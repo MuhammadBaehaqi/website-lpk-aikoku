@@ -1,3 +1,6 @@
+<?php
+include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -127,12 +130,33 @@
 
 <body>
     <?php include 'navbar.php'; ?>
-    <div class="hero-section">
-        <h1>Daftar Sekarang dan Wujudkan Mimpi Anda di Jepang!</h1>
+    <?php
+    $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_pendaftaran ORDER BY id_hero DESC LIMIT 1");
+    $heroData = mysqli_fetch_assoc($heroQuery);
+
+    // Tambahkan pengecekan jika tidak ada data
+    if (!$heroData) {
+        $hero_background = 'img/hero.jpg';  // Default image
+        $hero_title = 'Hubungi Kami';
+        $hero_description = '';  // Kosongkan deskripsi jika tidak ada
+    } else {
+        // Gunakan data dari database jika ada
+        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_title = $heroData['judul'];
+        $hero_description = $heroData['deskripsi'];
+    }
+    ?>
+    <div class="hero-section" style="background: url('<?= $hero_background ?>') no-repeat center center/cover;">
+        <div class="container">
+            <h1><?= htmlspecialchars($hero_title) ?></h1>
+            <p><?= htmlspecialchars($hero_description) ?></p>
+        </div>
     </div>
+
     <div class="container mt-4">
         <h2 class="text-center">Formulir Pendaftaran</h2>
-        <form action="/pendaftaran/admin/data_pendaftar/proses_pendaftaran.php" method="POST" class="p-4 shadow rounded bg-light mb-5">
+        <form action="/pendaftaran/admin/data_pendaftar/proses_pendaftaran.php" method="POST"
+            class="p-4 shadow rounded bg-light mb-5">
             <div class="mb-3">
                 <label for="nama_lengkap" class="form-label">Nama Lengkap:</label>
                 <input type="text" id="nama_lengkap" name="kirim_nama" class="form-control" required>

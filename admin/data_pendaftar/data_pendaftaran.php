@@ -101,8 +101,6 @@ include '../../config.php';
                     </thead>
                     <tbody>
                         <?php
-                        $pageTitle = 'Data Pendaftaran';
-                        include '../../config.php';
 
                         // Generate nomor pendaftaran jika masih kosong
                         $data_generate = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran WHERE nomor_pendaftaran IS NULL ORDER BY id_pendaftaran ASC");
@@ -112,7 +110,7 @@ include '../../config.php';
                             mysqli_query($mysqli, "UPDATE tb_pendaftaran SET nomor_pendaftaran = '$nomor' WHERE id_pendaftaran = " . $d_generate['id_pendaftaran']);
                             $no++;
                         }
-                        
+
                         // Baru lanjut ambil data seperti biasa
                         $data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran ORDER BY id_pendaftaran ASC");
                         ?>
@@ -149,26 +147,239 @@ include '../../config.php';
                                 <td><?= $d['status'] ?></td>
                                 <td><?= date('d-m-Y H:i:s', strtotime($d['tanggal_daftar'])) ?></td>
                                 <td>
-                                    <a href="edit.php?id=<?= $d['id_pendaftaran'] ?>"
-                                        class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="hapus_data_pendaftaran.php?id_pendaftaran=<?= $d['id_pendaftaran'] ?>"
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
-                                    <!-- Form Update Status -->
-                                    <form action="update_status.php" method="POST" style="display:inline-block;">
-                                        <input type="hidden" name="id_pendaftaran" value="<?= $d['id_pendaftaran'] ?>">
-                                        <select name="status" class="form-select form-select-sm"
-                                            style="width:auto;display:inline-block;">
-                                            <option value="Pending" <?= ($d['status'] == 'Pending') ? 'selected' : '' ?>>
-                                                Pending</option>
-                                            <option value="Lolos" <?= ($d['status'] == 'Lolos') ? 'selected' : '' ?>>Lolos
-                                            </option>
-                                            <option value="Tidak Lolos" <?= ($d['status'] == 'Tidak Lolos') ? 'selected' : '' ?>>Tidak Lolos</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-sm btn-success mt-1">Update</button>
-                                    </form>
+                                    <div class="p-2 border rounded mb-2 bg-light">
+                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                            <a href="export_excel.php" class="btn btn-success btn-sm" title="Export Excel">
+                                                <i class="bi bi-file-earmark-excel"></i>
+                                            </a>
+                                            <a href="cetak_semua_pendaftaran.php" target="_blank"
+                                                class="btn btn-danger btn-sm" title="Cetak PDF">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                            <!-- Tombol untuk membuka modal -->
+                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#modalEdit<?= $d['id_pendaftaran'] ?>">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+
+                                            <a href="hapus_data_pendaftaran.php?id_pendaftaran=<?= $d['id_pendaftaran'] ?>"
+                                                class="btn btn-danger btn-sm" title="Hapus"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                        <form action="update_status.php" method="POST"
+                                            class="d-flex flex-wrap gap-2 align-items-center">
+                                            <input type="hidden" name="id_pendaftaran" value="<?= $d['id_pendaftaran'] ?>">
+                                            <select name="status" class="form-select form-select-sm w-auto">
+                                                <option value="Pending" <?= ($d['status'] == 'Pending') ? 'selected' : '' ?>>
+                                                    Pending</option>
+                                                <option value="Lolos" <?= ($d['status'] == 'Lolos') ? 'selected' : '' ?>>Lolos
+                                                </option>
+                                                <option value="Tidak Lolos" <?= ($d['status'] == 'Tidak Lolos') ? 'selected' : '' ?>>Tidak Lolos</option>
+                                            </select>
+                                            <input type="text" name="pengumuman" class="form-control form-control-sm w-auto"
+                                                placeholder="Isi pengumuman"
+                                                value="<?= htmlspecialchars($d['pengumuman']) ?>">
+                                            <button type="submit" class="btn btn-success btn-sm" title="Update">
+                                                <i class="bi bi-check-circle"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
+                            <!-- Modal Edit Data -->
+                            <div class="modal fade" id="modalEdit<?= $d['id_pendaftaran'] ?>" tabindex="-1"
+                                aria-labelledby="modalLabel<?= $d['id_pendaftaran'] ?>" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <form action="edit_data_pendaftaran.php" method="POST">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalLabel<?= $d['id_pendaftaran'] ?>">Edit Data
+                                                    Pendaftaran</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id_pendaftaran"
+                                                    value="<?= $d['id_pendaftaran'] ?>">
+                                                <div class="row g-3">
+                                                    <!-- Nama Lengkap -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Nama Lengkap</label>
+                                                        <input type="text" name="nama_lengkap" class="form-control"
+                                                            value="<?= htmlspecialchars($d['nama_lengkap']) ?>" required>
+                                                    </div>
+                                                    <!-- Tempat Lahir -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Tempat Lahir</label>
+                                                        <input type="text" name="tempat_lahir" class="form-control"
+                                                            value="<?= htmlspecialchars($d['tempat_lahir']) ?>" required>
+                                                    </div>
+                                                    <!-- Tanggal Lahir -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Tanggal Lahir</label>
+                                                        <input type="date" name="tanggal_lahir" class="form-control"
+                                                            value="<?= isset($d['tanggal_lahir']) ? $d['tanggal_lahir'] : ''; ?>"
+                                                            required>
+                                                    </div>
+                                                    <!-- Usia -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Usia</label>
+                                                        <input type="number" name="usia" class="form-control"
+                                                            value="<?= $d['usia'] ?>" required>
+                                                    </div>
+                                                    <!-- Jenis Kelamin -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Jenis Kelamin</label>
+                                                        <select name="jenis_kelamin" class="form-select" required>
+                                                            <option value="Laki-laki" <?= ($d['jenis_kelamin'] == 'Laki-laki') ? 'selected' : '' ?>>Laki-laki</option>
+                                                            <option value="Perempuan" <?= ($d['jenis_kelamin'] == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Agama -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Agama</label>
+                                                        <select name="agama" class="form-select" required>
+                                                            <option value="">Pilih Agama</option>
+                                                            <option value="Islam" <?= ($d['agama'] == 'Islam') ? 'selected' : ''; ?>>Islam</option>
+                                                            <option value="Kristen" <?= ($d['agama'] == 'Kristen') ? 'selected' : ''; ?>>Kristen</option>
+                                                            <option value="Katolik" <?= ($d['agama'] == 'Katolik') ? 'selected' : ''; ?>>Katolik</option>
+                                                            <option value="Hindu" <?= ($d['agama'] == 'Hindu') ? 'selected' : ''; ?>>Hindu</option>
+                                                            <option value="Buddha" <?= ($d['agama'] == 'Buddha') ? 'selected' : ''; ?>>Buddha</option>
+                                                            <option value="Konghucu" <?= ($d['agama'] == 'Konghucu') ? 'selected' : ''; ?>>Konghucu</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Alamat KTP -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Alamat KTP</label>
+                                                        <input type="text" name="alamat_ktp" class="form-control"
+                                                            value="<?= htmlspecialchars($d['alamat_ktp']) ?>" required>
+                                                    </div>
+                                                    <!-- Email -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Email</label>
+                                                        <input type="email" name="email" class="form-control"
+                                                            value="<?= htmlspecialchars($d['email']) ?>" required>
+                                                    </div>
+                                                    <!-- Telepon -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Telepon</label>
+                                                        <input type="text" name="telepon" class="form-control"
+                                                            value="<?= htmlspecialchars($d['telepon']) ?>" required>
+                                                    </div>
+                                                    <!-- Alamat -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Alamat</label>
+                                                        <input type="text" name="alamat" class="form-control"
+                                                            value="<?= htmlspecialchars($d['alamat']) ?>" required>
+                                                    </div>
+                                                    <!-- Alamat Keluarga -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Alamat Keluarga</label>
+                                                        <input type="text" name="alamat_keluarga" class="form-control"
+                                                            value="<?= htmlspecialchars($d['alamat_keluarga']) ?>" required>
+                                                    </div>
+                                                    <!-- Telepon Keluarga -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Telepon Keluarga</label>
+                                                        <input type="text" name="telepon_keluarga" class="form-control"
+                                                            value="<?= htmlspecialchars($d['telepon_keluarga']) ?>"
+                                                            required>
+                                                    </div>
+                                                    <!-- Program -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Program</label>
+                                                        <select name="program" class="form-select" required>
+                                                            <option value="Magang" <?= ($d['program'] == 'Magang') ? 'selected' : '' ?>>Program Magang</option>
+                                                            <option value="Engineering" <?= ($d['program'] == 'Engineering') ? 'selected' : '' ?>>Program Engineering</option>
+                                                            <option value="Tokutei Ginou" <?= ($d['program'] == 'Tokutei Ginou') ? 'selected' : '' ?>>Program Tokutei Ginou
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!-- Pendidikan Terakhir -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Pendidikan Terakhir</label>
+                                                        <select name="pendidikan_terakhir" class="form-select" required>
+                                                            <option value="">Pilih Pendidikan Terakhir</option>
+                                                            <option value="SD" <?= ($d['pendidikan_terakhir'] == 'SD') ? 'selected' : '' ?>>SD</option>
+                                                            <option value="MI" <?= ($d['pendidikan_terakhir'] == 'MI') ? 'selected' : '' ?>>MI</option>
+                                                            <option value="SMP" <?= ($d['pendidikan_terakhir'] == 'SMP') ? 'selected' : '' ?>>SMP</option>
+                                                            <option value="MTS" <?= ($d['pendidikan_terakhir'] == 'MTS') ? 'selected' : '' ?>>MTS</option>
+                                                            <option value="SMA" <?= ($d['pendidikan_terakhir'] == 'SMA') ? 'selected' : '' ?>>SMA</option>
+                                                            <option value="ALIYAH" <?= ($d['pendidikan_terakhir'] == 'ALIYAH') ? 'selected' : '' ?>>ALIYAH</option>
+                                                            <option value="SMK" <?= ($d['pendidikan_terakhir'] == 'SMK') ? 'selected' : '' ?>>SMK</option>
+                                                            <option value="D3" <?= ($d['pendidikan_terakhir'] == 'D3') ? 'selected' : '' ?>>D3</option>
+                                                            <option value="S1" <?= ($d['pendidikan_terakhir'] == 'S1') ? 'selected' : '' ?>>S1</option>
+                                                            <option value="S2" <?= ($d['pendidikan_terakhir'] == 'S2') ? 'selected' : '' ?>>S2</option>
+                                                            <option value="S3" <?= ($d['pendidikan_terakhir'] == 'S3') ? 'selected' : '' ?>>S3</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Pengalaman Kerja -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Pengalaman Kerja</label>
+                                                        <input type="text" name="pengalaman_kerja" class="form-control"
+                                                            value="<?= htmlspecialchars($d['pengalaman_kerja']) ?>"
+                                                            required>
+                                                    </div>
+                                                    <!-- Status Pernikahan -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Status Pernikahan</label>
+                                                        <select name="status_pernikahan" class="form-select" required>
+                                                            <option value="Belum Menikah"
+                                                                <?= ($d['status_pernikahan'] == 'Belum Menikah') ? 'selected' : '' ?>>Belum Menikah
+                                                            </option>
+                                                            <option value="Menikah" <?= ($d['status_pernikahan'] == 'Menikah') ? 'selected' : '' ?>>Menikah</option>
+                                                            <option value="Janda/Duda"
+                                                                <?= ($d['status_pernikahan'] == 'Janda/Duda') ? 'selected' : '' ?>>Janda/Duda</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Tinggi Badan -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Tinggi Badan</label>
+                                                        <input type="text" name="tinggi_badan" class="form-control"
+                                                            value="<?= htmlspecialchars($d['tinggi_badan']) ?>" required>
+                                                    </div>
+                                                    <!-- Berat Badan -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Berat Badan</label>
+                                                        <input type="text" name="berat_badan" class="form-control"
+                                                            value="<?= htmlspecialchars($d['berat_badan']) ?>" required>
+                                                    </div>
+                                                    <!-- Pengalaman Jepang -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Pengalaman Jepang</label>
+                                                        <select name="pengalaman_jepang" class="form-select" required>
+                                                            <option value="Pemula" <?= ($d['pengalaman_jepang'] == 'Pemula') ? 'selected' : '' ?>>Pemula</option>
+                                                            <option value="Ex-Jepang"
+                                                                <?= ($d['pengalaman_jepang'] == 'Ex-Jepang') ? 'selected' : '' ?>>Ex-Jepang</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- Penyakit Kronis -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Penyakit Kronis</label>
+                                                        <input type="text" name="penyakit_kronis" class="form-control"
+                                                            value="<?= htmlspecialchars($d['penyakit_kronis']) ?>" required>
+                                                    </div>
+                                                    <!-- Golongan Darah -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Golongan Darah</label>
+                                                        <input type="text" name="golongan_darah" class="form-control"
+                                                            value="<?= htmlspecialchars($d['golongan_darah']) ?>" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" name="update" class="btn btn-success">Simpan
+                                                    Perubahan</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         <?php } ?>
                     </tbody>
                 </table>

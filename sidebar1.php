@@ -224,7 +224,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
                             <i class="bi bi-megaphone"></i> Pengumuman</a></li>
                     <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/kontak/kontak_admin.php" onclick="changeTitle('Kontak')">
                             <i class="bi bi-envelope"></i> Kontak</a></li>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/pendaftaran/pendaftaran" onclick="changeTitle('Pendaftaran')">
+                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/pendaftaran/pendaftaran_admin.php" onclick="changeTitle('Pendaftaran')">
                             <i class="bi bi-person-add"></i> Pendaftaran</a></li>
                 </ul>
             </div>
@@ -260,7 +260,6 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
                 <li><a class="dropdown-item" href="/pendaftaran/logout.php">Logout</a></li>
             </ul>
         </div>
-
     </div>
 
     <script>
@@ -289,15 +288,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
             document.getElementById("page-title").textContent = title;
             closeSidebar(); // Tambahkan ini agar sidebar tertutup di semua menu
         }
-        document.addEventListener('DOMContentLoaded', function () {
-            var dropdownToggle = document.getElementById('userDropdown');
-            var dropdownMenu = dropdownToggle.nextElementSibling;
-
-            dropdownToggle.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('show');
-            });
-        });
-
+       
     </script>
 
 </body>

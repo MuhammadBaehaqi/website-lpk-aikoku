@@ -1,3 +1,14 @@
+<?php
+include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
+
+$kontakQuery = mysqli_query($mysqli, "SELECT * FROM tb_informasi_kontak ORDER BY id_kontak DESC LIMIT 1");
+$kontakData = mysqli_fetch_assoc($kontakQuery);
+
+$mapsQuery = mysqli_query($mysqli, "SELECT * FROM tb_maps ORDER BY id_maps DESC LIMIT 1");
+$mapsData = mysqli_fetch_assoc($mapsQuery);
+$maps_url = $mapsData ? $mapsData['maps_url'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -42,10 +53,27 @@
 
 <body>
     <?php include 'navbar.php'; ?>
-    <div class="hero-section">
-        <h1>Hubungi Kami</h1>
-        <p>Dapatkan informasi yang sebenar-benarnya tentang Jepang dan program pemagangan kami. Kami siap membantu Anda
-            mencapai impian bekerja di Jepang.</p>
+    <?php
+    $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_kontak ORDER BY id_hero DESC LIMIT 1");
+    $heroData = mysqli_fetch_assoc($heroQuery);
+
+    // Tambahkan pengecekan jika tidak ada data
+    if (!$heroData) {
+        $hero_background = 'img/hero.jpg';  // Default image
+        $hero_title = 'Hubungi Kami';
+        $hero_description = '';  // Kosongkan deskripsi jika tidak ada
+    } else {
+        // Gunakan data dari database jika ada
+        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_title = $heroData['judul'];
+        $hero_description = $heroData['deskripsi'];
+    }
+    ?>
+    <div class="hero-section" style="background: url('<?= $hero_background ?>') no-repeat center center/cover;">
+        <div class="container">
+            <h1><?= htmlspecialchars($hero_title) ?></h1>
+            <p><?= htmlspecialchars($hero_description) ?></p>
+        </div>
     </div>
 
     <div class="container my-5">
@@ -87,29 +115,39 @@
                 <div class="card shadow-lg border-0">
                     <div class="card-body">
                         <h3 class="text-success">Informasi Kontak</h3>
-                        <p><i class="fas fa-map-marker-alt text-success"></i> Petunjungan, Kab. Brebes, Jawa Tengah</p>
-                        <p><i class="fas fa-envelope text-success"></i> lpkaikokuterpadu@gmail.com</p>
-                        <p><i class="fas fa-phone text-success"></i> +62 857-2522-1265</p>
-                        <p><i class="fas fa-clock text-success"></i> Senin - Jumat: 08:00 - 17:00</p>
-                        <p><i class="fas fa-clock text-success"></i> Sabtu: 08:00 - 14:00</p>
+                        <?php if ($kontakData): ?>
+                            <p><i class="fas fa-map-marker-alt text-success"></i>
+                                <?= htmlspecialchars($kontakData['alamat']) ?></p>
+                            <p><i class="fas fa-envelope text-success"></i>
+                                <?= htmlspecialchars($kontakData['email_kontak']) ?></p>
+                            <p><i class="fas fa-phone text-success"></i> <?= htmlspecialchars($kontakData['telepon']) ?></p>
+                            <p><i class="fas fa-clock text-success"></i> <?= htmlspecialchars($kontakData['jam_kerja']) ?>
+                            </p>
+                            <p><i class="fas fa-clock text-success"></i> <?= htmlspecialchars($kontakData['jam_sabtu']) ?>
+                            </p>
+                            <p><i class="fas fa-sticky-note text-success"></i>
+                                <?= htmlspecialchars($kontakData['catatan']) ?></p>
+                        <?php else: ?>
+                            <p class="text-danger">Informasi kontak belum tersedia.</p>
+                        <?php endif; ?>
                         <span class="text-danger fw-bold">Minggu: Jadwalkan Terlebih Dahulu</span>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Google Maps -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card shadow-lg border-0">
-                    <div class="card-body p-0">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1411.6175482198566!2d108.977370955763!3d-6.9124748066521775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fa5af84c2ae8d%3A0x6d0eb4890eba578f!2sLPK%20AIKOKU%20TERPADU!5e1!3m2!1sid!2sid!4v1742344655628!5m2!1sid!2sid"
-                            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <?php if ($maps_url): ?>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-0">
+                            <iframe src="<?= htmlspecialchars($maps_url) ?>" width="100%" height="350" style="border:0;"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 
     <?php include 'footer.php' ?>

@@ -26,10 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $golongan_darah = $_POST['kirim_golongan_darah'];
 
     // Cari ID terakhir untuk membuat nomor pendaftaran
-    $query_last = mysqli_query($mysqli, "SELECT id FROM tb_pendaftaran ORDER BY id DESC LIMIT 1");
+    $query_last = mysqli_query($mysqli, "SELECT id_pendaftaran FROM tb_pendaftaran ORDER BY id_pendaftaran DESC LIMIT 1");
     $data_last = mysqli_fetch_assoc($query_last);
 
-    $last_id = $data_last ? $data_last['id'] : 0;
+    $last_id = $data_last ? $data_last['id_pendaftaran'] : 0;
+
     $next_id = $last_id + 1;
 
     // Buat nomor pendaftaran
@@ -40,7 +41,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               VALUES ('$nama', '$tempat_lahir', '$tanggal_lahir', '$usia', '$jenis_kelamin', '$agama', '$alamat_ktp', '$email', '$telepon', '$alamat', '$alamat_keluarga', '$telepon_keluarga', '$program', '$pendidikan', '$pengalaman_kerja', '$status_pernikahan', '$tinggi_badan', '$berat_badan', '$pengalaman_jepang', '$penyakit_kronis', '$golongan_darah', '$nomor_pendaftaran')";
 
     if (mysqli_query($mysqli, $query)) {
-        echo "<script>alert('Pendaftaran berhasil! Silakan tunggu konfirmasi dari admin.'); window.location.href = 'http://localhost/pendaftaran/index.php';</script>";
+        // Setelah berhasil simpan ke tb_pendaftaran, lanjut insert ke tb_pengguna
+        // Cek apakah nama sudah ada di tb_pengguna
+        $cek_pengguna = mysqli_query($mysqli, "SELECT * FROM tb_pengguna WHERE username = '$nama'");
+        if (mysqli_num_rows($cek_pengguna) == 0) {
+            // Tambahkan user ke tb_pengguna (akun login)
+            $password_default = md5("123456"); // amankan password dengan md5
+            $role = 'user'; // role default user
+            $query_user = "INSERT INTO tb_pengguna (username, email_pengguna, password, roles) 
+               VALUES ('$nama', '$email', '$password_default', '$role')";
+            mysqli_query($mysqli, $query_user);
+        }
+
+        echo "<script>alert('Pendaftaran berhasil! Username: $nama | Password: 123456'); window.location.href = 'http://localhost/pendaftaran/index.php';</script>";
     } else {
         echo "Gagal menyimpan data: " . mysqli_error($mysqli);
     }

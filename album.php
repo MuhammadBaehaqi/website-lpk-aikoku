@@ -152,9 +152,32 @@ $result = mysqli_query($mysqli, $query);
 
 <body>
     <?php include 'navbar.php'; ?>
-    <div class="hero-section">
-        Album LPK Aikoku Terpadu
+    <?php
+   
+
+    $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_album ORDER BY id_hero DESC LIMIT 1");
+    $heroData = mysqli_fetch_assoc($heroQuery);
+
+    // Tambahkan pengecekan jika tidak ada data
+    if (!$heroData) {
+        $hero_background = 'img/sejarah.jpg';  // Default image
+        $hero_title = 'Album Kami';
+        $hero_description = '';  // Kosongkan deskripsi jika tidak ada
+    } else {
+        // Gunakan data dari database jika ada
+        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_title = $heroData['judul'];
+        $hero_description = $heroData['deskripsi'];
+    }
+    ?>
+    
+    <div class="hero-section" style="background: url('<?= $hero_background ?>') no-repeat center center/cover;">
+        <div class="container">
+            <h1><?= htmlspecialchars($hero_title) ?></h1>
+            <p><?= htmlspecialchars($hero_description) ?></p>
+        </div>
     </div>
+
 
     <!-- Tombol Navigasi Kategori -->
     <div class="nav-buttons">

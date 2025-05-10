@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../../../config.php';
 // Pengecekan jika pengguna belum login
 if (!isset($_SESSION['username'])) {
     header("Location: ../../../login.php");
@@ -14,10 +14,15 @@ if ($_SESSION['roles'] != 'admin') {
 }
 
 $pageTitle = 'Kelola Halaman / Album';
+
+$query_hero = "SELECT * FROM tb_hero_album ORDER BY id_hero DESC LIMIT 1";
+$result_hero = mysqli_query($mysqli, $query_hero);
+$hero = mysqli_fetch_assoc($result_hero);
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +39,7 @@ $pageTitle = 'Kelola Halaman / Album';
 
 <body>
     <?php include '../../../sidebar1.php'; ?>
-  
+
     <div class="container mt-4 content">
         <h2><?php echo $pageTitle; ?></h2>
 
@@ -61,6 +66,66 @@ $pageTitle = 'Kelola Halaman / Album';
                 </select>
             </form>
         </div>
+        <!-- Hero Section -->
+<div class="card mb-4">
+    <div class="card-header">Kelola Hero Album</div>
+    <div class="card-body">
+        <!-- Form Input Hero -->
+        <form action="proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="judul" class="form-label">Judul</label>
+                <input type="text" name="judul" id="judul" class="form-control"
+                    placeholder="Masukkan Judul Album" required autocomplete="off" maxlength="100">
+            </div>
+
+            <div class="mb-3">
+                <label for="deskripsi" class="form-label">Deskripsi</label>
+                <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
+                    placeholder="Masukkan Deskripsi Album" required maxlength="255"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="gambar" class="form-label">Upload Gambar</label>
+                <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+
+        <hr>
+
+        <!-- Daftar Album -->
+        <h5>Daftar Album</h5>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Deskripsi</th>
+                    <th>Gambar</th>
+                    <th>Tanggal Upload</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                        // Query untuk mengambil data album hero
+                        $query = "SELECT * FROM tb_hero_album ORDER BY id_hero DESC";
+                        $result = mysqli_query($mysqli, $query);
+                        $no = 1;
+                        while ($data = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= htmlspecialchars($data['judul']) ?></td>
+                                <td><?= htmlspecialchars($data['deskripsi']) ?></td>
+                                <td><img src="../../../uploads/<?= $data['gambar'] ?>" width="100"></td>
+                                <td><?= date('d-m-Y H:i:s', strtotime($data['tanggal_upload'])) ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- Tombol Tambah Album (Modal) -->
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#tambahAlbumModal">Tambah
@@ -81,7 +146,6 @@ $pageTitle = 'Kelola Halaman / Album';
                 </thead>
                 <tbody>
                     <?php
-                    include '../../../config.php';
                     $query = "SELECT * FROM tb_album ORDER BY id_album ASC";
 
                     $result = mysqli_query($mysqli, $query);

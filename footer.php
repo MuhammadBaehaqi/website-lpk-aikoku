@@ -15,11 +15,12 @@
         color: #ccc;
         text-decoration: none;
     }
-.footer-logo {
-    width: 120px;
-    height: auto;
-    max-width: 100%;
-}
+
+    .footer-logo {
+        width: 120px;
+        height: auto;
+        max-width: 100%;
+    }
 
     /* khusus untuk email di kontak & jam operasional */
     /* footer a:hover {
@@ -71,7 +72,8 @@
     <div class="container">
         <div class="row">
             <!-- Kolom Logo dan Deskripsi -->
-            <div class="col-md-3 mb-4">
+            <div
+                class="col-md-3 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
                 <img src="logo.png" alt="Logo" class="footer-logo">
                 <p class="mt-3">Pusat Pelatihan Bahasa Jepang Terbaik untuk Mewujudkan Impian Berkarir di Jepang</p>
                 <div class="social-icons mt-3">

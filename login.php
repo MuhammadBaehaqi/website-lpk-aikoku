@@ -2,33 +2,64 @@
 session_start();
 include 'config.php';
 
-// Proses login saat form disubmit
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = md5($_POST['password']); // Hashing password dengan MD5
+$error = '';
 
-    // Query menggunakan prepared statement
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username_or_email = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    // Coba login ke tb_pengguna (admin/user internal)
+    // Login dengan username
     $stmt = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE username = ? AND password = ?");
-    $stmt->bind_param('ss', $username, $password);
+    $stmt->bind_param('ss', $username_or_email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $data_session = $result->fetch_assoc();
-        $_SESSION['username'] = $username;
-        $_SESSION['roles'] = $data_session['roles'];
+        $data = $result->fetch_assoc();
 
-        // Redirect berdasarkan role
-        if ($data_session['roles'] == 'admin') {
+        // Cek apakah role adalah user
+        if ($data['roles'] === 'user') {
+            // Ambil data dari tb_pendaftaran berdasarkan email_pengguna (email yang terdaftar)
+            $stmt2 = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE email = ? LIMIT 1");
+            $stmt2->bind_param('s', $data['email_pengguna']); // Menggunakan email_pengguna dari tb_pengguna
+            $stmt2->execute();
+            $result2 = $stmt2->get_result();
+            $pendaftar = $result2->fetch_assoc();
+
+            if ($pendaftar) {
+                if ($pendaftar['status'] === 'Lolos') {
+                    // Session berdasarkan nama_lengkap untuk user
+                    $_SESSION['id_pengguna'] = $data['id_pengguna'];
+                    $_SESSION['id'] = $pendaftar['id_pendaftaran'];
+                    $_SESSION['username'] = $data['username']; // Username dari tb_pengguna
+                    $_SESSION['roles'] = $data['roles']; // Role dari tb_pengguna
+                    $_SESSION['nama'] = $pendaftar['nama_lengkap']; // Nama lengkap dari tb_pendaftaran
+                    header("Location: User/dashboard_user.php");
+                    exit();
+                } elseif ($pendaftar['status'] === 'Pending') {
+                    $error = "Akun Anda masih dalam proses verifikasi. Silakan tunggu konfirmasi.";
+                } elseif ($pendaftar['status'] === 'Tidak Lolos') {
+                    $error = "Maaf, Anda tidak lolos seleksi. Silakan hubungi admin.";
+                } else {
+                    $error = "Status akun tidak valid.";
+                }
+            } else {
+                $error = "Data pendaftar tidak ditemukan.";
+            }
+        } else {
+            // Role admin, langsung masuk
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['roles'] = $data['roles'];
             header("Location: admin/dashboard/dashboard_admin.php");
             exit();
-        } else {
-            header("Location: user_dashboard.php"); // Jika user
-            exit();
         }
+
     } else {
+        // Jika username atau password salah
         $error = "Username atau password salah.";
     }
+
 }
 ?>
 <!DOCTYPE html>
