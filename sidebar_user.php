@@ -7,6 +7,13 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 $role = isset($_SESSION['roles']) ? $_SESSION['roles'] : 'user';
 ?>
 
+<?php
+function isActive($page)
+{
+    return strpos($_SERVER['REQUEST_URI'], $page) !== false ? 'active' : '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -18,6 +25,11 @@ $role = isset($_SESSION['roles']) ? $_SESSION['roles'] : 'user';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        .sidebar a.active {
+            background-color: #0d4221;
+            font-weight: bold;
+            transform: translateX(5px);
+        }
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -168,22 +180,22 @@ $role = isset($_SESSION['roles']) ? $_SESSION['roles'] : 'user';
         <span class="btn-close-sidebar" onclick="closeSidebar()">✖</span>
 
         <a href="/pendaftaran/User/dashboard_user.php" onclick="changeTitle('Dashboard')"
-            class="text-white d-block px-3 py-2">
+            class="text-white d-block px-3 py-2 <?php echo isActive('dashboard_user.php'); ?>">
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
 
         <a href="/pendaftaran/User/lihat_pengumuman.php" onclick="changeTitle('Pengumuman')"
-            class="text-white d-block px-3 py-2">
+            class="text-white d-block px-3 py-2 <?php echo isActive('lihat_pengumuman.php'); ?>">
             <i class="bi bi-megaphone"></i> Pengumuman
         </a>
 
         <a href="/pendaftaran/User/Lihat_pendaftaran.php" onclick="changeTitle('Status Pendaftaran')"
-            class="text-white d-block px-3 py-2">
+            class="text-white d-block px-3 py-2 <?php echo isActive('Lihat_pendaftaran.php'); ?>">
             <i class="bi bi-file-earmark-check"></i> Status Pendaftaran
         </a>
 
         <a href="/pendaftaran/User/Edit_profile_user.php" onclick="changeTitle('Edit Profil')"
-            class="text-white d-block px-3 py-2">
+            class="text-white d-block px-3 py-2 <?php echo isActive('Edit_profile_user.php'); ?>">
             <i class="bi bi-person-gear"></i> Edit Profil
         </a>
 

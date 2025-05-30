@@ -9,7 +9,12 @@ $options = new Options();
 $options->set('defaultFont', 'Arial');
 $dompdf = new Dompdf($options);
 // Ambil data
-$data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran");
+$where = '';
+if (isset($_GET['id'])) {
+    $id = (int) $_GET['id'];
+    $where = "WHERE id_pendaftaran = $id";
+}
+$data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran $where ORDER BY id_pendaftaran ASC");
 
 // HTML awal
 $html = '<h3>Data Pendaftaran Siswa</h3>';

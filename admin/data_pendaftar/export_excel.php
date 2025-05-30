@@ -3,8 +3,13 @@ header("Content-type: application/vnd-ms-excel");
 header("Content-Disposition: attachment; filename=data_pendaftaran.xls");
 
 include '../../config.php'; // sesuaikan path koneksi
+$where = '';
+if (isset($_GET['id'])) {
+    $id = (int) $_GET['id'];
+    $where = "WHERE id_pendaftaran = $id";
+}
+$data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran $where ORDER BY id_pendaftaran ASC");
 
-$data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran");
 
 echo "<h3>Data Pendaftaran</h3>";
 echo "<table border='1'>";

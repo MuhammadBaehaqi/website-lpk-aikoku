@@ -5,63 +5,57 @@ include 'config.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username_or_email = $_POST['username'];
+    $input = $_POST['username'];
     $password = md5($_POST['password']);
 
-    // Coba login ke tb_pengguna (admin/user internal)
-    // Login dengan username
-    $stmt = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE username = ? AND password = ?");
-    $stmt->bind_param('ss', $username_or_email, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // === 1. Coba login sebagai admin (cocokkan username)
+    $stmt_admin = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE username = ? AND password = ? AND roles = 'admin'");
+    $stmt_admin->bind_param('ss', $input, $password);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
 
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
-
-        // Cek apakah role adalah user
-        if ($data['roles'] === 'user') {
-            // Ambil data dari tb_pendaftaran berdasarkan email_pengguna (email yang terdaftar)
-            $stmt2 = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE email = ? LIMIT 1");
-            $stmt2->bind_param('s', $data['email_pengguna']); // Menggunakan email_pengguna dari tb_pengguna
-            $stmt2->execute();
-            $result2 = $stmt2->get_result();
-            $pendaftar = $result2->fetch_assoc();
-
-            if ($pendaftar) {
-                if ($pendaftar['status'] === 'Lolos') {
-                    // Session berdasarkan nama_lengkap untuk user
-                    $_SESSION['id_pengguna'] = $data['id_pengguna'];
-                    $_SESSION['id'] = $pendaftar['id_pendaftaran'];
-                    $_SESSION['username'] = $data['username']; // Username dari tb_pengguna
-                    $_SESSION['roles'] = $data['roles']; // Role dari tb_pengguna
-                    $_SESSION['nama'] = $pendaftar['nama_lengkap']; // Nama lengkap dari tb_pendaftaran
-                    header("Location: User/dashboard_user.php");
-                    exit();
-                } elseif ($pendaftar['status'] === 'Pending') {
-                    $error = "Akun Anda masih dalam proses verifikasi. Silakan tunggu konfirmasi.";
-                } elseif ($pendaftar['status'] === 'Tidak Lolos') {
-                    $error = "Maaf, Anda tidak lolos seleksi. Silakan hubungi admin.";
-                } else {
-                    $error = "Status akun tidak valid.";
-                }
-            } else {
-                $error = "Data pendaftar tidak ditemukan.";
-            }
-        } else {
-            // Role admin, langsung masuk
-            $_SESSION['username'] = $data['username'];
-            $_SESSION['roles'] = $data['roles'];
-            header("Location: admin/dashboard/dashboard_admin.php");
-            exit();
-        }
-
-    } else {
-        // Jika username atau password salah
-        $error = "Username atau password salah.";
+    if ($result_admin->num_rows > 0) {
+        $admin = $result_admin->fetch_assoc();
+        $_SESSION['id_pengguna'] = $admin['id_pengguna'];
+        $_SESSION['username'] = $admin['username'];
+        $_SESSION['roles'] = $admin['roles'];
+        header("Location: admin/dashboard/dashboard_admin.php");
+        exit();
     }
 
+    // === 2. Jika bukan admin, coba login sebagai user berdasarkan email
+    $stmt_user = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE email = ? AND status = 'Lolos'");
+    $stmt_user->bind_param('s', $input);
+    $stmt_user->execute();
+    $result_user = $stmt_user->get_result();
+
+    if ($result_user->num_rows > 0) {
+        $user = $result_user->fetch_assoc();
+
+        // Cocokkan password dari tb_pengguna berdasarkan email
+        $stmt_pengguna = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE email_pengguna = ? AND password = ? AND roles = 'user'");
+        $stmt_pengguna->bind_param('ss', $input, $password);
+        $stmt_pengguna->execute();
+        $result_pengguna = $stmt_pengguna->get_result();
+
+        if ($result_pengguna->num_rows > 0) {
+            $akun = $result_pengguna->fetch_assoc();
+            $_SESSION['id_pengguna'] = $akun['id_pengguna'];
+            $_SESSION['id'] = $user['id_pendaftaran'];
+            $_SESSION['username'] = $akun['username'];
+            $_SESSION['roles'] = $akun['roles'];
+            $_SESSION['nama'] = $user['nama_lengkap'];
+            header("Location: User/dashboard_user.php");
+            exit();
+        } else {
+            $error = "Email ditemukan, tapi password salah.";
+        }
+    } else {
+        $error = "Email tidak ditemukan atau belum lolos seleksi.";
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -130,13 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger">
-                <?= $error ?>
+                <?= $error ?? '' ?>
             </div>
         <?php endif; ?>
 
         <form method="POST" action="login.php">
             <div class="mb-3">
-                <input type="text" name="username" class="form-control" placeholder="Username" required>
+                <input type="text" name="username" class="form-control" placeholder="Username / Email" required>
             </div>
             <div class="mb-3 position-relative">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password"

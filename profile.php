@@ -71,119 +71,141 @@
 <body>
     <?php include 'navbar.php'; ?>
 
-    <!-- Hero Section -->
-    <div class="hero">
+    <?php
+    include 'config.php';
+    $data = mysqli_query($mysqli, "SELECT * FROM tb_hero_profile ORDER BY id_hero DESC LIMIT 1");
+    $hero = mysqli_fetch_assoc($data);
+    ?>
+
+    <div class="hero" style="background: url('uploads/<?= $hero['gambar']; ?>') no-repeat center center/cover;">
         <div class="container hero-content">
-            <h1 class="fw-bold text-white">LPK Aikoku Terpadu</h1>
-            <h2 class="text-white">Wujudkan Mimpimu Kerja di Jepang</h2>
-            <p class="lead text-white mx-auto" style="max-width: 600px;">
-                Lembaga Pelatihan Kerja "AIKOKU TERPADU" adalah lembaga pelatihan yang mendidik dan melatih siswa sesuai
-                dengan kebutuhan perusahaan di Jepang.
-            </p>
+            <h1 class="fw-bold text-white"><?= $hero['judul']; ?></h1>
+            <p class="lead text-white mx-auto" style="max-width: 600px;"><?= $hero['deskripsi']; ?></p>
         </div>
     </div>
 
+    <?php
+    $query = mysqli_query($mysqli, "SELECT * FROM tb_profile_sejarah ORDER BY id DESC LIMIT 1");
+    $data = mysqli_fetch_assoc($query);
+    ?>
     <!-- Section Sejarah -->
     <section class="section-sejarah container">
-        <h2 class="fw-bold text-success text-center">SEJARAH</h2>
-        <h3 class="fw-bold text-success text-center">LPK AIKOKU TERPADU</h3>
+        <h2 class="fw-bold text-success text-center"><?= $data['judul_atas']; ?></h2>
+        <h3 class="fw-bold text-success text-center"><?= $data['judul_bawah']; ?></h3>
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
-                <img src="img/sejarah.jpg" alt="Sejarah LPK" class="img-fluid rounded shadow-lg hover-effect">
+                <img src="uploads/<?= $data['gambar']; ?>" alt="Sejarah LPK"
+                    class="img-fluid rounded shadow-lg hover-effect">
             </div>
             <div class="col-md-6">
-                <h3 class="fw-bold text-success text-center">LPK Aikoku Terpadu</h3>
-                <p>
-                    LPK Aikoku Terpadu adalah lembaga pelatihan kerja yang berdedikasi untuk mengembangkan sumber daya
-                    manusia berkualitas. Didirikan pada 10 Mei 2018, lembaga kami berkomitmen memberikan pelatihan
-                    terbaik.
-                </p>
-                <p>
-                    Kami telah melatih ribuan peserta yang kini bekerja di perusahaan terkemuka. Komitmen kami terhadap
-                    kualitas menjadikan LPK Aikoku Terpadu sebagai lembaga terpercaya.
-                </p>
+                <h3 class="fw-bold text-success text-center"><?= $data['judul_tengah']; ?></h3>
+                <p><?= $data['paragraf1']; ?></p>
+                <p><?= $data['paragraf2']; ?></p>
             </div>
         </div>
     </section>
 
-    <!-- Section Sambutan -->
+    <?php
+    // Ambil data sambutan dari database
+    $query = "SELECT * FROM tb_profile_sambutan ORDER BY tanggal_upload DESC LIMIT 1";
+    $result = mysqli_query($mysqli, $query);
+    $data = mysqli_fetch_assoc($result);
+    ?>
+    <!-- Sambutan Kepala Sekolah -->
     <section class="container my-5">
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h2 class="fw-bold text-success">Sambutan Kepala Sekolah</h2>
-                <p>Assalamu'alaikum warahmatullahi wabarakatuh,</p>
-                <p>Selamat datang di website resmi kami. Kami berkomitmen mencetak SDM yang terampil dan siap kerja di
-                    Jepang.</p>
-                <p>Semoga lembaga ini terus berkembang dan berkontribusi bagi masyarakat. Terima kasih atas kepercayaan
-                    Anda.</p>
-                <p>Wassalamu'alaikum warahmatullahi wabarakatuh.</p>
-                <h5 class="fw-bold">[Nama Kepala Sekolah]</h5>
+                <p><?php echo nl2br($data['paragraf_1']); ?></p>
+                <p><?php echo nl2br($data['paragraf_2']); ?></p>
+                <p><?php echo nl2br($data['paragraf_3']); ?></p>
+                <p><?php echo nl2br($data['paragraf_4']); ?></p>
+                <h5 class="fw-bold"><?php echo $data['nama_kepala']; ?></h5>
             </div>
             <div class="col-md-4 text-center">
-                <img src="img/Selma.jpg" alt="Kepala Sekolah" class="img-fluid rounded-circle shadow-lg hover-effect"
-                    width="200">
+                <img src="uploads/<?php echo $data['gambar']; ?>" alt="Kepala Sekolah"
+                    class="img-fluid rounded-circle shadow-lg hover-effect" width="200">
             </div>
         </div>
     </section>
-
+    <?php
+    $query = mysqli_query($mysqli, "SELECT * FROM tb_profile_visimisi ORDER BY tanggal_upload DESC LIMIT 1");
+    $visimisi = mysqli_fetch_assoc($query);
+    ?>
     <!-- Section Visi Misi -->
     <section class="container my-5">
         <h2 class="fw-bold text-success text-center">Visi & Misi</h2>
         <div class="row">
             <div class="col-md-6">
                 <h3 class="fw-bold text-success">Visi</h3>
-                <p>Menjadi lembaga pelatihan kerja terbaik untuk tenaga kerja profesional di Jepang dengan standar
-                    internasional.</p>
+                <p><?= isset($visimisi['visi']) ? nl2br($visimisi['visi']) : '<i>Data visi belum tersedia.</i>'; ?></p>
             </div>
             <div class="col-md-6">
                 <h3 class="fw-bold text-success">Misi</h3>
-                <ul>
-                    <li>Pelatihan berbasis kebutuhan industri Jepang.</li>
-                    <li>Pengembangan bahasa & keterampilan kerja.</li>
-                    <li>Kerjasama dengan perusahaan/institusi Jepang.</li>
-                    <li>Menanamkan disiplin, profesionalisme, dan etos kerja.</li>
-                </ul>
+                <p><?= isset($visimisi['misi']) ? nl2br($visimisi['misi']) : '<i>Data misi belum tersedia.</i>'; ?></p>
             </div>
         </div>
     </section>
 
+    <?php
+    $query = "SELECT * FROM tb_profile_pengurus ORDER BY id_pengurus ASC";
+    $result = mysqli_query($mysqli, $query);
+    ?>
     <!-- Section Tim Pengurus -->
     <section class="container my-5">
         <h2 class="fw-bold text-success text-center">Tim Pengurus</h2>
         <p class="text-center">Kami adalah tim profesional yang berdedikasi mencetak SDM unggul.</p>
         <div class="row text-center mt-4">
-            <div class="col-md-4">
-                <img src="img/Selma.jpg" alt="Direktur" class="img-fluid rounded-circle shadow-lg hover-effect" width="150">
-                <h4 class="fw-bold mt-2">Imam Joharudin</h4>
-                <p>Direktur - Memimpin visi lembaga.</p>
+            <div class="row text-center mt-4">
+                <?php while ($pengurus = mysqli_fetch_assoc($result)): ?>
+                    <div class="col-md-4">
+                        <img src="uploads/<?= $pengurus['foto']; ?>" alt="<?= $pengurus['nama_pengurus']; ?>"
+                            class="img-fluid rounded-circle shadow-lg hover-effect" width="150">
+                        <h4 class="fw-bold mt-2"><?= $pengurus['nama_pengurus']; ?></h4>
+                        <p><?= $pengurus['jabatan']; ?></p>
+                        <p><?= $pengurus['deskripsi']; ?></p>
+                    </div>
+                <?php endwhile; ?>
             </div>
-            <div class="col-md-4">
-                <img src="img/Selma.jpg" alt="Wakil Direktur" class="img-fluid rounded-circle shadow-lg hover-effect"
-                    width="150">
-                <h4 class="fw-bold mt-2">Ali Chamdan</h4>
-                <p>Wakil Direktur - Mendukung implementasi misi.</p>
-            </div>
-            <div class="col-md-4">
-                <img src="img/Selma.jpg" alt="Bendahara" class="img-fluid rounded-circle shadow-lg hover-effect"
-                    width="150">
-                <h4 class="fw-bold mt-2">Nurul Aeni</h4>
-                <p>Bendahara - Mengelola administrasi & keuangan.</p>
-            </div>
-        </div>
     </section>
 
-    <!-- Section Legalitas -->
-    <section class="container my-5">
-        <div class="card text-center p-3 shadow-lg hover-effect" style="max-width: 500px; margin: 0 auto;">
-            <div class="card-body">
+    <?php
+    $query = "SELECT * FROM tb_profile_legalitas ORDER BY tanggal_upload ASC";
+    $result = mysqli_query($mysqli, $query);
+    // Pastikan query berhasil dijalankan dan ada hasilnya
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($mysqli));
+    }
+    ?>
+
+    <?php if (mysqli_num_rows($result) > 0): ?>
+        <section class="container my-5">
+            <div class="text-center mb-4">
                 <h2 class="fw-bold text-success">Legalitas</h2>
-                <img src="logo.png" alt="Logo" class="img-fluid my-3 hover-effect" width="80">
-                <p>Surat Izin Menkumham Dinperinaker Brebes Nomor</p>
-                <h4 class="fw-bold">KEP 563/548/V/2019</h4>
             </div>
+            <div class="row justify-content-center">
+                <?php while ($legalitas = mysqli_fetch_assoc($result)): ?>
+                    <div class="col-md-6 mb-4">
+                        <div class="card text-center p-3 shadow-lg hover-effect">
+                            <div class="card-body">
+                                <h2 class="fw-bold text-success"><?= $legalitas['judul']; ?></h2>
+                                <img src="uploads/<?= $legalitas['logo']; ?>" alt="Logo Legalitas"
+                                    class="img-fluid my-3 hover-effect" width="80">
+                                <p><?= $legalitas['deskripsi']; ?></p>
+                                <h4 class="fw-bold"><?= $legalitas['nomor_surat']; ?></h4>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
+    <?php else: ?>
+        <div class="text-center my-5">
+            <p class="text-muted">Data legalitas belum tersedia. Silakan tambahkan melalui halaman admin.</p>
         </div>
-    </section>
+    <?php endif; ?>
 
     <?php include 'footer.php'; ?>
 </body>
+
 </html>

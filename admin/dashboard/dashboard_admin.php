@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 
 // Pengecekan jika pengguna bukan admin
 if ($_SESSION['roles'] != 'admin') {
-    header("Location: user_dashboard.php"); // Atau ke halaman lain yang sesuai
+    header("Location: dashboard_user.php"); // Atau ke halaman lain yang sesuai
     exit();
 }
 ?>

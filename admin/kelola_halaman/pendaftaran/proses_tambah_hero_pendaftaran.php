@@ -21,7 +21,7 @@ if (isset($_FILES['hero_image']) && $_FILES['hero_image']['error'] == 0) {
 
             // Simpan data baru ke database
             $query = "INSERT INTO tb_hero_pendaftaran (judul, deskripsi, gambar)
-                      VALUES ('$judul', '$deskripsi', '$fileName')";
+                    VALUES ('$judul', '$deskripsi', '$fileName')";
             if (mysqli_query($mysqli, $query)) {
                 header("Location: pendaftaran_admin.php?status=sukses");
             } else {

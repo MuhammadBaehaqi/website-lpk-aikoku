@@ -67,6 +67,29 @@ include '../../config.php';
         <?php endif; ?>
 
         <div class="container-fluid mt-3">
+            <form method="GET" class="d-flex mb-3">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari nama..."
+                    value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
+                    <?php
+                    $limits = [5, 10, 15, 20];
+                    foreach ($limits as $val) {
+                        $selected = (isset($_GET['limit']) && $_GET['limit'] == $val) ? 'selected' : '';
+                        echo "<option value='$val' $selected>$val</option>";
+                    }
+                    ?>
+                </select>
+                <button type="submit" class="btn btn-primary">Tampilkan</button>
+            </form>
+            <div class="mb-3">
+                <a href="export_excel.php" class="btn btn-success btn-sm">
+                    <i class="bi bi-file-earmark-excel"></i> Export Semua Excel
+                </a>
+                <a href="cetak_semua_pendaftaran.php" target="_blank" class="btn btn-danger btn-sm">
+                    <i class="bi bi-printer"></i> Cetak Semua PDF
+                </a>
+            </div>
+
             <div class="table-container">
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -99,25 +122,45 @@ include '../../config.php';
                             <th>Aksi</th>
                         </tr>
                     </thead>
+                    <?php
+                    $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+                    $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                    $search = isset($_GET['search']) ? $_GET['search'] : '';
+                    $offset = ($page - 1) * $limit;
+
+                    $where = "";
+                    if (!empty($search)) {
+                        $search = mysqli_real_escape_string($mysqli, $search);
+                        $where = "WHERE 
+                            nama_lengkap LIKE '%$search%' OR
+                            email LIKE '%$search%' OR
+                            nomor_pendaftaran LIKE '%$search%' OR
+                            telepon LIKE '%$search%'";
+                    }
+
+                    // Ambil data sesuai filter dan pagination
+                    $data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran $where ORDER BY id_pendaftaran ASC LIMIT $limit OFFSET $offset");
+
+                    // Ambil total data (untuk pagination)
+                    $total_data_result = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_pendaftaran $where");
+                    $total_data = mysqli_fetch_assoc($total_data_result)['total'];
+                    $total_pages = ceil($total_data / $limit);
+
+                    $no = $offset + 1; // No urut dimulai dari offset+1
+                    ?>
+
                     <tbody>
                         <?php
-
                         // Generate nomor pendaftaran jika masih kosong
                         $data_generate = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran WHERE nomor_pendaftaran IS NULL ORDER BY id_pendaftaran ASC");
-                        $no = 1;
+                        $gen = 1;
                         while ($d_generate = mysqli_fetch_array($data_generate)) {
-                            $nomor = '2025-' . str_pad($no, 4, '0', STR_PAD_LEFT);
+                            $nomor = '2025-' . str_pad($gen, 4, '0', STR_PAD_LEFT);
                             mysqli_query($mysqli, "UPDATE tb_pendaftaran SET nomor_pendaftaran = '$nomor' WHERE id_pendaftaran = " . $d_generate['id_pendaftaran']);
-                            $no++;
+                            $gen++;
                         }
-
-                        // Baru lanjut ambil data seperti biasa
-                        $data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran ORDER BY id_pendaftaran ASC");
                         ?>
-
                         <?php
-                        $data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran ORDER BY id_pendaftaran ASC");
-                        $no = 1; // Inisialisasi nomor urut
                         while ($d = mysqli_fetch_array($data)) {
                             ?>
                             <tr>
@@ -149,11 +192,12 @@ include '../../config.php';
                                 <td>
                                     <div class="p-2 border rounded mb-2 bg-light">
                                         <div class="d-flex flex-wrap gap-2 mb-2">
-                                            <a href="export_excel.php" class="btn btn-success btn-sm" title="Export Excel">
+                                            <a href="export_excel.php?id=<?= $d['id_pendaftaran'] ?>"
+                                                class="btn btn-sm btn-success" title="Excel Data Ini">
                                                 <i class="bi bi-file-earmark-excel"></i>
                                             </a>
-                                            <a href="cetak_semua_pendaftaran.php" target="_blank"
-                                                class="btn btn-danger btn-sm" title="Cetak PDF">
+                                            <a href="cetak_semua_pendaftaran.php?id=<?= $d['id_pendaftaran'] ?>"
+                                                class="btn btn-sm btn-danger" title="PDF Data Ini">
                                                 <i class="bi bi-printer"></i>
                                             </a>
                                             <!-- Tombol untuk membuka modal -->
@@ -383,6 +427,16 @@ include '../../config.php';
                         <?php } ?>
                     </tbody>
                 </table>
+                <nav>
+                    <ul class="pagination">
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                <a class="page-link"
+                                    href="?page=<?= $i ?>&limit=<?= $limit ?>&search=<?= $search ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../config.php';
 
 if (isset($_POST['id_pengguna'])) {
@@ -16,6 +17,12 @@ if (isset($_POST['id_pengguna'])) {
 
         // Menjalankan query
         if (mysqli_stmt_execute($stmt)) {
+
+            // ✅ Perbarui session jika user mengedit dirinya sendiri
+            if ($_SESSION['id_pengguna'] == $id_pengguna) {
+                $_SESSION['username'] = $username;
+            }
+
             // Redirect ke halaman kelola user setelah sukses
             header("Location: kelola_user.php");
             exit();

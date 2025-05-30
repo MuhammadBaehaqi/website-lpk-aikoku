@@ -1,3 +1,6 @@
+<?php
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -121,6 +124,12 @@
             /* Warna hijau */
             padding: 5px;
         }
+
+        .deskripsi-beranda {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
     </style>
 </head>
 
@@ -167,186 +176,109 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
     </div>
-    </header>
-
+    <?php
+    $query = mysqli_query($mysqli, "SELECT * FROM tb_beranda_tentang_kami ORDER BY id_tentang DESC LIMIT 1");
+    $data = mysqli_fetch_assoc($query);
+    ?>
     <!-- Tentang Kami Singkat -->
     <section class="content-section py-5 bg-light" id="tentang">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="img/profile.jpg" class="img-fluid rounded shadow" alt="Tentang LPK Aikoku Terpadu">
+                    <img src="uploads/<?php echo $data['gambar']; ?>" class="img-fluid rounded shadow"
+                        alt="Tentang LPK Aikoku Terpadu">
                 </div>
                 <div class="col-md-6">
-                    <h2 class="text-success fw-bold">Tentang LPK Aikoku Terpadu</h2>
-                    <p>LPK Aikoku Terpadu adalah lembaga pelatihan kerja yang berfokus pada persiapan tenaga kerja ke
-                        Jepang. Dengan pengalaman bertahun-tahun, kami berkomitmen mencetak generasi unggul yang siap
-                        bersaing secara global.</p>
-                    <a href="#kontak" class="btn btn-success mt-3">Hubungi Kami</a>
+                    <h2 class="text-success fw-bold"><?php echo $data['judul']; ?></h2>
+                    <div class="deskripsi-beranda">
+                        <?php echo $data['deskripsi']; ?>
+                    </div>
+                    <a href="kontak.php" class="btn btn-success mt-3">Hubungi Kami</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Mengapa Memilih Kami -->
+    <?php
+    $query = mysqli_query($mysqli, "SELECT * FROM tb_beranda_keunggulan ORDER BY id_keunggulan ASC");
+    ?>
+
     <section class="content-section py-5">
         <div class="container">
             <h2 class="text-center text-success fw-bold mb-4">Mengapa Memilih Kami</h2>
             <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-graduation-cap fa-3x text-success mb-3"></i>
+                <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+                    <div class="col-md-6">
+                        <div class="card text-center shadow-sm p-4 h-100">
+                            <div class="mb-3">
+                                <i class="<?php echo $row['ikon']; ?> fa-3x text-success mb-3"></i>
+                            </div>
+                            <h4><?php echo $row['judul']; ?></h4>
+                            <p><?php echo $row['deskripsi']; ?></p>
                         </div>
-                        <h4>Pengajar Berpengalaman</h4>
-                        <p>Tim pengajar profesional yang terdiri dari native speaker dan instruktur tersertifikasi, LPK
-                            Aikoku Terpadu
-                            memastikan setiap siswa mendapat pembelajaran berkualitas tinggi. Pengajar kami memiliki
-                            pengalaman dalam
-                            mengajar bahasa Jepang dan siap membantu Anda mencapai kemahiran yang diinginkan.</p>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-book fa-3x text-success mb-3"></i>
-                        </div>
-                        <h4>Pelatihan Yang Singkat</h4>
-                        <p>Kami menawarkan program pelatihan yang efektif dan singkat, dirancang untuk mempersiapkan
-                            Anda dalam waktu
-                            singkat. Kurikulum kami mengikuti standar JLPT (Japanese Language Proficiency Test), dengan
-                            fokus pada
-                            kemampuan praktis yang mendukung kesiapan kerja.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-users fa-3x text-success mb-3"></i>
-                        </div>
-                        <h4>Lembaga Terpercaya</h4>
-                        <p>Sebagai lembaga pelatihan bahasa Jepang yang berkomitmen pada kualitas, LPK Aikoku Terpadu
-                            membatasi jumlah
-                            siswa di setiap kelas untuk memastikan perhatian penuh dan pembelajaran yang optimal bagi
-                            setiap peserta.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fa-regular fa-money-bill-1 fa-3x text-success mb-3"></i>
-                        </div>
-                        <h4>Biaya Terjangkau</h4>
-                        <p>Kami percaya bahwa pendidikan berkualitas tidak harus mahal. LPK Aikoku Terpadu menawarkan
-                            program berkualitas
-                            dengan biaya yang kompetitif dan pelatihan yang terjangkau.Biaya sudah termasuk materi
-                            pembelajaran,
-                            konsultasi karir, dan akses ke fasilitas belajar. Kami juga menyediakan opsi pembayaran
-                            cicilan untuk
-                            memudahkan Anda.</p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </section>
 
-    <!-- Fasilitas -->
+    <!-- fasilitas -->
     <section class="content-section py-5">
         <div class="container">
             <h2 class="text-center text-success fw-bold mb-4">Fasilitas Kami</h2>
             <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-home fa-3x text-success"></i>
+                <?php
+                include 'config.php';
+                $result = mysqli_query($mysqli, "SELECT * FROM tb_beranda_fasilitas ORDER BY id_fasilitas ASC");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="col-md-6">
+                        <div class="card text-center shadow-sm p-4 h-100">
+                            <div class="mb-3">
+                                <i class="<?= $row['ikon']; ?> fa-3x text-success"></i>
+                            </div>
+                            <h4><?= $row['judul']; ?></h4>
+                            <p><?= $row['deskripsi']; ?></p>
                         </div>
-                        <h4>Asrama</h4>
-                        <p>Kami menyediakan fasilitas asrama bagi siswa yang berasal dari luar daerah, sehingga mereka
-                            dapat
-                            belajar dengan lebih nyaman dan fokus.</p>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-wifi fa-3x text-success"></i>
-                        </div>
-                        <h4>WiFi Gratis</h4>
-                        <p>Fasilitas WiFi gratis tersedia untuk semua siswa, memungkinkan akses ke materi belajar secara
-                            online tanpa hambatan.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-book fa-3x text-success"></i>
-                        </div>
-                        <h4>Modul Pembelajaran</h4>
-                        <p>Setiap siswa akan mendapatkan modul pembelajaran berkualitas yang dirancang untuk
-                            meningkatkan
-                            pemahaman bahasa Jepang secara efektif.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card text-center shadow-sm p-4 h-100">
-                        <div class="mb-3">
-                            <i class="fas fa-tshirt fa-3x text-success"></i>
-                        </div>
-                        <h4>Kaos Seragam</h4>
-                        <p>Seluruh peserta akan mendapatkan kaos seragam LPK Aikoku Terpadu sebagai identitas resmi
-                            selama
-                            pelatihan berlangsung.</p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </section>
+
+    <?php
+    // Query untuk mengambil data testimoni
+    $query = "SELECT * FROM tb_beranda_testimoni ORDER BY tanggal ASC"; // Urutkan sesuai tanggal atau sesuaikan
+    $result = mysqli_query($mysqli, $query);
+
+    // Cek apakah query berhasil
+    if (!$result) {
+        echo "Error: " . mysqli_error($mysqli); // Tampilkan pesan error jika query gagal
+    }
+    ?>
     <!-- Testimoni Section -->
-    <section class="content-section py-5 bg-white">
+    <section id="testimoni" class="testimoni-section py-5 bg-white">
         <div class="container">
+            <!-- Teks Heading Testimoni Alumni -->
             <h2 class="text-center text-success fw-bold mb-4">Testimoni Alumni<br>LPK Aikoku Terpadu</h2>
-
-            <div id="testimoniCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
-                <div class="carousel-inner text-center">
-
-                    <!-- Testimoni 1 -->
-                    <div class="carousel-item active">
-                        <p class="testimonial-text px-4">
-                            "Alhamdulillah saya sangat bersyukur dan bangga menjadi bagian dari LPK Aikoku Terpadu.
-                            Suasana
-                            belajar sangat nyaman, pengajar luar biasa, dan fasilitas mendukung. Sekarang saya sudah
-                            bekerja
-                            di Jepang."
-                        </p>
-                        <img src="img/Selma.jpg" class="rounded-circle mt-3" width="80" alt="Alumni 1">
-                        <h5 class="fw-bold mt-2">Selma Fatimah Handaya Resmi</h5>
-                        <p class="text-muted">Tokutei Ginou Pengolahan Makanan</p>
-                    </div>
-
-                    <!-- Testimoni 2 -->
-                    <div class="carousel-item">
-                        <p class="testimonial-text px-4">
-                            "Saya mendapatkan pelatihan yang sangat baik di LPK Aikoku Terpadu. Berkat bimbingan sensei
-                            dan
-                            dukungan teman-teman, saya bisa bekerja di Jepang dengan percaya diri."
-                        </p>
-                        <img src="img/Selma.jpg" class="rounded-circle mt-3" width="80" alt="Alumni 2">
-                        <h5 class="fw-bold mt-2">Rizki Saputra</h5>
-                        <p class="text-muted">Bidang Konstruksi</p>
-                    </div>
-
-                    <!-- Testimoni 3 -->
-                    <div class="carousel-item">
-                        <p class="testimonial-text px-4">
-                            "Program di LPK Aikoku sangat lengkap, dari bahasa Jepang hingga kesiapan bekerja. Saya
-                            sangat
-                            merekomendasikan bagi yang ingin berkarier di Jepang!"
-                        </p>
-                        <img src="img/Selma.jpg" class="rounded-circle mt-3" width="80" alt="Alumni 3">
-                        <h5 class="fw-bold mt-2">Budi Santoso</h5>
-                        <p class="text-muted">Bidang Manufaktur</p>
-                    </div>
+            <div id="testimoniCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <?php
+                    $isActive = 'active'; // Inisialisasi status item pertama sebagai 'active'
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<div class="carousel-item ' . $isActive . '">';
+                        echo '<div class="d-flex flex-column align-items-center">';
+                        echo '<p class="testimonial-text px-4 text-center">"' . $row['testimoni'] . '"</p>';
+                        echo '<img src="uploads/' . $row['gambar'] . '" class="rounded-circle mt-3" width="150" alt="Alumni">';
+                        echo '<h5 class="fw-bold mt-2">' . $row['nama'] . '</h5>';
+                        echo '<p class="text-muted">' . $row['bidang'] . '</p>';
+                        echo '</div>';
+                        echo '</div>';
+                        $isActive = ''; // Set status item berikutnya menjadi kosong setelah item pertama
+                    }
+                    ?>
                 </div>
-
                 <!-- Navigasi Carousel -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#testimoniCarousel"
                     data-bs-slide="prev">
@@ -443,7 +375,7 @@
     </section>
 
     <?php include 'footer.php' ?>
-    
+
 </body>
 
 </html>

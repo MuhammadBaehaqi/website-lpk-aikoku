@@ -6,6 +6,23 @@ if (session_status() == PHP_SESSION_NONE) {
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 ?>
 
+<?php
+function isActive($page)
+{
+    return strpos($_SERVER['REQUEST_URI'], $page) !== false ? 'active' : '';
+}
+?>
+<!-- untuk dropdown -->
+<?php
+function isDropdownActive($pages = []) {
+    foreach ($pages as $page) {
+        if (strpos($_SERVER['REQUEST_URI'], $page) !== false) {
+            return 'show'; // untuk collapse Bootstrap
+        }
+    }
+    return '';
+}
+?>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -182,6 +199,12 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
             padding: 10px 15px;
             cursor: pointer;
         }
+
+        .sidebar a.active {
+            background-color: #0d4221;
+            font-weight: bold;
+            transform: translateX(5px);
+        }
     </style>
 </head>
 
@@ -197,7 +220,8 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
             <h5 class="mt-2">LPK Aikoku Terpadu</h5>
         </div>
         <span class="btn-close-sidebar" onclick="closeSidebar()">✖</span>
-        <a href="/pendaftaran/admin/dashboard/dashboard_admin.php" onclick="changeTitle('Dashboard')" class="text-white d-block px-3 py-2">
+        <a href="/pendaftaran/admin/dashboard/dashboard_admin.php" onclick="changeTitle('Dashboard')"
+            class="text-white d-block px-3 py-2 <?php echo isActive('dashboard_admin.php'); ?>">
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
         <div class="dropdown">
@@ -207,40 +231,62 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
             </a>
             <div class="collapse" id="kelolaHalamanMenu">
                 <ul class="list-unstyled ms-3">
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/beranda/beranda_admin.php"
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('beranda_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/beranda/beranda_admin.php"
                             onclick="changeTitle('Beranda')">
                             <i class="bi bi-house-door"></i> Beranda</a></li>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/profile/profile_admin.php"
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('profile_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/profile/profile_admin.php"
                             onclick="changeTitle('Profile')">
                             <i class="bi bi-person-circle"></i> Profile</a></li>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/program/program_admin.php" onclick="changeTitle('Program')">
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('program_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/program/program_admin.php"
+                            onclick="changeTitle('Program')">
                             <i class="bi bi-journal-code"></i> Program</a></li>
-                    <a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/album/album_admin.php"
-                        onclick="changeTitle('Album')">
+                    <a class="text-white d-block px-3 py-2 <?php echo isActive('album_admin.php'); ?>"
+                        href="/pendaftaran/admin/kelola_halaman/album/album_admin.php" onclick="changeTitle('Album')">
                         <i class="bi bi-images"></i> Album
                     </a>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/pengumuman/pengumuman_admin.php"
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('pengumuman_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/pengumuman/pengumuman_admin.php"
                             onclick="changeTitle('Pengumuman')">
                             <i class="bi bi-megaphone"></i> Pengumuman</a></li>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/kontak/kontak_admin.php" onclick="changeTitle('Kontak')">
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('kontak_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/kontak/kontak_admin.php"
+                            onclick="changeTitle('Kontak')">
                             <i class="bi bi-envelope"></i> Kontak</a></li>
-                    <li><a class="text-white d-block px-3 py-2" href="/pendaftaran/admin/kelola_halaman/pendaftaran/pendaftaran_admin.php" onclick="changeTitle('Pendaftaran')">
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('pendaftaran_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/pendaftaran/pendaftaran_admin.php"
+                            onclick="changeTitle('Pendaftaran')">
                             <i class="bi bi-person-add"></i> Pendaftaran</a></li>
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('footer_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/footer/footer_admin.php"
+                            onclick="changeTitle('footer')">
+                            <i class="bi bi-person-add"></i> footer</a></li>
                 </ul>
             </div>
         </div>
         <!-- Data Pendaftaran -->
-        <a href="/pendaftaran/admin/data_pendaftar/data_pendaftaran.php" onclick="changeTitle('Data Pendaftaran')" class="text-white d-block px-3 py-2">
+        <a href="/pendaftaran/admin/data_pendaftar/data_pendaftaran.php" onclick="changeTitle('Data Pendaftaran')"
+            class="text-white d-block px-3 py-2 <?php echo isActive('data_pendaftaran.php'); ?>">
             <i class="bi bi-table"></i> Data Pendaftaran
         </a>
 
         <!-- Data Kontak -->
-        <a href="/pendaftaran/admin/kontak_masuk/data_kontak.php" onclick="changeTitle('Data Kontak')" class="text-white d-block px-3 py-2">
+        <a href="/pendaftaran/admin/kontak_masuk/data_kontak.php" onclick="changeTitle('Data Kontak')"
+            class="text-white d-block px-3 py-2 <?php echo isActive('data_kontak.php'); ?>">
             <i class="bi bi-telephone"></i> Data Kontak
         </a>
 
+        <!-- Profile Admin Password -->
+        <a href="/pendaftaran/admin/profile/profile_admin_pw.php" onclick="changeTitle('Profile Admin')"
+            class="text-white d-block px-3 py-2 <?php echo isActive('profile_admin_pw.php'); ?>">
+            <i class="bi bi-person-gear"></i> Profile Admin
+        </a>
+
         <!-- Kelola User -->
-        <a href="/pendaftaran/admin/user/kelola_user.php" onclick="changeTitle('Kelola User')" class="text-white d-block px-3 py-2">
+        <a href="/pendaftaran/admin/user/kelola_user.php" onclick="changeTitle('Kelola User')"
+            class="text-white d-block px-3 py-2 <?php echo isActive('kelola_user.php'); ?>">
             <i class="bi bi-people"></i> Kelola User
         </a>
     </div>
@@ -288,7 +334,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
             document.getElementById("page-title").textContent = title;
             closeSidebar(); // Tambahkan ini agar sidebar tertutup di semua menu
         }
-       
+
     </script>
 
 </body>

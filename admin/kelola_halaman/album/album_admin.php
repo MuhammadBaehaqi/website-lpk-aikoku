@@ -34,6 +34,7 @@ $hero = mysqli_fetch_assoc($result_hero);
             max-height: 70vh;
             overflow-y: auto;
         }
+        
     </style>
 </head>
 
@@ -67,47 +68,47 @@ $hero = mysqli_fetch_assoc($result_hero);
             </form>
         </div>
         <!-- Hero Section -->
-<div class="card mb-4">
-    <div class="card-header">Kelola Hero Album</div>
-    <div class="card-body">
-        <!-- Form Input Hero -->
-        <form action="proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="judul" class="form-label">Judul</label>
-                <input type="text" name="judul" id="judul" class="form-control"
-                    placeholder="Masukkan Judul Album" required autocomplete="off" maxlength="100">
-            </div>
+        <div class="card mb-4">
+            <div class="card-header">Kelola Hero Album</div>
+            <div class="card-body">
+                <!-- Form Input Hero -->
+                <form action="proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul</label>
+                        <input type="text" name="judul" id="judul" class="form-control"
+                            placeholder="Masukkan Judul Album" required autocomplete="off" maxlength="100">
+                    </div>
 
-            <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
-                    placeholder="Masukkan Deskripsi Album" required maxlength="255"></textarea>
-            </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
+                            placeholder="Masukkan Deskripsi Album" required maxlength="255"></textarea>
+                    </div>
 
-            <div class="mb-3">
-                <label for="gambar" class="form-label">Upload Gambar</label>
-                <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*" required>
-            </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Upload Gambar</label>
+                        <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*" required>
+                    </div>
 
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </form>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
 
-        <hr>
+                <hr>
 
-        <!-- Daftar Album -->
-        <h5>Daftar Album</h5>
-        <table class="table table-bordered">
-            <thead class="table-light">
-                <tr>
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Deskripsi</th>
-                    <th>Gambar</th>
-                    <th>Tanggal Upload</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
+                <!-- Daftar Album -->
+                <h5>Daftar Album</h5>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Gambar</th>
+                            <th>Tanggal Upload</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
                         // Query untuk mengambil data album hero
                         $query = "SELECT * FROM tb_hero_album ORDER BY id_hero DESC";
                         $result = mysqli_query($mysqli, $query);
@@ -222,52 +223,50 @@ $hero = mysqli_fetch_assoc($result_hero);
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <!-- Modal Tambah Album -->
-    <div class="modal fade" id="tambahAlbumModal" tabindex="-1" aria-labelledby="tambahAlbumModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="margin-top: 50px;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tambahAlbumModalLabel">Tambah Album</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-info" role="alert">
-                        Lengkapi data album beserta foto untuk ditambahkan ke daftar album.
+        <!-- Modal Tambah Album -->
+        <div class="modal fade" id="tambahAlbumModal" tabindex="-1" aria-labelledby="tambahAlbumModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="margin-top: 50px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahAlbumModalLabel">Tambah Album</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="proses_tambah_album.php" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Deskripsi Album</label>
-                            <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+                    <div class="modal-body">
+                        <div class="alert alert-info" role="alert">
+                            Lengkapi data album beserta foto untuk ditambahkan ke daftar album.
                         </div>
+                        <form action="proses_tambah_album.php" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="deskripsi" class="form-label">Deskripsi Album</label>
+                                <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="detail" class="form-label">Detail Album (Kategori)</label>
-                            <select class="form-select" id="detail" name="detail" required>
-                                <option value="">-- Pilih Kategori --</option>
-                                <option value="Keberangkatan">Keberangkatan</option>
-                                <option value="Kelulusan Job">Kelulusan Job</option>
-                                <option value="Pendidikan LPK">Pendidikan LPK</option>
-                                <option value="Tanda Tangan Kontrak">Tanda Tangan Kontrak</option>
-                            </select>
-                        </div>
+                            <div class="mb-3">
+                                <label for="detail" class="form-label">Detail Album (Kategori)</label>
+                                <select class="form-select" id="detail" name="detail" required>
+                                    <option value="">-- Pilih Kategori --</option>
+                                    <option value="Keberangkatan">Keberangkatan</option>
+                                    <option value="Kelulusan Job">Kelulusan Job</option>
+                                    <option value="Pendidikan LPK">Pendidikan LPK</option>
+                                    <option value="Tanda Tangan Kontrak">Tanda Tangan Kontrak</option>
+                                </select>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="foto_album" class="form-label">Unggah Foto</label>
-                            <input type="file" class="form-control" id="foto_album" name="foto_album" accept="image/*"
-                                required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="foto_album" class="form-label">Unggah Foto</label>
+                                <input type="file" class="form-control" id="foto_album" name="foto_album"
+                                    accept="image/*" required>
+                            </div>
 
-                        <button type="submit" class="btn btn-success">Simpan Album</button>
-                    </form>
+                            <button type="submit" class="btn btn-success">Simpan Album</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

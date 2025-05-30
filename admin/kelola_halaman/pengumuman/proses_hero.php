@@ -17,10 +17,10 @@ if (isset($_FILES['hero_image']) && $_FILES['hero_image']['error'] == 0) {
             $deskripsi = $_POST['hero_description'];
 
             // Hapus data lama jika ada
-            mysqli_query($mysqli, "DELETE FROM hero_pengumuman");
+            mysqli_query($mysqli, "DELETE FROM tb_hero_pengumuman");
 
             // Simpan data baru ke database
-            $query = "INSERT INTO hero_pengumuman (hero_title, hero_description, hero_image)
+            $query = "INSERT INTO tb_hero_pengumuman (hero_title, hero_description, hero_image)
                       VALUES ('$judul', '$deskripsi', '$fileName')";
             if (mysqli_query($mysqli, $query)) {
                 header("Location: pengumuman_admin.php?status=sukses");

@@ -7,9 +7,11 @@ if (!isset($_SESSION['nama'])) {
     exit();
 }
 
-$username = $_SESSION['nama'];
-
-$query = "SELECT * FROM tb_pendaftaran WHERE nama_lengkap = '$username' LIMIT 1";
+$id_pengguna = $_SESSION['id_pengguna'];
+$query = "SELECT * FROM tb_pengguna 
+          INNER JOIN tb_pendaftaran 
+          ON tb_pengguna.email_pengguna = tb_pendaftaran.email 
+          WHERE tb_pengguna.id_pengguna = '$id_pengguna' LIMIT 1";
 $result = mysqli_query($mysqli, $query);
 $data = mysqli_fetch_assoc($result);
 

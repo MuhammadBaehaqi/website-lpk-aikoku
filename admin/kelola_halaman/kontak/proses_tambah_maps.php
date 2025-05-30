@@ -8,11 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (strpos($maps_url, 'https://www.google.com/maps/embed?pb=') === 0) {
 
         // Menghapus data maps lama (jika ada)
-        $delete_query = "DELETE FROM tb_maps";
+        $delete_query = "DELETE FROM tb_kontak_maps";
         mysqli_query($mysqli, $delete_query);
 
         // Menyimpan URL baru ke database, tanpa perlu menyertakan created_at karena sudah otomatis
-        $query = "INSERT INTO tb_maps (maps_url) VALUES ('$maps_url')";
+        $query = "INSERT INTO tb_kontak_maps (maps_url) VALUES ('$maps_url')";
         if (mysqli_query($mysqli, $query)) {
             header("Location: kontak_admin.php?success=maps_saved");
         } else {

@@ -16,9 +16,11 @@ if ($_SESSION['roles'] != 'admin') {
 $pageTitle = "Kelola User";
 include '../../config.php';
 
-// Ambil parameter search dan show
+// Ambil parameter search, show, dan page
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $show = isset($_GET['show']) ? intval($_GET['show']) : 10;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * $show;
 
 // Query untuk data user dengan pencarian
 $where = "";
@@ -27,7 +29,14 @@ if (!empty($search)) {
     $where = "WHERE username LIKE '%$searchEscaped%' OR email_pengguna LIKE '%$searchEscaped%'";
 }
 
-$query = mysqli_query($mysqli, "SELECT * FROM tb_pengguna $where LIMIT $show");
+$query = mysqli_query($mysqli, "SELECT * FROM tb_pengguna $where LIMIT $show OFFSET $offset");
+
+// Hitung total untuk pagination
+$total_query = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_pengguna $where");
+$total_data = mysqli_fetch_assoc($total_query)['total'];
+$total_pages = ceil($total_data / $show);
+
+$no = $offset + 1;
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -66,8 +75,8 @@ $query = mysqli_query($mysqli, "SELECT * FROM tb_pengguna $where LIMIT $show");
                     }
                     ?>
                 </select>
+                <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
             </form>
-
         </div>
 
         <!-- Tombol Tambah -->
@@ -192,6 +201,17 @@ $query = mysqli_query($mysqli, "SELECT * FROM tb_pengguna $where LIMIT $show");
                 </tbody>
             </table>
         </div>
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                        <a class="page-link"
+                            href="?page=<?= $i ?>&show=<?= $show ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </nav>
     </div>
 
 </body>

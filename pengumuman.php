@@ -77,7 +77,7 @@ include 'config.php'; // koneksi ke database
 <body>
     <?php include 'navbar.php'; ?>
     <?php
-    $heroQuery = mysqli_query($mysqli, "SELECT * FROM hero_pengumuman ORDER BY id DESC LIMIT 1");
+    $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_pengumuman ORDER BY id DESC LIMIT 1");
     $heroData = mysqli_fetch_assoc($heroQuery);
 
     // Tambahkan pengecekan jika tidak ada data
@@ -114,31 +114,48 @@ include 'config.php'; // koneksi ke database
             </form>
 
             <?php
-            // Cek jika pencarian dilakukan
+            // PAGINATION
+            $limit = 10;
+            $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+            $start = ($page - 1) * $limit;
+
             if (isset($_GET['cari'])) {
-                // Menyaring input pencarian
                 $cari = mysqli_real_escape_string($mysqli, $_GET['cari']);
+                $query = "SELECT p.* FROM tb_pendaftaran p
+              JOIN tb_pengumuman_tayang t ON t.id_pendaftaran = p.id_pendaftaran
+              WHERE (p.nama_lengkap LIKE '%$cari%' OR p.nomor_pendaftaran LIKE '%$cari%')
+              AND p.status IN ('Lolos', 'Tidak Lolos')
+              LIMIT $start, $limit";
 
-                // Query untuk mencari pendaftar dengan status Lolos atau Tidak Lolos
-                $query = "SELECT * FROM tb_pendaftaran WHERE (nama_lengkap LIKE '%$cari%' OR nomor_pendaftaran LIKE '%$cari%') AND status IN ('Lolos', 'Tidak Lolos')";
-                $result = mysqli_query($mysqli, $query);
+                $countQuery = "SELECT COUNT(*) AS total FROM tb_pengumuman_tayang t
+                   JOIN tb_pendaftaran p ON t.id_pendaftaran = p.id_pendaftaran
+                   WHERE (p.nama_lengkap LIKE '%$cari%' OR p.nomor_pendaftaran LIKE '%$cari%')
+                   AND p.status IN ('Lolos', 'Tidak Lolos')";
 
-                // Jika tidak ada hasil pencarian dengan status Lolos/Tidak Lolos
-                if (mysqli_num_rows($result) == 0) {
-                    // Cek apakah data pendaftar ada di database
-                    $cek_data = mysqli_query($mysqli, "SELECT * FROM tb_pendaftaran WHERE nama_lengkap LIKE '%$cari%' OR nomor_pendaftaran LIKE '%$cari%'");
-                    if (mysqli_num_rows($cek_data) > 0) {
-                        echo '<div class="alert alert-info mt-3">Status Anda sedang diproses. Harap tunggu konfirmasi lebih lanjut.</div>';
-                    } else {
-                        echo '<div class="alert alert-warning mt-3">Data tidak ditemukan. Pastikan nama atau nomor pendaftaran yang Anda masukkan benar.</div>';
-                    }
-                }
             } else {
-                // Query default jika tidak ada pencarian
-                $query = "SELECT * FROM tb_pendaftaran WHERE status IN ('Lolos', 'Tidak Lolos')";
-                $result = mysqli_query($mysqli, $query);
+                $query = "SELECT p.* FROM tb_pendaftaran p
+              JOIN tb_pengumuman_tayang t ON t.id_pendaftaran = p.id_pendaftaran
+              WHERE p.status IN ('Lolos', 'Tidak Lolos')
+              LIMIT $start, $limit";
+
+                $countQuery = "SELECT COUNT(*) AS total FROM tb_pengumuman_tayang t
+                   JOIN tb_pendaftaran p ON t.id_pendaftaran = p.id_pendaftaran
+                   WHERE p.status IN ('Lolos', 'Tidak Lolos')";
+            }
+
+            $result = mysqli_query($mysqli, $query);
+            $countResult = mysqli_query($mysqli, $countQuery);
+            $total = mysqli_fetch_assoc($countResult)['total'];
+            $pages = ceil($total / $limit);
+
+            // Menampilkan pesan jika tidak ada hasil
+            if (mysqli_num_rows($result) == 0) {
+                if (isset($_GET['cari'])) {
+                    echo '<div class="alert alert-warning mt-3">Data tidak ditemukan. Pastikan nama atau nomor pendaftaran benar atau belum ditampilkan oleh admin.</div>';
+                }
             }
             ?>
+
 
             <table class="table table-bordered table-striped text-center">
                 <thead>
@@ -174,6 +191,17 @@ include 'config.php'; // koneksi ke database
                     ?>
                 </tbody>
             </table>
+            <nav>
+                <ul class="pagination justify-content-center mt-4">
+                    <?php for ($i = 1; $i <= $pages; $i++): ?>
+                        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                            <a class="page-link"
+                                href="?<?= isset($_GET['cari']) ? 'cari=' . urlencode($_GET['cari']) . '&' : '' ?>page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+
         </div>
     </div>
     <?php include 'footer.php'; ?>

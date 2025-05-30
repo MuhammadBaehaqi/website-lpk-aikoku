@@ -1,3 +1,17 @@
+<?php
+include 'config.php';
+
+// Ambil hero section untuk program tokutei
+$queryHero = "SELECT * FROM tb_hero_program WHERE program='tokutei' ORDER BY id_hero_program DESC LIMIT 1";
+$resultHero = mysqli_query($mysqli, $queryHero);
+$dataHero = mysqli_fetch_assoc($resultHero);
+
+// Siapkan data default jika tidak ada hero
+$gambarHero = $dataHero ? 'uploads/' . $dataHero['gambar'] : 'img/default.jpg';
+$judulHero = $dataHero ? $dataHero['judul'] : 'Program Tokutei Ginou';
+$deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Tokutei Ginou bagi yang baru ke Jepang.';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -19,6 +33,17 @@
             color: white;
             font-size: 24px;
             font-weight: bold;
+            padding: 0 20px;
+        }
+
+        .hero-section h1,
+        .hero-section p {
+            word-wrap: break-word;
+            /* Membuat teks terbungkus ke baris berikutnya jika panjang */
+            word-break: break-word;
+            /* Menjamin kata panjang yang tidak terpisah juga akan terputus dengan baik */
+            max-width: 100%;
+            /* Pastikan teks tidak melampaui lebar container */
         }
 
         .footer {
@@ -75,12 +100,13 @@
 
 <body>
     <?php include 'navbar.php'; ?>
-    <div class="hero-section d-flex flex-column justify-content-center align-items-center text-center">
-        <h1 class="fw-bold">Tokutei Ginou</h1>
-        <p class="fs-5">Program Tokutei Ginou bagi yang baru ke Jepang bagi yang baru pertama kali ingin bekerja di
-            Jepang.</p>
+    <div class="hero-section d-flex flex-column justify-content-center align-items-center text-center"
+        style="background: url('<?php echo $gambarHero; ?>') no-repeat center center/cover;">
+        <h1 class="fw-bold"><?php echo htmlspecialchars($judulHero); ?></h1>
+        <p class="fs-5"><?php echo htmlspecialchars($deskripsiHero); ?></p>
         <a href="daftar.php" class="btn btn-warning btn-lg mt-3">Daftar Sekarang</a>
     </div>
+
 
     <div class="container mt-5">
         <div class="row mb-5">
@@ -91,17 +117,17 @@
                         <h5>Persyaratan Umum</h5>
                     </div>
                     <div class="card-body">
+                        <!-- Persyaratan Umum -->
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Laki-Laki/Perempuan</li>
-                            <li class="list-group-item">Umur 18 – 32 tahun</li>
-                            <li class="list-group-item">Pendidikan Min. MA, SMA/SMK/Sederajat</li>
-                            <li class="list-group-item">Tidak Buta Warna</li>
-                            <li class="list-group-item">Sehat Jasmani dan Rohani</li>
-                            <li class="list-group-item">Bersedia mengikuti pembelajaran bahasa Jepang di LPK Aikoku
-                                Terpadu
-                            </li>
-                            <li class="list-group-item">Tidak Bertindik & Bertato</li>
+                            <?php
+                            $queryUmum = "SELECT * FROM tb_persyaratan_program WHERE program='tokutei' AND jenis='umum'";
+                            $resultUmum = mysqli_query($mysqli, $queryUmum);
+                            while ($row = mysqli_fetch_assoc($resultUmum)) {
+                                echo "<li class='list-group-item'>" . htmlspecialchars($row['isi']) . "</li>";
+                            }
+                            ?>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -113,14 +139,15 @@
                         <h5>Persyaratan Dokumen</h5>
                     </div>
                     <div class="card-body">
+                        <!-- Persyaratan Dokumen -->
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Fotokopi & Asli Ijazah (SD, SMP, SMA/SMK, dan
-                                Diploma/Universitas
-                                jika ada)</li>
-                            <li class="list-group-item">Fotokopi Kartu Tanda Penduduk (KTP)</li>
-                            <li class="list-group-item">Fotokopi Kartu Keluarga (KK)</li>
-                            <li class="list-group-item">Fotokopi & Asli Akte Kelahiran</li>
-                            <li class="list-group-item">Pas Foto dalam format JPG (Background Putih)</li>
+                            <?php
+                            $queryDokumen = "SELECT * FROM tb_persyaratan_program WHERE program='tokutei' AND jenis='dokumen'";
+                            $resultDokumen = mysqli_query($mysqli, $queryDokumen);
+                            while ($row = mysqli_fetch_assoc($resultDokumen)) {
+                                echo "<li class='list-group-item'>" . htmlspecialchars($row['isi']) . "</li>";
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>

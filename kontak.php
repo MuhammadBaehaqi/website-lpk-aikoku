@@ -4,7 +4,7 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
 $kontakQuery = mysqli_query($mysqli, "SELECT * FROM tb_informasi_kontak ORDER BY id_kontak DESC LIMIT 1");
 $kontakData = mysqli_fetch_assoc($kontakQuery);
 
-$mapsQuery = mysqli_query($mysqli, "SELECT * FROM tb_maps ORDER BY id_maps DESC LIMIT 1");
+$mapsQuery = mysqli_query($mysqli, "SELECT * FROM tb_kontak_maps ORDER BY id_maps DESC LIMIT 1");
 $mapsData = mysqli_fetch_assoc($mapsQuery);
 $maps_url = $mapsData ? $mapsData['maps_url'] : '';
 ?>

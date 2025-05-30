@@ -57,7 +57,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                 </form>
             </div>
         </div>
-       <!-- Hero Section Tabel -->
+        <!-- Hero Section Tabel -->
         <div class="card mb-4">
             <div class="card-header">Data Hero Section</div>
             <div class="card-body">
@@ -72,26 +72,76 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                         </tr>
                     </thead>
                     <tbody>
-                       <?php
-                    // Query untuk mengambil data hero section dari database
-                    $query = "SELECT * FROM hero_pengumuman ORDER BY id DESC";
-                    $result = mysqli_query($mysqli, $query);
-                    $no = 1;
-                    while ($data = mysqli_fetch_assoc($result)) {
-                        ?>
-                        <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td><?php echo $data['hero_title']; ?></td>
-                            <td><?php echo $data['hero_description']; ?></td>
-                            <td><img src="../../../uploads/<?php echo $data['hero_image']; ?>" alt="Gambar Hero" width="100"></td>
-                            <td><?php echo date('d-m-Y H:i:s', strtotime($data['created_at'])); ?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                        <?php
+                        // Query untuk mengambil data hero section dari database
+                        $query = "SELECT * FROM tb_hero_pengumuman ORDER BY id DESC";
+                        $result = mysqli_query($mysqli, $query);
+                        $no = 1;
+                        while ($data = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $data['hero_title']; ?></td>
+                                <td><?php echo $data['hero_description']; ?></td>
+                                <td><img src="../../../uploads/<?php echo $data['hero_image']; ?>" alt="Gambar Hero"
+                                        width="100"></td>
+                                <td><?php echo date('d-m-Y H:i:s', strtotime($data['created_at'])); ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-
+        <!-- Tabel Daftar Pendaftar Lolos -->
+        <div class="card mb-4">
+            <div class="card-header">Daftar Pendaftar (Lolos dan Tidak Lolos)</div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Nomor Pendaftaran</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT p.id_pendaftaran, p.nama_lengkap, p.nomor_pendaftaran, p.status,
+                    t.id AS id_tayang
+             FROM tb_pendaftaran p
+             LEFT JOIN tb_pengumuman_tayang t ON t.id_pendaftaran = p.id_pendaftaran
+             WHERE p.status IN ('Lolos', 'Tidak Lolos')
+             ORDER BY p.id_pendaftaran ASC";
+                        $result = mysqli_query($mysqli, $sql);
+                        $no = 1;
+                        while ($row = mysqli_fetch_assoc($result)):
+                            ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= htmlspecialchars($row['nama_lengkap']) ?></td>
+                                <td><?= htmlspecialchars($row['nomor_pendaftaran']) ?></td>
+                                <td><span class="badge bg-success"><?= $row['status'] ?></span></td>
+                                <td>
+                                    <?php if ($row['id_tayang']): ?>
+                                        <a href="hapus_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin ingin menghapus dari pengumuman?')">Hapus dari
+                                            Pengumuman</a>
+                                    <?php else: ?>
+                                        <a href="tambah_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
+                                            class="btn btn-success btn-sm"
+                                            onclick="return confirm('Tampilkan di halaman pengumuman?')">Tampilkan di
+                                            Pengumuman</a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -1,3 +1,10 @@
+<?php
+include 'config.php';
+
+$query = "SELECT * FROM tb_footer ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($mysqli, $query);
+$footer = mysqli_fetch_assoc($result);
+?>
 <style>
     /* Warna judul footer */
     footer h5 {
@@ -47,8 +54,8 @@
     }
 
     .social-icons a {
-        font-size: 1.4rem;
-        margin-right: 8px;
+        font-size: 1.5rem; /* atau sesuaikan seperti 1.8rem, 2.2rem, dll */
+    margin-right: 12px; /* optional: biar jaraknya juga pas */
         color: #ccc;
         transition: color 0.3s ease, transform 0.3s ease;
     }
@@ -74,16 +81,37 @@
             <!-- Kolom Logo dan Deskripsi -->
             <div
                 class="col-md-3 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
-                <img src="logo.png" alt="Logo" class="footer-logo">
-                <p class="mt-3">Pusat Pelatihan Bahasa Jepang Terbaik untuk Mewujudkan Impian Berkarir di Jepang</p>
+                <?php if (!empty($footer['logo'])): ?>
+                    <img src="uploads/<?= htmlspecialchars($footer['logo']) ?>" alt="Logo" class="footer-logo">
+                    <p class="mt-3"><?= nl2br(htmlspecialchars($footer['deskripsi'])) ?></p>
+                <?php endif; ?>
                 <div class="social-icons mt-3">
-                    <a href="#"><i class="fab fa-facebook-f me-3"></i></a>
-                    <a href="#"><i class="fab fa-instagram me-3"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp me-3"></i></a>
-                    <a href="#"><i class="fab fa-youtube me-3"></i></a>
-                    <a href="mailto:lpkaikokuterpadu@gmail.com">
-                        <i class="fas fa-envelope me-3"></i>
-                    </a>
+                    <?php if (!empty($footer['facebook'])): ?>
+                        <a href="<?= htmlspecialchars($footer['facebook']) ?>" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (!empty($footer['instagram'])): ?>
+                        <a href="<?= htmlspecialchars($footer['instagram']) ?>" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (!empty($footer['whatsapp'])): ?>
+                        <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $footer['whatsapp']) ?>" target="_blank"
+                            class="me-2">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (!empty($footer['youtube'])): ?>
+                        <a href="<?= htmlspecialchars($footer['youtube']) ?>" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (!empty($footer['email_sosmed'])): ?>
+                        <a href="mailto:<?= htmlspecialchars($footer['email_sosmed']) ?>" target="_blank">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -114,24 +142,30 @@
             <!-- Kontak & Jam Operasional -->
             <div class="col-md-3 mb-4">
                 <h5>Kontak & Jam Operasional</h5>
-                <p><i class="bi bi-geo-alt-fill me-2 text-warning"></i>Petunjungan, Kab. Brebes, Jawa Tengah 52253</p>
-                <p><i class="bi bi-envelope-fill me-2 text-warning"></i>lpkaikokuterpadu@gmail.com</p>
-                <p><i class="bi bi-telephone-fill me-2 text-warning"></i>+62 857-2522-1265</p>
-                <p><i class="bi bi-clock-fill me-2 text-warning"></i>Senin - Jumat: 08:00 - 17:00</p>
-                <p><i class="bi bi-clock-fill me-2 text-warning"></i>Sabtu: 08:00 - 14:00</p>
-                <p><i class="bi bi-calendar-event-fill me-2 text-danger"></i><span class="text-danger">Minggu: Jadwalkan
-                        Terlebih Dahulu</span></p>
+                <p><i class="bi bi-geo-alt-fill me-2 text-warning"></i><?= nl2br(htmlspecialchars($footer['alamat'])) ?>
+                </p>
+                <p><i class="bi bi-telephone-fill me-2 text-warning"></i><?= htmlspecialchars($footer['telepon']) ?></p>
+                <p><i class="bi bi-envelope-fill me-2 text-warning"></i><a
+                        href="mailto:<?= htmlspecialchars($footer['email']) ?>"
+                        class="text-light"><?= htmlspecialchars($footer['email']) ?></a></p>
+                <p><i class="bi bi-clock-fill me-2 text-warning"></i><strong>Senin - Jumat:</strong>
+                    <?= htmlspecialchars($footer['jam_kerja']) ?></p>
+                <p><i class="bi bi-clock-fill me-2 text-warning"></i><strong>Sabtu:</strong>
+                    <?= htmlspecialchars($footer['jam_sabtu']) ?></p>
+                <p><i class="bi bi-calendar-event-fill me-2 text-danger"></i><span
+                        class="text-danger"><?= htmlspecialchars($footer['catatan']) ?></span></p>
             </div>
         </div>
 
         <!-- Google Maps Panjang -->
         <div class="row mt-4">
-            <div class="col-12">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.1708493362!2d109.0320760740444!3d-7.55201107518066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6548a6cf3522f9%3A0x4aa00a4c8b5c0aab!2sPetunjungan%2C%20Kec.%20Bulakamba%2C%20Kabupaten%20Brebes%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1714143000000!5m2!1sid!2sid"
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            <?php if (!empty($footer['maps_url'])): ?>
+                <div class="col-12">
+                    <iframe <iframe src="<?= htmlspecialchars($footer['maps_url']) ?>" width="100%" height="300"
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Garis Horizontal -->

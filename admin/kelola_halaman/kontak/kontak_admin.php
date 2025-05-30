@@ -136,7 +136,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
                     include '../../../config.php';
 
                     // Query untuk mengambil semua URL Google Maps
-                    $query_maps = "SELECT * FROM tb_maps ORDER BY id_maps DESC";
+                    $query_maps = "SELECT * FROM tb_kontak_maps ORDER BY id_maps DESC";
                     $result_maps = mysqli_query($mysqli, $query_maps);
                     while ($data_maps = mysqli_fetch_assoc($result_maps)) {
                         ?>

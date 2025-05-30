@@ -52,8 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                VALUES ('$nama', '$email', '$password_default', '$role')";
             mysqli_query($mysqli, $query_user);
         }
-
-        echo "<script>alert('Pendaftaran berhasil! Username: $nama | Password: 123456'); window.location.href = 'http://localhost/pendaftaran/index.php';</script>";
+        echo "<script>alert('Pendaftaran berhasil! Silakan tunggu konfirmasi dari admin melalui WhatsApp/email.'); window.location.href = 'http://localhost/pendaftaran/index.php';</script>";
     } else {
         echo "Gagal menyimpan data: " . mysqli_error($mysqli);
     }
