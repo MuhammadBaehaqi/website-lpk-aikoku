@@ -39,7 +39,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
         <div class="card mb-4">
             <div class="card-header">Atur Hero Section</div>
             <div class="card-body">
-                <form method="POST" action="proses_hero.php" enctype="multipart/form-data">
+                <form method="POST" action="hero/proses_hero.php" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="hero_title" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="hero_title" name="hero_title" required>
@@ -92,7 +92,41 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                 </table>
             </div>
         </div>
+
+        <?php
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $search_escaped = mysqli_real_escape_string($mysqli, $search);
+        $offset = ($page - 1) * $limit;
+
+        $where = "p.status IN ('Lolos', 'Tidak Lolos')";
+        if (!empty($search)) {
+            $where .= " AND (p.nama_lengkap LIKE '%$search_escaped%' OR p.nomor_pendaftaran LIKE '%$search_escaped%')";
+        }
+        // Hitung total data
+        $count_sql = "SELECT COUNT(*) as total FROM tb_pendaftaran p WHERE $where";
+        $count_result = mysqli_query($mysqli, $count_sql);
+        $total_data = mysqli_fetch_assoc($count_result)['total'];
+        $total_pages = ceil($total_data / $limit);
+        ?>
+
         <!-- Tabel Daftar Pendaftar Lolos -->
+        <form method="GET" class="d-flex mb-3">
+            <input type="text" name="search" class="form-control me-2" placeholder="Cari nama atau nomor pendaftaran..."
+                value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+            <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
+                <?php
+                $limits = [5, 10, 15, 20];
+                foreach ($limits as $val) {
+                    $selected = ($limit == $val) ? 'selected' : '';
+                    echo "<option value='$val' $selected>$val</option>";
+                }
+                ?>
+            </select>
+            <button type="submit" class="btn btn-primary">Tampilkan</button>
+        </form>
+
         <div class="card mb-4">
             <div class="card-header">Daftar Pendaftar (Lolos dan Tidak Lolos)</div>
             <div class="card-body">
@@ -109,11 +143,12 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                     <tbody>
                         <?php
                         $sql = "SELECT p.id_pendaftaran, p.nama_lengkap, p.nomor_pendaftaran, p.status,
-                    t.id AS id_tayang
-             FROM tb_pendaftaran p
-             LEFT JOIN tb_pengumuman_tayang t ON t.id_pendaftaran = p.id_pendaftaran
-             WHERE p.status IN ('Lolos', 'Tidak Lolos')
-             ORDER BY p.id_pendaftaran ASC";
+                        t.id AS id_tayang
+                        FROM tb_pendaftaran p
+                        LEFT JOIN tb_pengumuman_tayang t ON t.id_pendaftaran = p.id_pendaftaran
+                        WHERE $where
+                        ORDER BY p.id_pendaftaran ASC
+                        LIMIT $limit OFFSET $offset";
                         $result = mysqli_query($mysqli, $sql);
                         $no = 1;
                         while ($row = mysqli_fetch_assoc($result)):
@@ -125,12 +160,12 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                                 <td><span class="badge bg-success"><?= $row['status'] ?></span></td>
                                 <td>
                                     <?php if ($row['id_tayang']): ?>
-                                        <a href="hapus_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
+                                        <a href="tayang/hapus_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Yakin ingin menghapus dari pengumuman?')">Hapus dari
                                             Pengumuman</a>
                                     <?php else: ?>
-                                        <a href="tambah_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
+                                        <a href="tayang/tambah_tayang.php?id=<?= $row['id_pendaftaran'] ?>"
                                             class="btn btn-success btn-sm"
                                             onclick="return confirm('Tampilkan di halaman pengumuman?')">Tampilkan di
                                             Pengumuman</a>
@@ -140,6 +175,15 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+                <nav>
+                    <ul class="pagination">
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

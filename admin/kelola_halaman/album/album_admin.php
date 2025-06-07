@@ -34,7 +34,6 @@ $hero = mysqli_fetch_assoc($result_hero);
             max-height: 70vh;
             overflow-y: auto;
         }
-        
     </style>
 </head>
 
@@ -72,7 +71,7 @@ $hero = mysqli_fetch_assoc($result_hero);
             <div class="card-header">Kelola Hero Album</div>
             <div class="card-body">
                 <!-- Form Input Hero -->
-                <form action="proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
+                <form action="hero/proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
                         <input type="text" name="judul" id="judul" class="form-control"
@@ -163,8 +162,8 @@ $hero = mysqli_fetch_assoc($result_hero);
                                 <!-- Tombol untuk membuka modal Edit -->
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#editAlbumModal<?= $row['id_album']; ?>">Edit</button>
-                                <a href="hapus_album.php?id=<?= $row['id_album']; ?>" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus album ini?');">Hapus</a>
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#hapusAlbumModal<?= $row['id_album']; ?>">Hapus</button>
                             </td>
                         </tr>
 
@@ -182,7 +181,8 @@ $hero = mysqli_fetch_assoc($result_hero);
                                         <div class="alert alert-warning" role="alert">
                                             Pastikan semua data diisi dengan benar sebelum menyimpan perubahan.
                                         </div>
-                                        <form action="proses_edit_album.php" method="POST" enctype="multipart/form-data">
+                                        <form action="galeri/proses_edit_album.php" method="POST"
+                                            enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?= $row['id_album']; ?>">
 
                                             <div class="mb-3">
@@ -219,6 +219,35 @@ $hero = mysqli_fetch_assoc($result_hero);
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal Hapus Album -->
+                        <div class="modal fade" id="hapusAlbumModal<?= $row['id_album']; ?>" tabindex="-1"
+                            aria-labelledby="hapusAlbumModalLabel<?= $row['id_album']; ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="galeri/proses_hapus_album.php" method="POST">
+                                    <input type="hidden" name="id" value="<?= $row['id_album']; ?>">
+                                    <input type="hidden" name="foto_album" value="<?= $row['foto_album']; ?>">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Hapus Album</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Tutup"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah kamu yakin ingin menghapus album ini?
+                                            <br><strong><?= htmlspecialchars($row['deskripsi']); ?></strong>
+                                            <br><img src="../../../<?= $row['foto_album']; ?>" width="100"
+                                                class="img-thumbnail mt-2">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                     <?php } ?>
                 </tbody>
             </table>
@@ -237,7 +266,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                         <div class="alert alert-info" role="alert">
                             Lengkapi data album beserta foto untuk ditambahkan ke daftar album.
                         </div>
-                        <form action="proses_tambah_album.php" method="POST" enctype="multipart/form-data">
+                        <form action="galeri/proses_tambah_album.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi Album</label>
                                 <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>

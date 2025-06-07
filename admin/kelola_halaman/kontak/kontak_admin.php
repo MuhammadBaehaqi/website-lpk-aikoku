@@ -37,7 +37,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
         <div class="card mb-4">
             <div class="card-header">Kelola Hero Section</div>
             <div class="card-body">
-                <form action="proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
+                <form action="hero/proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="hero_title" class="form-control mb-3" placeholder="Judul" required>
                     <input type="text" name="hero_description" class="form-control mb-3" placeholder="Deskripsi"
                         required>
@@ -89,7 +89,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
         <div class="card mb-4">
             <div class="card-header">Kelola Informasi Kontak</div>
             <div class="card-body">
-                <form action="proses_tambah_kontak.php" method="POST">
+                <form action="informasi/proses_tambah_kontak.php" method="POST">
                     <input type="text" name="alamat" class="form-control mb-3" placeholder="Alamat" required>
                     <input type="email" name="email_kontak" class="form-control mb-3" placeholder="Email" required>
                     <input type="text" name="telepon" class="form-control mb-3" placeholder="Telepon" required>
@@ -125,7 +125,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
         <div class="card mb-4">
             <div class="card-header">Kelola Google Maps</div>
             <div class="card-body">
-                <form action="proses_tambah_maps.php" method="POST">
+                <form action="maps/proses_tambah_maps.php" method="POST">
                     <input type="text" name="maps_url" class="form-control mb-3" placeholder="URL Google Maps" required>
                     <button type="submit" class="btn btn-primary">Simpan URL Maps</button>
                 </form>

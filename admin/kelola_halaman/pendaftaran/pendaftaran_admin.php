@@ -37,7 +37,7 @@ $pageTitle = 'Kelola Halaman / Pendaftaran';
         <div class="card mb-4">
             <div class="card-header">Kelola Hero Pendaftaran</div>
             <div class="card-body">
-                <form action="proses_tambah_hero_pendaftaran.php" method="POST" enctype="multipart/form-data">
+                <form action="hero/proses_tambah_hero_pendaftaran.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="hero_title" class="form-control mb-3" placeholder="Judul" required>
                     <input type="text" name="hero_description" class="form-control mb-3" placeholder="Deskripsi"
                         required>

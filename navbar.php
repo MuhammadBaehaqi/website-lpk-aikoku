@@ -44,9 +44,18 @@
 </style>
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
+        <?php
+        include 'config.php'; // pastikan ini sebelum <nav>
+        
+        $logo_query = mysqli_query($mysqli, "SELECT * FROM tb_logo ORDER BY id_logo DESC LIMIT 1");
+        $logo_data = mysqli_fetch_assoc($logo_query);
+        $logo_img = !empty($logo_data['logo']) ? 'uploads/' . $logo_data['logo'] : 'logo.png';
+        $logo_text = !empty($logo_data['text_logo']) ? $logo_data['text_logo'] : 'LPK AIKOKU TERPADU';
+        ?>
+
         <a class="navbar-brand d-flex align-items-center" id="logoBrand" href="index.php">
-            <img src="logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
-            LPK AIKOKU TERPADU
+            <img src="<?= $logo_img ?>" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+            <?= htmlspecialchars($logo_text) ?>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -134,32 +143,32 @@
     });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const links = document.querySelectorAll('.nav-link'); // Semua link nav
-    const logoBrand = document.getElementById('logoBrand'); // Logo
-    const currentPage = window.location.pathname.split("/").pop(); // Nama file sekarang
+    document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll('.nav-link'); // Semua link nav
+        const logoBrand = document.getElementById('logoBrand'); // Logo
+        const currentPage = window.location.pathname.split("/").pop(); // Nama file sekarang
 
-    // Untuk semua link navbar
-    links.forEach(link => {
-        link.addEventListener("click", function (e) {
-            const targetPage = link.getAttribute("href");
+        // Untuk semua link navbar
+        links.forEach(link => {
+            link.addEventListener("click", function (e) {
+                const targetPage = link.getAttribute("href");
 
+                if (targetPage === currentPage || (targetPage === "index.php" && (currentPage === ""))) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Untuk logo navbar
+        logoBrand.addEventListener("click", function (e) {
+            const targetPage = logoBrand.getAttribute("href");
             if (targetPage === currentPage || (targetPage === "index.php" && (currentPage === ""))) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     });
-
-    // Untuk logo navbar
-    logoBrand.addEventListener("click", function (e) {
-        const targetPage = logoBrand.getAttribute("href");
-        if (targetPage === currentPage || (targetPage === "index.php" && (currentPage === ""))) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
-});
 </script>
 </body>
 

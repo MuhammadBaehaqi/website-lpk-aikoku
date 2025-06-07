@@ -30,7 +30,7 @@ if (!$footer) {
     ];
 }
 
-$pageTitle = "Kelola Footer";
+$pageTitle = "Kelola Halaman / Footer";
 ?>
 
 <!DOCTYPE html>

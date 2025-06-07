@@ -54,7 +54,7 @@ $pageTitle = 'Kelola Halaman / Program';
             <div class="card-header">Kelola Hero Program</div>
             <div class="card-body">
                 <!-- Tambah Hero Section -->
-                <form action="proses_tambah_hero_program.php" method="POST" enctype="multipart/form-data">
+                <form action="hero/proses_tambah_hero_program.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="program" class="form-label">Program</label>
                         <select name="program" class="form-select" required>
@@ -117,7 +117,7 @@ $pageTitle = 'Kelola Halaman / Program';
                             <div class="modal fade" id="editHero<?= $data['id_hero_program'] ?>" tabindex="-1"
                                 aria-labelledby="editHeroLabel<?= $data['id_hero_program'] ?>" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="edit_hero_program.php" method="POST" enctype="multipart/form-data">
+                                    <form action="hero/edit_hero_program.php" method="POST" enctype="multipart/form-data">
                                         <input type="hidden" name="id" value="<?= $data['id_hero_program'] ?>">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -164,7 +164,7 @@ $pageTitle = 'Kelola Halaman / Program';
         <div class="card mb-4">
             <div class="card-header">Tambah Persyaratan</div>
             <div class="card-body">
-                <form action="proses_tambah_persyaratan.php" method="POST">
+                <form action="persyaratan/proses_tambah_persyaratan.php" method="POST">
                     <div class="mb-3">
                         <label for="program" class="form-label">Program</label>
                         <select name="program" class="form-select" required>
@@ -233,7 +233,7 @@ $pageTitle = 'Kelola Halaman / Program';
                             <div class="modal fade" id="editModal<?= $id ?>" tabindex="-1"
                                 aria-labelledby="editModalLabel<?= $id ?>" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="edit_persyaratan.php" method="POST">
+                                    <form action="persyaratan/edit_persyaratan.php" method="POST">
                                         <input type="hidden" name="id" value="<?= $id ?>">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -280,7 +280,7 @@ $pageTitle = 'Kelola Halaman / Program';
                             <div class="modal fade" id="hapusModal<?= $id ?>" tabindex="-1"
                                 aria-labelledby="hapusModalLabel<?= $id ?>" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="hapus_persyaratan.php" method="GET">
+                                    <form action="persyaratan/hapus_persyaratan.php" method="GET">
                                         <input type="hidden" name="id" value="<?= $id ?>">
                                         <div class="modal-content">
                                             <div class="modal-header">

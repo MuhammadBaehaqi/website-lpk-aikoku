@@ -14,7 +14,8 @@ function isActive($page)
 ?>
 <!-- untuk dropdown -->
 <?php
-function isDropdownActive($pages = []) {
+function isDropdownActive($pages = [])
+{
     foreach ($pages as $page) {
         if (strpos($_SERVER['REQUEST_URI'], $page) !== false) {
             return 'show'; // untuk collapse Bootstrap
@@ -225,11 +226,33 @@ function isDropdownActive($pages = []) {
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
         <div class="dropdown">
-            <a class="dropdown-toggle text-white d-block px-3 py-2" href="#" role="button" id="kelolaHalamanDropdown"
-                data-bs-toggle="collapse" data-bs-target="#kelolaHalamanMenu">
+            <!-- kelas aktif -->
+            <a class="dropdown-toggle text-white d-block px-3 py-2 <?php echo isDropdownActive([
+                'beranda_admin.php',
+                'profile_admin.php',
+                'program_admin.php',
+                'album_admin.php',
+                'pengumuman_admin.php',
+                'kontak_admin.php',
+                'pendaftaran_admin.php',
+                'footer_admin.php',
+                'logo_admin.php'
+            ]) ? 'active' : ''; ?>" href="#" role="button" id="kelolaHalamanDropdown" data-bs-toggle="collapse"
+                data-bs-target="#kelolaHalamanMenu">
                 <i class="bi bi-layout-text-sidebar-reverse"></i> Kelola Halaman
             </a>
-            <div class="collapse" id="kelolaHalamanMenu">
+            <!-- dropdown buka -->
+            <div class="collapse <?php echo isDropdownActive([
+                'beranda_admin.php',
+                'profile_admin.php',
+                'program_admin.php',
+                'album_admin.php',
+                'pengumuman_admin.php',
+                'kontak_admin.php',
+                'pendaftaran_admin.php',
+                'footer_admin.php',
+                'logo_admin.php'
+            ]); ?>" id="kelolaHalamanMenu">
                 <ul class="list-unstyled ms-3">
                     <li><a class="text-white d-block px-3 py-2 <?php echo isActive('beranda_admin.php'); ?>"
                             href="/pendaftaran/admin/kelola_halaman/beranda/beranda_admin.php"
@@ -262,7 +285,11 @@ function isDropdownActive($pages = []) {
                     <li><a class="text-white d-block px-3 py-2 <?php echo isActive('footer_admin.php'); ?>"
                             href="/pendaftaran/admin/kelola_halaman/footer/footer_admin.php"
                             onclick="changeTitle('footer')">
-                            <i class="bi bi-person-add"></i> footer</a></li>
+                            <i class="bi bi-arrow-down-square"></i> Footer</a></li>
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('logo_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/logo/logo_admin.php" onclick="changeTitle('Logo')">
+                            <i class="bi bi-bootstrap-fill"></i> Logo
+                        </a></li>
                 </ul>
             </div>
         </div>

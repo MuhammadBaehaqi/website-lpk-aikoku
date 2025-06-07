@@ -153,8 +153,7 @@ $result = mysqli_query($mysqli, $query);
 <body>
     <?php include 'navbar.php'; ?>
     <?php
-   
-
+    
     $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_album ORDER BY id_hero DESC LIMIT 1");
     $heroData = mysqli_fetch_assoc($heroQuery);
 

@@ -14,19 +14,30 @@ include 'config.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         #heroCarousel .hero-section {
+            position: absolute;
+            top: 0;
+            left: 0;
             height: 100vh;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            /* agar teks tetap jelas */
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
+            padding: 20px;
             text-align: center;
             color: white;
-            padding-top: 80px;
+            overflow: hidden;
         }
 
         /* Animasi fade-in di hero */
         #heroCarousel .hero-content {
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
             animation: fadeIn 1.5s ease-in-out;
+            word-wrap: break-word;
         }
 
         /* Gambar di carousel hero */
@@ -52,6 +63,17 @@ include 'config.php';
             /* Tombol naik sedikit */
             box-shadow: 0 10px 20px rgba(255, 193, 7, 0.5);
             /* Bayangan hover */
+        }
+
+        /* untuk hp */
+        @media (max-width: 576px) {
+            #heroCarousel .hero-content h1 {
+                font-size: 1.6rem;
+            }
+
+            #heroCarousel .hero-content p {
+                font-size: 1rem;
+            }
         }
 
         /* Animasi fade-in */
@@ -138,36 +160,27 @@ include 'config.php';
     <!-- Hero Section -->
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/hero.jpg" class="d-block w-100" alt="Slide 1">
-                <div class="carousel-caption hero-section">
-                    <div class="hero-content">
-                        <h1>Wujudkan Mimpimu Kerja di Jepang</h1>
-                        <p>Bersama LPK Aikoku Terpadu</p>
-                        <a href="#daftar" class="btn btn-warning">Daftar Sekarang</a>
+            <?php
+            $query = mysqli_query($mysqli, "SELECT * FROM tb_hero ORDER BY id_hero ASC");
+            $first = true;
+            while ($row = mysqli_fetch_assoc($query)) {
+                ?>
+                <div class="carousel-item <?= $first ? 'active' : '' ?>">
+                    <img src="uploads/<?= $row['gambar'] ?>" class="d-block w-100" alt="Hero">
+                    <div class="carousel-caption hero-section">
+                        <div class="hero-content">
+                            <h1><?= htmlspecialchars($row['judul']) ?></h1>
+                            <p><?= htmlspecialchars($row['deskripsi']) ?></p>
+                            <a href="<?= htmlspecialchars($row['link_tombol']) ?>" class="btn btn-warning">
+                                <?= htmlspecialchars($row['teks_tombol']) ?>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img src="img/sejarah.jpg" class="d-block w-100" alt="Slide 2">
-                <div class="carousel-caption hero-section">
-                    <div class="hero-content">
-                        <h1>Raih Masa Depan Cerah di Jepang</h1>
-                        <p>Dengan Dukungan LPK Aikoku Terpadu</p>
-                        <a href="#program" class="btn btn-warning">Lihat Program</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="img/profile.jpg" class="d-block w-100" alt="Slide 3">
-                <div class="carousel-caption hero-section">
-                    <div class="hero-content">
-                        <h1>Bersiaplah Menuju Karier Global</h1>
-                        <p>Bersama LPK Aikoku Terpadu</p>
-                        <a href="#kontak" class="btn btn-warning">Hubungi Kami</a>
-                    </div>
-                </div>
-            </div>
+                <?php
+                $first = false;
+            }
+            ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

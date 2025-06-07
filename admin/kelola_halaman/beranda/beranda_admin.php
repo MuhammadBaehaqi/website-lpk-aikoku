@@ -23,7 +23,6 @@ $pageTitle = 'Kelola Halaman / Beranda';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
     <link rel="icon" href="../../../logo.png" type="image/x-icon">
-   
 
     <style>
         .table td,
@@ -54,29 +53,152 @@ $pageTitle = 'Kelola Halaman / Beranda';
         <div class="card mb-4">
             <div class="card-header">Kelola Hero Section</div>
             <div class="card-body">
-                <form action="proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
+                <form action="hero/proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul" required>
                     <input type="text" name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required>
+                    <select name="link_tombol" class="form-control mb-3" required>
+                        <option value="daftar.php">daftar.php</option>
+                        <option value="album.php">album.php</option>
+                        <option value="profile.php">profile.php</option>
+                        <option value="#program">#program</option>
+                        <option value="kontak.php">kontak.php</option>
+                    </select>
+                    <input type="text" name="teks_tombol" class="form-control mb-3" placeholder="Teks Tombol (misal: Daftar Sekarang)" required>
                     <input type="file" name="gambar" class="form-control mb-3" required>
                     <button type="submit" class="btn btn-primary">Tambah Hero</button>
                 </form>
                 <hr>
                 <h5>Daftar Hero</h5>
-                <ul class="list-group">
-                    <li class="list-group-item">Hero 1 <a href="edit_hero.php?id=1"
-                            class="btn btn-sm btn-warning">Edit</a> <a href="hapus_hero.php?id=1"
-                            class="btn btn-sm btn-danger">Hapus</a></li>
-                    <li class="list-group-item">Hero 2 <a href="edit_hero.php?id=2"
-                            class="btn btn-sm btn-warning">Edit</a> <a href="hapus_hero.php?id=2"
-                            class="btn btn-sm btn-danger">Hapus</a></li>
-                </ul>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Link Tombol</th>
+                            <th>Teks Tombol</th>
+                            <th>Gambar</th>
+                            <th>Tanggal Upload</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            <?php
+                            include '../../../config.php';
+                            $hero = mysqli_query($mysqli, "SELECT * FROM tb_hero ORDER BY id_hero ASC");
+                            $no = 1;
+                            while ($row = mysqli_fetch_assoc($hero)) {
+                                ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= htmlspecialchars($row['judul']) ?></td>
+                                    <td><?= htmlspecialchars($row['deskripsi']) ?></td>
+                                    <td><?= htmlspecialchars($row['link_tombol']) ?></td>
+                                    <td><?= htmlspecialchars($row['teks_tombol']) ?></td>
+                                    <td><img src="../../../uploads/<?= $row['gambar'] ?>" width="120"></td>
+                                    <td><?= date("d-m-Y H:i", strtotime($row['tanggal_upload'])) ?></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#editHeroModal<?= $row['id_hero'] ?>">Edit</button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#hapusHeroModal<?= $row['id_hero'] ?>">Hapus</button>
+                                    </td>
+                                </tr>
+                                <!-- Modal Edit -->
+                                <div class="modal fade" id="editHeroModal<?= $row['id_hero'] ?>" tabindex="-1"
+                                    aria-labelledby="editHeroModalLabel<?= $row['id_hero'] ?>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="hero/proses_edit_hero.php" method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" value="<?= $row['id_hero'] ?>">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Hero</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Tutup"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-2">
+                                                        <label>Judul</label>
+                                                        <input type="text" name="judul" class="form-control"
+                                                            value="<?= htmlspecialchars($row['judul']) ?>" required>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label>Deskripsi</label>
+                                                        <input type="text" name="deskripsi" class="form-control"
+                                                            value="<?= htmlspecialchars($row['deskripsi']) ?>" required>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label>Link Tombol</label>
+                                                        <select name="link_tombol" class="form-control" required>
+                                                            <option value="daftar.php" <?= $row['link_tombol'] == 'daftar.php' ? 'selected' : '' ?>>daftar.php</option>
+                                                            <option value="album.php" <?= $row['link_tombol'] == 'album.php' ? 'selected' : '' ?>>album.php</option>
+                                                            <option value="profile.php"
+                                                                <?= $row['link_tombol'] == 'profile.php' ? 'selected' : '' ?>>
+                                                                profile.php</option>
+                                                            <option value="#program" <?= $row['link_tombol'] == '#program' ? 'selected' : '' ?>>#program</option>
+                                                            <option value="kontak.php" <?= $row['link_tombol'] == 'kontak.php' ? 'selected' : '' ?>>kontak.php</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label>Teks Tombol</label>
+                                                        <input type="text" name="teks_tombol" class="form-control" value="<?= htmlspecialchars($row['teks_tombol']) ?>"
+                                                            required>
+                                                    </div>
+
+                                                    <div class="mb-2">
+                                                        <label>Ganti Gambar (opsional)</label>
+                                                        <input type="file" name="gambar" class="form-control">
+                                                        <small>Gambar saat ini: <?= $row['gambar'] ?></small>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Hapus -->
+                                <div class="modal fade" id="hapusHeroModal<?= $row['id_hero'] ?>" tabindex="-1"
+                                    aria-labelledby="hapusHeroModalLabel<?= $row['id_hero'] ?>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="hero/proses_hapus_hero.php" method="POST">
+                                            <input type="hidden" name="id" value="<?= $row['id_hero'] ?>">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Hapus Hero</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Tutup"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Yakin ingin menghapus slide
+                                                    "<strong><?= htmlspecialchars($row['judul']) ?></strong>"?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
         <!-- Tentang Kami Singkat -->
         <div class="card mb-4">
             <div class="card-header">Kelola Tentang Kami Singkat</div>
             <div class="card-body">
-                <form action="proses_tentang_kami.php" method="POST" enctype="multipart/form-data">
+                <form action="tentang_kami/proses_tentang_kami.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul Tentang Kami" required>
                     <textarea name="deskripsi" class="form-control mb-3" placeholder="Deskripsi Singkat"
                         required></textarea>
@@ -126,7 +248,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
         <div class="card mb-4">
             <div class="card-header">Kelola "Mengapa Memilih Kami"</div>
             <div class="card-body">
-                <form action="proses_tambah_keunggulan.php" method="POST">
+                <form action="keunggulan/proses_tambah_keunggulan.php" method="POST">
                     <input type="text" name="ikon" class="form-control mb-2"
                         placeholder="Ikon di web Fontawesome Contoh: fas fa-graduation-cap" required>
                     <input type="text" name="judul" class="form-control mb-2" placeholder="Judul" required>
@@ -174,7 +296,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 <div class="modal fade" id="editModal<?= $data['id_keunggulan']; ?>" tabindex="-1"
                                     aria-labelledby="editModalLabel<?= $data['id_keunggulan']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="proses_edit_keunggulan.php" method="POST">
+                                        <form action="keunggulan/proses_edit_keunggulan.php" method="POST">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit Keunggulan</h5>
@@ -213,7 +335,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 <div class="modal fade" id="hapusModal<?= $data['id_keunggulan']; ?>" tabindex="-1"
                                     aria-labelledby="hapusModalLabel<?= $data['id_keunggulan']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="proses_hapus_keunggulan.php" method="POST">
+                                        <form action="keunggulan/proses_hapus_keunggulan.php" method="POST">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Hapus Keunggulan</h5>
@@ -244,7 +366,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
         <div class="card mb-4">
             <div class="card-header">Kelola Fasilitas</div>
             <div class="card-body">
-                <form action="proses_tambah_fasilitas.php" method="POST">
+                <form action="fasilitas/proses_tambah_fasilitas.php" method="POST">
                     <input type="text" name="ikon" class="form-control mb-2" placeholder="Ikon Fontawesome" required>
                     <input type="text" name="judul" class="form-control mb-2" placeholder="Judul" required>
                     <textarea name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required></textarea>
@@ -289,7 +411,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 <div class="modal fade" id="editFasilitasModal<?= $f['id_fasilitas']; ?>" tabindex="-1"
                                     aria-labelledby="editFasilitasModalLabel<?= $f['id_fasilitas']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="proses_edit_fasilitas.php" method="POST">
+                                        <form action="fasilitas/proses_edit_fasilitas.php" method="POST">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit Fasilitas</h5>
@@ -328,7 +450,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 <div class="modal fade" id="hapusFasilitasModal<?= $f['id_fasilitas']; ?>" tabindex="-1"
                                     aria-labelledby="hapusFasilitasModalLabel<?= $f['id_fasilitas']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="proses_hapus_fasilitas.php" method="POST">
+                                        <form action="fasilitas/proses_hapus_fasilitas.php" method="POST">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Hapus Fasilitas</h5>
@@ -364,7 +486,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
         <div class="card mb-4">
             <div class="card-header">Kelola Testimoni</div>
             <div class="card-body">
-                <form action="proses_tambah_testimoni.php" method="POST" enctype="multipart/form-data">
+                <form action="testimoni/proses_tambah_testimoni.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="nama" class="form-control mb-3" placeholder="Nama Alumni" required>
                     <textarea name="testimoni" class="form-control mb-3" placeholder="Isi Testimoni"
                         required></textarea>
@@ -401,72 +523,72 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 echo '<td>' . substr($row['testimoni'], 0, 100) . '...</td>';
                                 echo '<td>' . date('d-m-Y', strtotime($row['tanggal'])) . '</td>';
                                 echo '<td>
-        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTestimoniModal' . $row['id_testimoni'] . '">Edit</button>
-        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusTestimoniModal' . $row['id_testimoni'] . '">Hapus</button>
-    </td>';
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTestimoniModal' . $row['id_testimoni'] . '">Edit</button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusTestimoniModal' . $row['id_testimoni'] . '">Hapus</button>
+                                    </td>';
                                 echo '</tr>';
 
                                 // Modal Edit Testimoni
                                 echo '
-    <div class="modal fade" id="editTestimoniModal' . $row['id_testimoni'] . '" tabindex="-1" aria-labelledby="editTestimoniModalLabel' . $row['id_testimoni'] . '" aria-hidden="true">
-        <div class="modal-dialog">
-            <form action="proses_edit_testimoni.php" method="POST" enctype="multipart/form-data">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Testimoni</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="' . $row['id_testimoni'] . '">
-                        <div class="mb-2">
-                            <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" value="' . $row['nama'] . '" required>
-                        </div>
-                        <div class="mb-2">
-                            <label>Bidang</label>
-                            <input type="text" name="bidang" class="form-control" value="' . $row['bidang'] . '" required>
-                        </div>
-                        <div class="mb-2">
-                            <label>Testimoni</label>
-                            <textarea name="testimoni" class="form-control" required>' . $row['testimoni'] . '</textarea>
-                        </div>
-                        <div class="mb-2">
-                            <label>Ganti Gambar (opsional)</label>
-                            <input type="file" name="gambar" class="form-control">
-                            <small>Gambar saat ini: ' . $row['gambar'] . '</small>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>';
+                            <div class="modal fade" id="editTestimoniModal' . $row['id_testimoni'] . '" tabindex="-1" aria-labelledby="editTestimoniModalLabel' . $row['id_testimoni'] . '" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="testimoni/proses_edit_testimoni.php" method="POST" enctype="multipart/form-data">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Testimoni</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id" value="' . $row['id_testimoni'] . '">
+                                                <div class="mb-2">
+                                                    <label>Nama</label>
+                                                    <input type="text" name="nama" class="form-control" value="' . $row['nama'] . '" required>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label>Bidang</label>
+                                                    <input type="text" name="bidang" class="form-control" value="' . $row['bidang'] . '" required>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label>Testimoni</label>
+                                                    <textarea name="testimoni" class="form-control" required>' . $row['testimoni'] . '</textarea>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label>Ganti Gambar (opsional)</label>
+                                                    <input type="file" name="gambar" class="form-control">
+                                                    <small>Gambar saat ini: ' . $row['gambar'] . '</small>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>';
 
-                                // Modal Hapus Testimoni
-                                echo '
-    <div class="modal fade" id="hapusTestimoniModal' . $row['id_testimoni'] . '" tabindex="-1" aria-labelledby="hapusTestimoniModalLabel' . $row['id_testimoni'] . '" aria-hidden="true">
-        <div class="modal-dialog">
-            <form action="proses_hapus_testimoni.php" method="POST">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus Testimoni</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="' . $row['id_testimoni'] . '">
-                        Yakin ingin menghapus testimoni dari <strong>' . $row['nama'] . '</strong>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>';
+                            // Modal Hapus Testimoni
+                            echo '
+                            <div class="modal fade" id="hapusTestimoniModal' . $row['id_testimoni'] . '" tabindex="-1" aria-labelledby="hapusTestimoniModalLabel' . $row['id_testimoni'] . '" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="testimoni/proses_hapus_testimoni.php" method="POST">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Hapus Testimoni</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id" value="' . $row['id_testimoni'] . '">
+                                                Yakin ingin menghapus testimoni dari <strong>' . $row['nama'] . '</strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>';
                             }
                             ?>
                         </tbody>
