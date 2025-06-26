@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 $id = (int) $_POST['id_pengurus'];
 $nama = $_POST['nama_pengurus'];

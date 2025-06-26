@@ -14,7 +14,7 @@ if ($_SESSION['roles'] != 'admin') {
 }
 
 $pageTitle = "Data Kontak";
-include '../../config.php';
+include '../../includes/config.php';
 
 // Ambil parameter
 $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
@@ -48,9 +48,7 @@ $no = $offset + 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
 </head>
 
 <body>

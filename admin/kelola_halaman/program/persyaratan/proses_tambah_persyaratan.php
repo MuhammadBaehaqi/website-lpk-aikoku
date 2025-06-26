@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 $program = $_POST['program'];
 $jenis = $_POST['jenis'];

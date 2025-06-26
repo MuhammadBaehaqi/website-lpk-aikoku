@@ -1,6 +1,6 @@
 <?php
 // Koneksi database
-include('../config.php');
+include('../includes/config.php');
 
 session_start();
 if (!isset($_SESSION['id_pengguna'])) {

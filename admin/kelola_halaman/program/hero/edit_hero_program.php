@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 $id = $_POST['id'];
 $judul = $_POST['judul'];

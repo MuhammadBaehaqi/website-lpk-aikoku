@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 // Pastikan file gambar ada
 if (isset($_FILES['hero_image']) && $_FILES['hero_image']['error'] == 0) {

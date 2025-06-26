@@ -1,5 +1,5 @@
 <?php
-include '../../config.php';
+include '../../includes/config.php';
 if (isset($_GET['id_kontak'])) { // Mengubah 'id' menjadi 'id_kontak'
     $id_kontak = $_GET['id_kontak'];
 

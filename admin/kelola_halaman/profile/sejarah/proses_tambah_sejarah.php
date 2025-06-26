@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php'; // Sesuaikan path jika perlu
+include '../../../../includes/config.php'; // Sesuaikan path jika perlu
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $judul_atas = $_POST['judul_atas'];

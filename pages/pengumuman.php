@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; // koneksi ke database
+include '../includes/config.php'; // koneksi ke database
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -10,11 +10,11 @@ include 'config.php'; // koneksi ke database
     <title>Pengumuman</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .hero-section {
-            background: url('img/hero.jpg') no-repeat center center/cover;
+            background: url('../img/hero.jpg') no-repeat center center/cover;
             height: 60vh;
             display: flex;
             align-items: center;
@@ -75,19 +75,19 @@ include 'config.php'; // koneksi ke database
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
     <?php
     $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_pengumuman ORDER BY id DESC LIMIT 1");
     $heroData = mysqli_fetch_assoc($heroQuery);
 
     // Tambahkan pengecekan jika tidak ada data
     if (!$heroData) {
-        $hero_background = 'img/hero.jpg';  // Default image
+        $hero_background = '../img/hero.jpg';  // Default image
         $hero_title = 'Daftar Sekarang dan Wujudkan Mimpi Anda di Jepang!';
         $hero_description = '';  // Kosongkan deskripsi jika tidak ada
     } else {
         // Gunakan data dari database jika ada
-        $hero_background = "uploads/" . $heroData['hero_image'];
+        $hero_background = "../uploads/" . $heroData['hero_image'];
         $hero_title = $heroData['hero_title'];
         $hero_description = $heroData['hero_description'];
     }
@@ -204,7 +204,7 @@ include 'config.php'; // koneksi ke database
 
         </div>
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

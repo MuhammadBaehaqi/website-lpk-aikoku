@@ -1,15 +1,18 @@
 <?php
 session_start();
-include '../config.php';
+include '../includes/config.php';
 
 if (!isset($_SESSION['nama'])) {
     header("Location: ../login.php");
     exit();
 }
 
-$username = $_SESSION['nama'];
+$id_pengguna = $_SESSION['id_pengguna'];
+$query = "SELECT pengumuman FROM tb_pengguna 
+          INNER JOIN tb_pendaftaran 
+          ON tb_pengguna.email_pengguna = tb_pendaftaran.email 
+          WHERE tb_pengguna.id_pengguna = '$id_pengguna' LIMIT 1";
 
-$query = "SELECT pengumuman FROM tb_pendaftaran WHERE nama_lengkap = '$username' LIMIT 1";
 $result = mysqli_query($mysqli, $query);
 $data = mysqli_fetch_assoc($result);
 
@@ -24,7 +27,7 @@ $pageTitle = "Pengumuman";
 <head>
     <meta charset="UTF-8">
     <title><?= $pageTitle ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .content {
@@ -52,10 +55,15 @@ $pageTitle = "Pengumuman";
                 <div class="card-body">
                     <h5>Pengumuman Terbaru</h5>
                     <?php if (!empty($pengumuman)): ?>
-                        <p><?= nl2br(htmlspecialchars($pengumuman)) ?></p>
+                        <div class="alert alert-success">
+                            <strong><?= $username ?>, berikut isi pengumuman untukmu:</strong>
+                            <hr>
+                            <p><?= nl2br(htmlspecialchars($pengumuman)) ?></p>
+                        </div>
                     <?php else: ?>
                         <p><em>Belum ada pengumuman dari admin.</em></p>
                     <?php endif; ?>
+
                     <a href="dashboard_user.php" class="btn btn-outline-secondary">Kembali ke Dashboard</a>
                 </div>
             </div>

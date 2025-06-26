@@ -4,7 +4,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 session_start();
-include '../config.php'; // ← kalau file ini di folder "dashboard_user", gunakan ../ untuk naik satu folder
+include '../includes/config.php'; // ← kalau file ini di folder "dashboard_user", gunakan ../ untuk naik satu folder
 
 if (!isset($_SESSION['nama'])) {
     header("Location: ../login.php");

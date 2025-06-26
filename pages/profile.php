@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -69,15 +69,15 @@
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
 
     <?php
-    include 'config.php';
+    include '../includes/config.php';
     $data = mysqli_query($mysqli, "SELECT * FROM tb_hero_profile ORDER BY id_hero DESC LIMIT 1");
     $hero = mysqli_fetch_assoc($data);
     ?>
 
-    <div class="hero" style="background: url('uploads/<?= $hero['gambar']; ?>') no-repeat center center/cover;">
+    <div class="hero" style="background: url('../uploads/<?= $hero['gambar']; ?>') no-repeat center center/cover;">
         <div class="container hero-content">
             <h1 class="fw-bold text-white"><?= $hero['judul']; ?></h1>
             <p class="lead text-white mx-auto" style="max-width: 600px;"><?= $hero['deskripsi']; ?></p>
@@ -94,7 +94,7 @@
         <h3 class="fw-bold text-success text-center"><?= $data['judul_bawah']; ?></h3>
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
-                <img src="uploads/<?= $data['gambar']; ?>" alt="Sejarah LPK"
+                <img src="../uploads/<?= $data['gambar']; ?>" alt="Sejarah LPK"
                     class="img-fluid rounded shadow-lg hover-effect">
             </div>
             <div class="col-md-6">
@@ -123,7 +123,7 @@
                 <h5 class="fw-bold"><?php echo $data['nama_kepala']; ?></h5>
             </div>
             <div class="col-md-4 text-center">
-                <img src="uploads/<?php echo $data['gambar']; ?>" alt="Kepala Sekolah"
+                <img src="../uploads/<?php echo $data['gambar']; ?>" alt="Kepala Sekolah"
                     class="img-fluid rounded-circle shadow-lg hover-effect" width="200">
             </div>
         </div>
@@ -159,7 +159,7 @@
             <div class="row text-center mt-4">
                 <?php while ($pengurus = mysqli_fetch_assoc($result)): ?>
                     <div class="col-md-4">
-                        <img src="uploads/<?= $pengurus['foto']; ?>" alt="<?= $pengurus['nama_pengurus']; ?>"
+                        <img src="../uploads/<?= $pengurus['foto']; ?>" alt="<?= $pengurus['nama_pengurus']; ?>"
                             class="img-fluid rounded-circle shadow-lg hover-effect" width="150">
                         <h4 class="fw-bold mt-2"><?= $pengurus['nama_pengurus']; ?></h4>
                         <p><?= $pengurus['jabatan']; ?></p>
@@ -189,7 +189,7 @@
                         <div class="card text-center p-3 shadow-lg hover-effect">
                             <div class="card-body">
                                 <h2 class="fw-bold text-success"><?= $legalitas['judul']; ?></h2>
-                                <img src="uploads/<?= $legalitas['logo']; ?>" alt="Logo Legalitas"
+                                <img src="../uploads/<?= $legalitas['logo']; ?>" alt="Logo Legalitas"
                                     class="img-fluid my-3 hover-effect" width="80">
                                 <p><?= $legalitas['deskripsi']; ?></p>
                                 <h4 class="fw-bold"><?= $legalitas['nomor_surat']; ?></h4>
@@ -205,7 +205,7 @@
         </div>
     <?php endif; ?>
 
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>

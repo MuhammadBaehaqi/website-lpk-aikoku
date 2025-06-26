@@ -2,7 +2,7 @@
 header("Content-type: application/vnd-ms-excel");
 header("Content-Disposition: attachment; filename=data_pendaftaran.xls");
 
-include '../../config.php'; // sesuaikan path koneksi
+include '../../includes/config.php'; // sesuaikan path koneksi
 $where = '';
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];

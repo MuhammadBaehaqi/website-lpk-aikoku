@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php'; // perbaikan path
+include '../../../../includes/config.php'; // perbaikan path
 
 $deskripsi = $_POST['deskripsi'];
 $detail = $_POST['detail'];

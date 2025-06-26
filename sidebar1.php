@@ -217,7 +217,7 @@ function isDropdownActive($pages = [])
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="text-center mb-4">
-            <img src="/pendaftaran/logo.png" alt="Logo LPK" class="img-fluid" style="width: 80px; height: auto;">
+            <img src="/pendaftaran/img/logo.png" alt="Logo LPK" class="img-fluid" style="width: 80px; height: auto;">
             <h5 class="mt-2">LPK Aikoku Terpadu</h5>
         </div>
         <span class="btn-close-sidebar" onclick="closeSidebar()">✖</span>

@@ -14,7 +14,7 @@ if ($_SESSION['roles'] != 'admin') {
 }
 
 $pageTitle = 'Data Pendaftaran';
-include '../../config.php';
+include '../../includes/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -23,8 +23,7 @@ include '../../config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
-    <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
     <style>
         thead th {
             background-color: #198754 !important;
@@ -68,9 +67,10 @@ include '../../config.php';
 
         <div class="container-fluid mt-3">
             <form method="GET" class="d-flex mb-3">
-                <input type="text" name="search" class="form-control me-2" placeholder="Cari nama..."
+                <input type="text" name="search" class="form-control me-2"
+                    placeholder="Cari nama, email, nomor, atau telepon..."
                     value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
-                <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
+                    <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
                     <?php
                     $limits = [5, 10, 15, 20];
                     foreach ($limits as $val) {
@@ -123,7 +123,7 @@ include '../../config.php';
                         </tr>
                     </thead>
                     <?php
-                    $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+                    $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
                     $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
                     $search = isset($_GET['search']) ? $_GET['search'] : '';
                     $offset = ($page - 1) * $limit;

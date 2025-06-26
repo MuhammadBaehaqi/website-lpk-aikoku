@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 if (!isset($_GET['id'])) {
     header("Location: ../profile_admin.php");

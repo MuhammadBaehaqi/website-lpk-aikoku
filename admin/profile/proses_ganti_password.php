@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../config.php';
+include '../../includes/config.php';
 
 $id_pengguna = $_SESSION['id_pengguna'];
 $password_lama = $_POST['password_lama'];

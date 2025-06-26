@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include 'includes/config.php';
 
 $error = '';
 
@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // === 2. Jika bukan admin, coba login sebagai user berdasarkan email
-    $stmt_user = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE email = ? AND status = 'Lolos'");
-    $stmt_user->bind_param('s', $input);
+    $stmt_user = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE (email = ? OR email LIKE ?) AND status = 'Lolos'");
+    $stmt_user->bind_param('ss', $input, $input);
     $stmt_user->execute();
     $result_user = $stmt_user->get_result();
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="login-container p-4">
-        <img src="logo.png" alt="Logo" class="logo">
+        <img src="img/logo.png" alt="Logo" class="logo">
         <h2 class="mb-2">Selamat Datang</h2>
         <p>Silakan masuk ke akun Anda</p>
 
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
             </div>
             <button type="submit" class="btn btn-primary w-100">Masuk</button>
-            <a href="index.php" class="btn btn-secondary w-100 mt-2">Kembali</a>
+            <a href="/pendaftaran/pages/index.php" class="btn btn-secondary w-100 mt-2">Kembali</a>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

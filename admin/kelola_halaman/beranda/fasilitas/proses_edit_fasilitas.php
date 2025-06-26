@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 $id = $_POST['id'];
 $ikon = $_POST['ikon'];

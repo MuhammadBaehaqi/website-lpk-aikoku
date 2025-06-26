@@ -46,10 +46,9 @@
     <div class="container">
         <?php
         include 'config.php'; // pastikan ini sebelum <nav>
-        
         $logo_query = mysqli_query($mysqli, "SELECT * FROM tb_logo ORDER BY id_logo DESC LIMIT 1");
         $logo_data = mysqli_fetch_assoc($logo_query);
-        $logo_img = !empty($logo_data['logo']) ? 'uploads/' . $logo_data['logo'] : 'logo.png';
+        $logo_img = !empty($logo_data['logo']) ? '../uploads/' . $logo_data['logo'] : 'logo.png';
         $logo_text = !empty($logo_data['text_logo']) ? $logo_data['text_logo'] : 'LPK AIKOKU TERPADU';
         ?>
 
@@ -94,7 +93,7 @@
             </ul>
             <div class="d-flex ms-3">
                 <a href="daftar.php" class="btn btn-warning me-2">Pendaftaran</a>
-                <a href="login.php" class="btn btn-light">Login</a>
+                <a href="../login.php" class="btn btn-light">Login</a>
             </div>
         </div>
     </div>

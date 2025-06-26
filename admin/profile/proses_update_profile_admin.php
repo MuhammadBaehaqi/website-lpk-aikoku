@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../config.php';
+include '../../includes/config.php';
 
 // Pastikan user sudah login dan punya hak akses admin
 if (!isset($_SESSION['username']) || $_SESSION['roles'] !== 'admin') {

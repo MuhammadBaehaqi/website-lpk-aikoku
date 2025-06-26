@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php'; // sesuaikan dengan path kamu
+include '../../../../includes/config.php'; // sesuaikan dengan path kamu
 
 // Tangkap data dari form
 $ikon = $_POST['ikon'];

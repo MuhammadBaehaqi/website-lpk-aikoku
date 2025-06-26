@@ -1,5 +1,5 @@
 <?php
-include '../../config.php';
+include '../../includes/config.php';
 
 // Memastikan ada ID pengguna yang diterima
 if (isset($_GET['id'])) {

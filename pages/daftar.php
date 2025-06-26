@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
+include '../includes/config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -8,12 +8,12 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .hero-section {
-            background: url('img/hero.jpg') no-repeat center center/cover;
+            background: url('../img/hero.jpg') no-repeat center center/cover;
             height: 60vh;
             display: flex;
             align-items: center;
@@ -129,7 +129,7 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
     <?php
     $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_pendaftaran ORDER BY id_hero DESC LIMIT 1");
     $heroData = mysqli_fetch_assoc($heroQuery);
@@ -141,7 +141,7 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
         $hero_description = '';  // Kosongkan deskripsi jika tidak ada
     } else {
         // Gunakan data dari database jika ada
-        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_background = "../uploads/" . $heroData['gambar'];
         $hero_title = $heroData['judul'];
         $hero_description = $heroData['deskripsi'];
     }
@@ -153,10 +153,18 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
         </div>
     </div>
 
+    <!-- Peringatan sebelum form -->
+    <div class="alert alert-warning">
+        <strong>Perhatian!</strong> Pastikan semua data yang Anda isi sudah benar.
+        Setelah mengklik tombol "Daftar", Anda tidak dapat mendaftar ulang menggunakan email yang sama.
+        Jika Anda ingin memperbaiki data setelah mendaftar, silakan login lalu gunakan fitur <strong>Edit
+            Profil</strong>.
+    </div>
+
     <div class="container mt-4">
         <h2 class="text-center">Formulir Pendaftaran</h2>
         <form action="/pendaftaran/admin/data_pendaftar/proses_pendaftaran.php" method="POST"
-            class="p-4 shadow rounded bg-light mb-5">
+            class="p-4 shadow rounded bg-light mb-5" onsubmit="return konfirmasiData();">
             <div class="mb-3">
                 <label for="nama_lengkap" class="form-label">Nama Lengkap:</label>
                 <input type="text" id="nama_lengkap" name="kirim_nama" class="form-control" required>
@@ -273,16 +281,24 @@ include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
             </div>
             <div class="mb-3">
                 <label for="penyakit_kronis" class="form-label">Penyakit Kronis (jika ada):</label>
-                <input type="text" id="penyakit_kronis" name="kirim_penyakit_kronis" class="form-control">
+                <input type="text" id="penyakit_kronis" name="kirim_penyakit_kronis" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="golongan_darah" class="form-label">Golongan Darah:</label>
-                <input type="text" id="golongan_darah" name="kirim_golongan_darah" class="form-control">
+                <input type="text" id="golongan_darah" name="kirim_golongan_darah" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-success w-100">Daftar</button>
         </form>
+
     </div>
-    <?php include 'footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
+
+    <!-- JS Konfirmasi Submit -->
+    <script>
+        function konfirmasiData() {
+            return confirm("Apakah semua data yang Anda isi sudah benar? Klik OK untuk lanjut atau Cancel untuk kembali.");
+        }
+    </script>
 </body>
 
 </html>

@@ -20,7 +20,7 @@ if ($_SESSION['roles'] != 'admin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard Admin - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../../logo.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -41,7 +41,7 @@ if ($_SESSION['roles'] != 'admin') {
                     <div class="card-header">Kelola Pendaftaran</div>
                     <div class="card-body">
                         <?php
-                        include '../../config.php'; // Pastikan path config sesuai
+                        include '../../includes/config.php'; // Pastikan path config sesuai
                         $pendaftar = mysqli_query($mysqli, "SELECT COUNT(*) AS total FROM tb_pendaftaran");
                         $hasil_pendaftar = mysqli_fetch_assoc($pendaftar);
                         ?>
@@ -59,7 +59,7 @@ if ($_SESSION['roles'] != 'admin') {
                     <div class="card-header">Data Kontak</div>
                     <div class="card-body">
                         <?php
-                        include '../../config.php'; // Pastikan path ini benar
+                        include '../../includes/config.php'; // Pastikan path ini benar
                         $kontak = mysqli_query($mysqli, "SELECT COUNT(*) AS total FROM tb_kontak");
                         $hasil_kontak = mysqli_fetch_assoc($kontak);
                         ?>
@@ -76,7 +76,7 @@ if ($_SESSION['roles'] != 'admin') {
                     <div class="card-header">Kelola User</div>
                     <div class="card-body">
                         <?php
-                        include '../../config.php'; // Pastikan path config sesuai
+                        include '../../includes/config.php'; // Pastikan path config sesuai
                         $pengguna = mysqli_query($mysqli, "SELECT COUNT(*) AS total FROM tb_pengguna");
                         $hasil_pengguna = mysqli_fetch_assoc($pengguna);
                         ?>

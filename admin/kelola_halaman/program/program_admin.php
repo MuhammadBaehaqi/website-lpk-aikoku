@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../../config.php';
+include '../../../includes/config.php';
 // Pengecekan jika pengguna belum login
 if (!isset($_SESSION['username'])) {
     header("Location: ../../../login.php");
@@ -23,7 +23,7 @@ $pageTitle = 'Kelola Halaman / Program';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
     <style>
         body,
         html {

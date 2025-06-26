@@ -82,7 +82,7 @@ $footer = mysqli_fetch_assoc($result);
             <div
                 class="col-md-3 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
                 <?php if (!empty($footer['logo'])): ?>
-                    <img src="uploads/<?= htmlspecialchars($footer['logo']) ?>" alt="Logo" class="footer-logo">
+                    <img src="../uploads/<?= htmlspecialchars($footer['logo']) ?>" alt="Logo" class="footer-logo">
                     <p class="mt-3"><?= nl2br(htmlspecialchars($footer['deskripsi'])) ?></p>
                 <?php endif; ?>
                 <div class="social-icons mt-3">
@@ -119,7 +119,7 @@ $footer = mysqli_fetch_assoc($result);
             <div class="col-md-3 mb-4">
                 <h5>Menu Cepat</h5>
                 <a href="index.php" class="footer-subitem d-block">Beranda</a>
-                <a href="profil.php" class="footer-subitem d-block">Profil</a>
+                <a href="profile.php" class="footer-subitem d-block">Profile</a>
                 <a href="album.php" class="footer-subitem d-block">Album</a>
                 <a href="pengumuman.php" class="footer-subitem d-block">Pengumuman</a>
                 <a href="kontak.php" class="footer-subitem d-block">Kontak</a>

@@ -22,7 +22,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 
     <style>
         .table td,
@@ -85,7 +85,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     </thead>
                         <tbody>
                             <?php
-                            include '../../../config.php';
+                            include '../../../includes/config.php';
                             $hero = mysqli_query($mysqli, "SELECT * FROM tb_hero ORDER BY id_hero ASC");
                             $no = 1;
                             while ($row = mysqli_fetch_assoc($hero)) {
@@ -213,7 +213,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
             <div class="card-header">Data Kelola Tentang Kami Singkat</div>
             <div class="card-body">
                 <?php
-                include '../../../config.php';
+                include '../../../includes/config.php';
                 $tentang = mysqli_query($mysqli, "SELECT * FROM tb_beranda_tentang_kami ORDER BY id_tentang DESC LIMIT 1");
                 if ($row = mysqli_fetch_assoc($tentang)) {
                     ?>
@@ -270,7 +270,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                         </thead>
                         <tbody>
                             <?php
-                            include '../../../config.php';
+                            include '../../../includes/config.php';
                             $result = mysqli_query($mysqli, "SELECT * FROM tb_beranda_keunggulan ORDER BY id_keunggulan ASC");
                             $no = 1;
                             while ($data = mysqli_fetch_assoc($result)) {

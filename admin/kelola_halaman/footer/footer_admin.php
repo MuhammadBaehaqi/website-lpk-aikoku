@@ -5,7 +5,7 @@ if (!isset($_SESSION['username']) || $_SESSION['roles'] != 'admin') {
     exit();
 }
 
-include '../../../config.php';
+include '../../../includes/config.php';
 
 $query = "SELECT * FROM tb_footer ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($mysqli, $query);
@@ -40,8 +40,7 @@ $pageTitle = "Kelola Halaman / Footer";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?> - Admin</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 </head>
 
 <body class="bg-light">

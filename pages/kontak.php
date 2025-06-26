@@ -1,5 +1,5 @@
 <?php
-include 'config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
+include '../includes/config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
 
 $kontakQuery = mysqli_query($mysqli, "SELECT * FROM tb_informasi_kontak ORDER BY id_kontak DESC LIMIT 1");
 $kontakData = mysqli_fetch_assoc($kontakQuery);
@@ -16,12 +16,12 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontak</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .hero-section {
-            background: url('img/kontak.jpg') no-repeat center center/cover;
+            background: url('../img/kontak.jpg') no-repeat center center/cover;
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -52,19 +52,19 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
     <?php
     $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_kontak ORDER BY id_hero DESC LIMIT 1");
     $heroData = mysqli_fetch_assoc($heroQuery);
 
     // Tambahkan pengecekan jika tidak ada data
     if (!$heroData) {
-        $hero_background = 'img/hero.jpg';  // Default image
+        $hero_background = '../img/hero.jpg';  // Default image
         $hero_title = 'Hubungi Kami';
         $hero_description = '';  // Kosongkan deskripsi jika tidak ada
     } else {
         // Gunakan data dari database jika ada
-        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_background = "../uploads/" . $heroData['gambar'];
         $hero_title = $heroData['judul'];
         $hero_description = $heroData['deskripsi'];
     }
@@ -150,7 +150,7 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
         <?php endif; ?>
     </div>
 
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

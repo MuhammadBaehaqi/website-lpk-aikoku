@@ -1,5 +1,5 @@
 <?php
-include '../../config.php';
+include '../../includes/config.php';
 
 // Memeriksa apakah data dikirim melalui POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "INSERT INTO tb_kontak (name, email, phone, address, message) 
               VALUES ('$name', '$email', '$phone', '$address', '$message')";
     if (mysqli_query($mysqli, $query)) {
-        echo "<script>alert('Pesan Anda berhasil dikirim!'); window.location.href = 'http://localhost/pendaftaran/index.php ';</script>";
+        echo "<script>alert('Pesan Anda berhasil dikirim!'); window.location.href = 'http://localhost/pendaftaran/pages/index.php ';</script>";
     } else {
         echo "<script>alert('Terjadi kesalahan saat mengirim pesan.');</script>";
     }

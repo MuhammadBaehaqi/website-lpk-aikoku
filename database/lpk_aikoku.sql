@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jun 2025 pada 04.41
+-- Waktu pembuatan: 26 Jun 2025 pada 15.38
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `tb_album` (
 
 INSERT INTO `tb_album` (`id_album`, `deskripsi`, `detail`, `foto_album`, `upload_date`) VALUES
 (5, 'hkasdzxx', 'Tanda Tangan Kontrak', 'uploads/1745421241_471782679_1245106896748017_8469993405143907191_n.jpg', '2025-04-23'),
-(6, '12345', 'Kelulusan Job', 'uploads/1745450377_afda.jpg', '2025-04-23');
+(6, '12345', 'Kelulusan Job', 'uploads/1745450377_afda.jpg', '2025-04-23'),
+(14, 'Lpk', 'Keberangkatan', 'uploads/1750941566_galery.jpg', '2025-06-26');
 
 -- --------------------------------------------------------
 
@@ -183,8 +184,9 @@ CREATE TABLE `tb_hero` (
 --
 
 INSERT INTO `tb_hero` (`id_hero`, `judul`, `deskripsi`, `gambar`, `tanggal_upload`, `link_tombol`, `teks_tombol`) VALUES
-(10, 'LPK AIKOKU TERPADU22', 'Lpk', 'foto_login.jpg', '2025-06-07 09:09:13', 'profile.php', 'coba'),
-(11, 'LPK AIKOKU TERPADU', '3', 'Fujiyama.jpg', '2025-06-07 09:15:42', 'album.php', 'Daftar Sekarang');
+(10, 'LPK AIKOKU TERPADU22', 'Lpk', 'jpng.jpg', '2025-06-07 09:09:13', 'profile.php', 'coba'),
+(11, 'LPK AIKOKU TERPADU', '3', 'Fujiyama.jpg', '2025-06-07 09:15:42', 'album.php', 'Daftar Sekarang'),
+(12, 'cc', 'cc', 'contact.png', '2025-06-26 20:25:16', 'daftar.php', 'ccc');
 
 -- --------------------------------------------------------
 
@@ -268,7 +270,7 @@ CREATE TABLE `tb_hero_pengumuman` (
 --
 
 INSERT INTO `tb_hero_pengumuman` (`id`, `hero_title`, `hero_description`, `hero_image`, `created_at`) VALUES
-(5, 'wa', 'wa', 'foto_login.jpg', '2025-06-06 12:31:45');
+(6, 'coba', 'c', 'assassins-creed-shadows-naoe-yasuke-4k-wallpaper-uhdpaper.com-642@5@e.jpg', '2025-06-26 10:45:45');
 
 -- --------------------------------------------------------
 
@@ -363,7 +365,9 @@ CREATE TABLE `tb_kontak` (
 INSERT INTO `tb_kontak` (`id_kontak`, `name`, `email`, `phone`, `address`, `message`, `date_sent`) VALUES
 (5, 'awdeaw', 'imam12@gmail.com', '123', '123', '123', '2025-04-24 14:22:46'),
 (6, 'aer', 'aew2@dq', 'awr', 'awr', 'awerfc', '2025-05-09 08:24:38'),
-(7, 'wre', 'ana@gmail.com', 'f3', '3r', 'ef', '2025-05-09 08:51:35');
+(7, 'wre', 'ana@gmail.com', 'f3', '3r', 'ef', '2025-05-09 08:51:35'),
+(8, 'dx', 'diji@mailinator13.com', '1', '1', '1', '2025-06-26 13:12:37'),
+(9, 'dx', 'diji@mailinator13.com', '1', '1', '1', '2025-06-26 13:13:11');
 
 -- --------------------------------------------------------
 
@@ -424,7 +428,9 @@ CREATE TABLE `tb_logo` (
 INSERT INTO `tb_logo` (`id_logo`, `logo`, `text_logo`, `created_at`) VALUES
 (1, 'logo_1748647707.jpg', 'LPK AIKOKU TERPADU TER', '2025-05-30 23:28:27'),
 (2, 'logo_1748647707.jpg', 'LPK AIKOKU TERPADU', '2025-05-30 23:30:49'),
-(3, 'logo_1748664193.png', 'LPK AIKOKU TERPADU', '2025-05-31 04:03:13');
+(3, 'logo_1748664193.png', 'LPK AIKOKU TERPADU', '2025-05-31 04:03:13'),
+(4, 'logo_1748664193.png', 'LPK AIKOKU TERPADU1', '2025-06-26 12:00:56'),
+(5, 'logo_1748664193.png', 'LPK AIKOKU TERPADU', '2025-06-26 12:01:20');
 
 -- --------------------------------------------------------
 
@@ -467,7 +473,7 @@ CREATE TABLE `tb_pendaftaran` (
 --
 
 INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `nama_lengkap`, `nomor_pendaftaran`, `tempat_lahir`, `tanggal_lahir`, `usia`, `jenis_kelamin`, `agama`, `alamat_ktp`, `email`, `telepon`, `alamat`, `alamat_keluarga`, `telepon_keluarga`, `program`, `pendidikan_terakhir`, `pengalaman_kerja`, `status_pernikahan`, `tinggi_badan`, `berat_badan`, `pengalaman_jepang`, `penyakit_kronis`, `golongan_darah`, `status`, `tanggal_daftar`, `id_pengguna`, `pengumuman`) VALUES
-(3, 'ZAKI', '2025-0001', '12', '0000-00-00', 1, 'Laki-laki', 'Islam', '12', '12@12', '12', 'ed', '2222', '222', 'Magang', 'S3', '22222', 'Menikah', 222, 22, 'Pemula', '22', '22', 'Lolos', '2025-04-24 22:07:39', NULL, NULL),
+(3, 'ZAKI1', '2025-0001', '12', '0011-11-11', 1, 'Laki-laki', 'Islam', '12', '12@12', '12', 'ed', '2222', '222', 'Magang', 'S3', '22222', 'Menikah', 222, 22, 'Pemula', '22', '22', 'Lolos', '2025-04-24 22:07:39', NULL, NULL),
 (4, 'qw', '2025-0002', 'qw', '0002-02-12', 1, 'Laki-laki', 'Buddha', '12qw', 'qw@qw', 'qw1', 'wqe1', '213e', '12e', 'Engineering', 'D3', '321', 'Janda/Duda', 21, 22, 'Pemula', '12', 'e', 'Lolos', '2025-04-24 22:07:39', NULL, ''),
 (5, 'intan', '2025005', '12', '1222-12-12', 12, 'Perempuan', 'Islam', 'aewr', '12@12', '231', '34qeq', '3qr', 'q34ed', 'Engineering', 'S2', 'qr43', 'Belum Menikah', 12, 12, 'Pemula', '24', 'ew2', 'Pending', '2025-05-05 21:51:39', NULL, NULL),
 (6, 'intan', '2025006', '12', '1222-12-12', 12, 'Perempuan', 'Islam', 'aewr', '12@12', '231', '34qeq', '3qr', 'q34ed', 'Engineering', 'S2', 'qr43', 'Belum Menikah', 12, 12, 'Pemula', '24', 'ew2', 'Pending', '2025-05-05 21:51:53', NULL, NULL),
@@ -497,7 +503,18 @@ INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `nama_lengkap`, `nomor_pendaftar
 (31, 'pp', '2025031', 'Nulla culpa id vol', '1970-03-21', 83, 'Perempuan', 'Islam', 'Ut nihil id sapient', 'hexyl@mailinator.com', 'Exercitation eos est', 'Impedit et fugit n', 'Quisquam in quod vol', 'Id quod laudantium', 'Engineering', 'ALIYAH', 'Nulla nobis impedit', 'Janda/Duda', 80, 72, 'Pemula', 'Et blanditiis ullamc', 'Est n', 'Lolos', '2025-05-29 20:00:13', NULL, ''),
 (32, 'op', '2025032', 'Dicta voluptatibus i11111', '2025-09-17', 6, 'Laki-laki', 'Buddha', 'Ex accusamus molesti', 'hozon@mailinator.com', 'Iste distinctio Sin', 'Necessitatibus quia ', 'Est laborum consect', 'Error ut velit quod ', 'Engineering', 'MTS', 'Quod molestiae sed d', 'Menikah', 86, 40, 'Pemula', 'Eiusmod rerum ut non', 'Reici', 'Lolos', '2025-05-29 20:09:06', NULL, ''),
 (34, 'haki', '2025034', 'Rerum quas tempore ', '1978-07-04', 14, 'Perempuan', 'Buddha', 'Non excepteur facere', 'zusaqy@mailinator.com', 'Est quod atque mini', 'Quia excepteur volup', 'Irure consectetur es', 'Omnis voluptatem dol', 'Engineering', 'S2', 'Esse et consectetur', 'Belum Menikah', 82, 33, 'Ex-Jepang', 'Ipsam adipisicing si', 'Labor', 'Pending', '2025-05-29 20:41:33', NULL, NULL),
-(36, 'op', '2025035', 'Quasi necessitatibus12', '2002-11-13', 11, 'Laki-laki', 'Buddha', 'Veniam mollitia vol', 'diji@mailinator.com', 'Vel doloribus dolor ', 'Delectus adipisci o', 'Dicta optio et sequ', 'Nisi molestiae ut de', 'Magang', 'SD', 'Ut aut odit incididu', 'Belum Menikah', 80, 31, 'Pemula', 'Aperiam commodi dolo', 'Volup', 'Tidak Lolos', '2025-05-29 22:02:53', NULL, '');
+(36, 'op1', '2025035', 'Quasi necessitatibus12', '2002-11-13', 11, 'Laki-laki', 'Buddha', 'Veniam mollitia vol', 'diji@mailinator1.com', 'Vel doloribus dolor ', 'Delectus adipisci o', 'Dicta optio et sequ', 'Nisi molestiae ut de', 'Magang', 'SD', 'Ut aut odit incididu', 'Belum Menikah', 80, 31, 'Pemula', 'Aperiam commodi dolo', 'Volup', 'Lolos', '2025-05-29 22:02:53', NULL, 'tes lok'),
+(37, 'Vel nulla accusamus ', '2025037', 'Porro dolore invento', '2010-06-01', 48, 'Perempuan', 'Hindu', 'Reiciendis sint ips', 'kiromahiw@mailinator.com', 'Eiusmod cum fugiat v', 'Eaque ratione recusa', 'Illo culpa amet per', 'Non nulla minim tene', 'Tokutei Ginou', 'SMK', 'Aute quos irure aut ', 'Janda/Duda', 45, 25, 'Pemula', 'Harum sed sit rerum ', 'Conse', 'Lolos', '2025-06-08 18:27:12', NULL, ''),
+(38, 'marina12', '2025038', 'Qui eos facilis dol', '1971-03-13', 79, 'Laki-laki', 'Konghucu', 'Irure voluptas labor', 'marina12@mailinator.com', 'Hic voluptas iste no', 'Consectetur sit te', 'Quia repudiandae qui', 'Velit quisquam paria', 'Tokutei Ginou', 'S1', 'Excepteur labore lab', 'Menikah', 60, 22, 'Ex-Jepang', 'Quae ut et veniam q', 'Volup', 'Lolos', '2025-06-22 09:08:15', NULL, 'COBAAAAA'),
+(39, 'hikmah', '2025039', '12', '1212-12-12', 12, 'Laki-laki', 'Islam', '12', 'hikmah1@gmail.com', '12', '12', '12', '12', 'Magang', 'S2', '12', 'Belum Menikah', 12, 12, 'Pemula', '12', '12', 'Lolos', '2025-06-24 14:37:38', NULL, ''),
+(40, 'hikmah1', '2025040', '12', '1212-12-12', 12, 'Laki-laki', 'Islam', '12', 'hikmah1@gmail.com', '12', '12', '12', '12', 'Magang', 'S2', '12', 'Belum Menikah', 12, 12, 'Pemula', '12', '12', 'Lolos', '2025-06-24 14:40:38', NULL, ''),
+(41, 'ko', '2025041', '11', '1111-11-11', 11, 'Laki-laki', 'Islam', '11', '111@111.com', '11', '11', '11', '11', 'Magang', 'S3', '11', 'Belum Menikah', 11, 11, 'Pemula', '11', '11', 'Lolos', '2025-06-24 16:29:46', NULL, ''),
+(42, 'Odit quisquam ut per', '2025042', 'Illum molestias ips', '2013-04-02', 68, 'Perempuan', 'Islam', 'Voluptatum laboris e', 'kadamahejo@mailinator.com', 'Voluptas excepturi c', 'Exercitationem eu co', 'Similique nemo quis ', 'Magni adipisicing do', 'Tokutei Ginou', 'SMA', 'Vel nihil reprehende', 'Janda/Duda', 60, 98, 'Ex-Jepang', 'Est amet ratione b', 'Ut do', 'Pending', '2025-06-24 16:44:05', NULL, NULL),
+(43, 'Error ut ullam aliqu', '2025043', 'Et dolorem ut duis n', '1992-03-08', 1, 'Laki-laki', 'Islam', 'Quas quis aliquid om', 'byhadol@mailinator.com', 'Dolor veniam et har', 'Animi amet recusan', 'Sit et ex earum amet', 'Sit eum ab esse pari', 'Tokutei Ginou', 'S3', 'Sunt sint autem a du', 'Janda/Duda', 62, 68, 'Ex-Jepang', 'Nobis non qui recusa', 'Commo', 'Pending', '2025-06-24 16:46:42', NULL, NULL),
+(44, 'Quibusdam eu sit do', '2025044', 'Et ex voluptatibus u1', '2020-08-08', 63, 'Perempuan', 'Hindu', 'Consequatur et bland', 'jitaq@mailinator.com', 'Ea reiciendis itaque', 'Esse nisi voluptatum', 'Enim asperiores ipsa', 'Et dolores pariatur', 'Engineering', 'MTS', 'Tempor eum excepteur', 'Janda/Duda', 80, 37, 'Pemula', 'Architecto id et co', 'Quam ', 'Lolos', '2025-06-24 18:55:24', 44, ''),
+(45, 'Ut non facilis aut r', '2025045', 'Distinctio Maiores ', '1970-04-17', 8, 'Laki-laki', 'Islam', 'Tempore ut quam mag', 'lyky@mailinator.com', 'Odit aperiam aut qui', 'Natus optio incidun', 'Ut in vitae nemo nes', 'Accusantium sed ipsa', 'Engineering', 'S1', 'Labore nulla aut ver', 'Belum Menikah', 3, 42, 'Ex-Jepang', 'Sint rerum ea volupt', 'Qui s', 'Lolos', '2025-06-26 19:50:22', 45, ''),
+(46, 'Deleniti totam earum', '2025046', 'Dicta non ut omnis q', '2025-02-09', 28, 'Laki-laki', 'Konghucu', 'Adipisci ratione rep', 'vararulane@mailinator.com', 'Labore non qui id a', 'Error assumenda dolo', 'Facilis exercitation', 'Voluptatum obcaecati', 'Magang', 'SMA', 'Explicabo Cillum qu', 'Menikah', 88, 7, 'Ex-Jepang', 'Inventore aute reici', 'Sunt ', 'Pending', '2025-06-26 19:58:09', 46, NULL),
+(47, 'Veniam consectetur', '2025047', 'Vitae qui est dignis', '1998-06-03', 36, 'Perempuan', 'Hindu', 'Sunt aperiam eos aut', 'finina@mailinator.com', 'Omnis voluptatum vol', 'Provident eveniet ', 'Assumenda voluptate ', 'Doloremque adipisici', 'Magang', 'MI', 'Iste rerum minima qu', 'Janda/Duda', 81, 10, 'Pemula', 'Id rerum quia in es', 'Quia ', 'Pending', '2025-06-26 20:28:14', 47, NULL);
 
 -- --------------------------------------------------------
 
@@ -519,7 +536,7 @@ CREATE TABLE `tb_pengguna` (
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `username`, `password`, `email_pengguna`, `roles`, `tanggal_aktivitas`) VALUES
-(3, 'imam123', '202cb962ac59075b964b07152d234b70', 'imam124@gmail.com', 'admin', '2025-05-09 09:12:49'),
+(3, 'admin123', '202cb962ac59075b964b07152d234b70', 'admin124@gmail.com', 'admin', '2025-05-09 09:12:49'),
 (4, 'haki123', '8e0cdbc8beefb35843dd2e835c5eee03', 'haki12@gmail.com', 'user', '2025-05-09 09:12:49'),
 (14, 'gg', '202cb962ac59075b964b07152d234b70', 'EQ@ed', 'user', '2025-05-09 09:12:49'),
 (16, 'zaka', 'e10adc3949ba59abbe56e057f20f883e', '112@d', 'user', '2025-05-09 09:12:49'),
@@ -542,7 +559,17 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `username`, `password`, `email_penggun
 (33, 'op', 'e10adc3949ba59abbe56e057f20f883e', 'hozon@mailinator.com', 'user', '2025-05-29 13:09:06'),
 (34, 'haki', 'e10adc3949ba59abbe56e057f20f883e', 'zusaqy@mailinator.com', 'user', '2025-05-29 13:41:33'),
 (35, 'op', 'e10adc3949ba59abbe56e057f20f883e', 'hozon@mailinator.com', 'user', '2025-05-29 13:53:07'),
-(37, 'op', 'e10adc3949ba59abbe56e057f20f883e', 'diji@mailinator.com', 'user', '2025-05-29 15:03:06');
+(37, 'op11', 'e10adc3949ba59abbe56e057f20f883e', 'diji@mailinator13.com', 'user', '2025-05-29 15:03:06'),
+(38, 'Vel nulla accusamus ', 'e10adc3949ba59abbe56e057f20f883e', 'kiromahiw@mailinator.com', 'user', '2025-06-08 11:27:12'),
+(39, 'marina12', 'e10adc3949ba59abbe56e057f20f883e', 'marina12@mailinator.com', 'user', '2025-06-22 02:08:15'),
+(40, 'hikmah', 'e10adc3949ba59abbe56e057f20f883e', 'hikmah1@gmail.com', 'user', '2025-06-24 07:37:38'),
+(41, 'ko', 'e10adc3949ba59abbe56e057f20f883e', '111@111.com', 'user', '2025-06-24 09:29:46'),
+(42, 'Odit quisquam ut per', 'e10adc3949ba59abbe56e057f20f883e', 'kadamahejo@mailinator.com', 'user', '2025-06-24 09:44:05'),
+(43, 'Error ut ullam aliqu', 'e10adc3949ba59abbe56e057f20f883e', 'byhadol@mailinator.com', 'user', '2025-06-24 09:46:42'),
+(44, 'Quibusdam eu sit do', 'e10adc3949ba59abbe56e057f20f883e', 'jitaq@mailinator.com', 'user', '2025-06-24 11:55:24'),
+(45, 'Ut non facilis aut r', 'e10adc3949ba59abbe56e057f20f883e', 'lyky@mailinator.com', 'user', '2025-06-26 12:50:22'),
+(46, 'Deleniti totam earum', 'e10adc3949ba59abbe56e057f20f883e', 'vararulane@mailinator.com', 'user', '2025-06-26 12:58:09'),
+(47, 'Veniam consectetur', 'e10adc3949ba59abbe56e057f20f883e', 'finina@mailinator.com', 'user', '2025-06-26 13:28:14');
 
 -- --------------------------------------------------------
 
@@ -897,7 +924,7 @@ ALTER TABLE `tb_profile_visimisi`
 -- AUTO_INCREMENT untuk tabel `tb_album`
 --
 ALTER TABLE `tb_album`
-  MODIFY `id_album` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_album` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_beranda_fasilitas`
@@ -933,7 +960,7 @@ ALTER TABLE `tb_footer`
 -- AUTO_INCREMENT untuk tabel `tb_hero`
 --
 ALTER TABLE `tb_hero`
-  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_album`
@@ -957,7 +984,7 @@ ALTER TABLE `tb_hero_pendaftaran`
 -- AUTO_INCREMENT untuk tabel `tb_hero_pengumuman`
 --
 ALTER TABLE `tb_hero_pengumuman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_profile`
@@ -981,7 +1008,7 @@ ALTER TABLE `tb_informasi_kontak`
 -- AUTO_INCREMENT untuk tabel `tb_kontak`
 --
 ALTER TABLE `tb_kontak`
-  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kontak_maps`
@@ -999,19 +1026,19 @@ ALTER TABLE `tb_kontak_masuk`
 -- AUTO_INCREMENT untuk tabel `tb_logo`
 --
 ALTER TABLE `tb_logo`
-  MODIFY `id_logo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_logo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pengumuman_tayang`

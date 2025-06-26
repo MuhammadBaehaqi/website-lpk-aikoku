@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 $visi = $_POST['visi'];
 $misi = $_POST['misi'];

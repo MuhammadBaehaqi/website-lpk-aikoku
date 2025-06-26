@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../../../config.php';
+include '../../../includes/config.php';
 // Pengecekan jika pengguna belum login
 if (!isset($_SESSION['username'])) {
     header("Location: ../../../login.php");
@@ -22,11 +22,8 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?php echo $pageTitle; ?> - Admin
-    </title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title><?php echo $pageTitle; ?> - Admin</title>
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 </head>
 
 <body>

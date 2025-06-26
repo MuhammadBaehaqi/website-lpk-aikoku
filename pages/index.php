@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../includes/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -8,7 +8,7 @@ include 'config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -156,7 +156,7 @@ include 'config.php';
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
+    <?php include '../includes/navbar.php' ?>
     <!-- Hero Section -->
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
@@ -166,7 +166,7 @@ include 'config.php';
             while ($row = mysqli_fetch_assoc($query)) {
                 ?>
                 <div class="carousel-item <?= $first ? 'active' : '' ?>">
-                    <img src="uploads/<?= $row['gambar'] ?>" class="d-block w-100" alt="Hero">
+                    <img src="../uploads/<?= $row['gambar'] ?>" class="d-block w-100" alt="Hero">
                     <div class="carousel-caption hero-section">
                         <div class="hero-content">
                             <h1><?= htmlspecialchars($row['judul']) ?></h1>
@@ -198,7 +198,7 @@ include 'config.php';
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="uploads/<?php echo $data['gambar']; ?>" class="img-fluid rounded shadow"
+                    <img src="../uploads/<?php echo $data['gambar']; ?>" class="img-fluid rounded shadow"
                         alt="Tentang LPK Aikoku Terpadu">
                 </div>
                 <div class="col-md-6">
@@ -242,7 +242,7 @@ include 'config.php';
             <h2 class="text-center text-success fw-bold mb-4">Fasilitas Kami</h2>
             <div class="row g-4">
                 <?php
-                include 'config.php';
+                include '../includes/config.php';
                 $result = mysqli_query($mysqli, "SELECT * FROM tb_beranda_fasilitas ORDER BY id_fasilitas ASC");
                 while ($row = mysqli_fetch_assoc($result)) {
                     ?>
@@ -283,7 +283,7 @@ include 'config.php';
                         echo '<div class="carousel-item ' . $isActive . '">';
                         echo '<div class="d-flex flex-column align-items-center">';
                         echo '<p class="testimonial-text px-4 text-center">"' . $row['testimoni'] . '"</p>';
-                        echo '<img src="uploads/' . $row['gambar'] . '" class="rounded-circle mt-3" width="150" alt="Alumni">';
+                        echo '<img src="../uploads/' . $row['gambar'] . '" class="rounded-circle mt-3" width="150" alt="Alumni">';
                         echo '<h5 class="fw-bold mt-2">' . $row['nama'] . '</h5>';
                         echo '<p class="text-muted">' . $row['bidang'] . '</p>';
                         echo '</div>';
@@ -387,7 +387,7 @@ include 'config.php';
         </div>
     </section>
 
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-include('../../../../config.php');
+include('../../../../includes/config.php');
 
 if (isset($_POST['id'], $_POST['nama'], $_POST['bidang'], $_POST['testimoni'])) {
     $id = mysqli_real_escape_string($mysqli, $_POST['id']);

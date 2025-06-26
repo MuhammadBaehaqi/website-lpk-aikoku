@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $maps_url = mysqli_real_escape_string($mysqli, $_POST['maps_url']);

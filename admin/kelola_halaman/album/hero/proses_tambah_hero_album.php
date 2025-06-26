@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php';
+include '../../../../includes/config.php';
 
 // Cek jika form telah disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,25 +1,24 @@
 <?php
-include 'config.php';
+include '../includes/config.php';
 
-// Ambil hero section untuk program engineering
-$queryHero = "SELECT * FROM tb_hero_program WHERE program='engineering' ORDER BY id_hero_program DESC LIMIT 1";
+// Ambil hero section untuk program magang
+$queryHero = "SELECT * FROM tb_hero_program WHERE program='magang' ORDER BY id_hero_program DESC LIMIT 1";
 $resultHero = mysqli_query($mysqli, $queryHero);
 $dataHero = mysqli_fetch_assoc($resultHero);
 
 // Siapkan data default jika tidak ada hero
-$gambarHero = $dataHero ? 'uploads/' . $dataHero['gambar'] : 'img/default.jpg';
-$judulHero = $dataHero ? $dataHero['judul'] : 'Program Engineering';
-$deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Engineering bagi yang baru ke Jepang.';
+$gambarHero = $dataHero ? '../uploads/' . $dataHero['gambar'] : '../img/default.jpg';
+$judulHero = $dataHero ? $dataHero['judul'] : 'Program magang';
+$deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program magangy bagi yang baru ke Jepang.';
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program Engineering</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <title>Program Magang</title>
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -45,61 +44,11 @@ $deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Engineering bagi 
             max-width: 100%;
             /* Pastikan teks tidak melampaui lebar container */
         }
-
-        .footer {
-            background-color: #000;
-            /* Warna hitam */
-            color: #fff;
-            /* Warna teks putih */
-        }
-
-        .footer a {
-            text-decoration: none;
-        }
-
-        .footer .fab,
-        .footer .fas {
-            font-size: 20px;
-        }
-
-        .footer h5 {
-            color: #00ff00;
-            /* Warna hijau neon */
-        }
-
-        .footer .text-success {
-            color: #00ff00 !important;
-            /* Hijau neon */
-        }
-
-        .footer .text-danger {
-            color: #ff0000 !important;
-            /* Merah */
-        }
-
-        .footer p,
-        .footer a {
-            color: #bbb;
-            /* Abu-abu terang */
-        }
-
-        .footer a:hover {
-            color: #00ff00;
-            /* Hijau neon saat hover */
-        }
-
-        /* Garis di atas Copyright */
-        .footer-line {
-            border: 1px solid #444;
-            /* Warna garis abu-abu gelap */
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
     <div class="hero-section d-flex flex-column justify-content-center align-items-center text-center"
         style="background: url('<?php echo $gambarHero; ?>') no-repeat center center/cover;">
         <h1 class="fw-bold"><?php echo htmlspecialchars($judulHero); ?></h1>
@@ -119,7 +68,7 @@ $deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Engineering bagi 
                         <!-- Persyaratan Umum -->
                         <ul class="list-group list-group-flush">
                             <?php
-                            $queryUmum = "SELECT * FROM tb_persyaratan_program WHERE program='engineering' AND jenis='umum'";
+                            $queryUmum = "SELECT * FROM tb_persyaratan_program WHERE program='magang' AND jenis='umum'";
                             $resultUmum = mysqli_query($mysqli, $queryUmum);
                             while ($row = mysqli_fetch_assoc($resultUmum)) {
                                 echo "<li class='list-group-item'>" . htmlspecialchars($row['isi']) . "</li>";
@@ -140,7 +89,7 @@ $deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Engineering bagi 
                         <!-- Persyaratan Dokumen -->
                         <ul class="list-group list-group-flush">
                             <?php
-                            $queryDokumen = "SELECT * FROM tb_persyaratan_program WHERE program='engineering' AND jenis='dokumen'";
+                            $queryDokumen = "SELECT * FROM tb_persyaratan_program WHERE program='magang' AND jenis='dokumen'";
                             $resultDokumen = mysqli_query($mysqli, $queryDokumen);
                             while ($row = mysqli_fetch_assoc($resultDokumen)) {
                                 echo "<li class='list-group-item'>" . htmlspecialchars($row['isi']) . "</li>";
@@ -153,7 +102,7 @@ $deskripsiHero = $dataHero ? $dataHero['deskripsi'] : 'Program Engineering bagi 
         </div>
     </div>
 
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

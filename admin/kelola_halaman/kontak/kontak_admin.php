@@ -22,8 +22,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -58,7 +57,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
                     </thead>
                     <tbody>
                         <?php
-                        include '../../../config.php';
+                        include '../../../includes/config.php';
                         // Query untuk mengambil data hero section kontak
                         $query = "SELECT * FROM tb_hero_kontak ORDER BY id_hero DESC LIMIT 1";
                         $result = mysqli_query($mysqli, $query);
@@ -133,7 +132,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
                 <h5>Daftar Google Maps</h5>
                 <ul class="list-group">
                     <?php
-                    include '../../../config.php';
+                    include '../../../includes/config.php';
 
                     // Query untuk mengambil semua URL Google Maps
                     $query_maps = "SELECT * FROM tb_kontak_maps ORDER BY id_maps DESC";

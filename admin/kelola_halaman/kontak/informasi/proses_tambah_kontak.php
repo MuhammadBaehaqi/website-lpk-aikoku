@@ -1,5 +1,5 @@
 <?php
-include '../../../../config.php'; // Koneksi ke database
+include '../../../../includes/config.php'; // Koneksi ke database
 
 // Mengambil data dari form
 $alamat = mysqli_real_escape_string($mysqli, $_POST['alamat']);

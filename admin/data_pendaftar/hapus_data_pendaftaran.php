@@ -1,5 +1,5 @@
 <?php
-include '../../config.php';
+include '../../includes/config.php';
 
 if (isset($_GET['id_pendaftaran'])) {
     $id_pendaftaran = intval($_GET['id_pendaftaran']);

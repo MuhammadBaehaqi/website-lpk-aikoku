@@ -1,12 +1,17 @@
 <?php
 session_start();
-include '../../config.php';
+include '../../includes/config.php';
 
 if (isset($_POST['id_pengguna'])) {
     $id_pengguna = $_POST['id_pengguna'];
     $username = $_POST['username'];
     $email = $_POST['email'];
     $roles = $_POST['roles'];
+
+    // Ambil email lama (digunakan jika roles adalah 'user')
+    $get_old_email = mysqli_query($mysqli, "SELECT email_pengguna FROM tb_pengguna WHERE id_pengguna = '$id_pengguna'");
+    $old_data = mysqli_fetch_assoc($get_old_email);
+    $email_lama = $old_data['email_pengguna'];
 
     // Membuat prepared statement untuk mengupdate data user
     $query = "UPDATE tb_pengguna SET username = ?, email_pengguna = ?, roles = ? WHERE id_pengguna = ?";
@@ -18,12 +23,19 @@ if (isset($_POST['id_pengguna'])) {
         // Menjalankan query
         if (mysqli_stmt_execute($stmt)) {
 
-            // ✅ Perbarui session jika user mengedit dirinya sendiri
+            // ✅ Jika user login mengedit dirinya sendiri
             if ($_SESSION['id_pengguna'] == $id_pengguna) {
                 $_SESSION['username'] = $username;
             }
 
-            // Redirect ke halaman kelola user setelah sukses
+            // ✅ Jika roles = user, update juga email di tb_pendaftaran
+            if ($roles === 'user') {
+                $query_update_pendaftaran = "UPDATE tb_pendaftaran 
+                    SET nama_lengkap = '$username', email = '$email' 
+                    WHERE email = '$email_lama' OR email = '$email'";
+                mysqli_query($mysqli, $query_update_pendaftaran);
+            }
+
             header("Location: kelola_user.php");
             exit();
         } else {

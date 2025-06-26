@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../../config.php';
+include '../../../includes/config.php';
 //hero section
 $hero_result = mysqli_query($mysqli, "SELECT * FROM tb_hero_profile ORDER BY id_hero DESC");
 
@@ -36,7 +36,7 @@ $pageTitle = 'Kelola Halaman / Profile';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 <?php
 // Koneksi ke database
-include('../../../../config.php'); // Sesuaikan dengan file koneksi ke database
+include('../../../../includes/config.php'); // Sesuaikan dengan file koneksi ke database
 
 if (isset($_POST['nama'], $_POST['testimoni'], $_POST['bidang'], $_FILES['gambar'])) {
     $nama = mysqli_real_escape_string($mysqli, $_POST['nama']);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php';
+include '../includes/config.php';
 
 if (!isset($_SESSION['id_pengguna'])) {
     header("Location: ../login.php");
@@ -15,6 +15,7 @@ $user_data = mysqli_fetch_assoc($query_user);
 $email_lama = $user_data['email_pengguna'];
 
 // Ambil data dari POST
+$nama_lengkap = $_POST['nama_lengkap'];
 $tempat_lahir = $_POST['tempat_lahir'];
 $tanggal_lahir = $_POST['tanggal_lahir'];
 $jenis_kelamin = $_POST['jenis_kelamin'];
@@ -27,6 +28,7 @@ $telepon_keluarga = $_POST['telepon_keluarga'];
 
 // Update di tb_pendaftaran berdasarkan email lama
 $query_pendaftaran = "UPDATE tb_pendaftaran SET 
+    nama_lengkap = '$nama_lengkap',
     tempat_lahir = '$tempat_lahir',
     tanggal_lahir = '$tanggal_lahir',
     jenis_kelamin = '$jenis_kelamin',
@@ -41,8 +43,12 @@ $query_pendaftaran = "UPDATE tb_pendaftaran SET
 // Jalankan update
 if (mysqli_query($mysqli, $query_pendaftaran)) {
     // Update email di tb_pengguna
-    $query_pengguna = "UPDATE tb_pengguna SET email_pengguna = '$email_baru' WHERE id_pengguna = '$id_pengguna' LIMIT 1";
+    $query_pengguna = "UPDATE tb_pengguna 
+        SET username = '$nama_lengkap', email_pengguna = '$email_baru' 
+        WHERE id_pengguna = '$id_pengguna' LIMIT 1";
     mysqli_query($mysqli, $query_pengguna);
+    // Update session jika nama berubah
+    $_SESSION['username'] = $nama_lengkap;
 
     header("Location: edit_profile_user.php?update=success");
 } else {

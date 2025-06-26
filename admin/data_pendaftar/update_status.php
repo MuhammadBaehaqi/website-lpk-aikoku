@@ -1,5 +1,5 @@
 <?php
-include '../../config.php'; // Pastikan sesuai
+include '../../includes/config.php'; // Pastikan sesuai
 
 if (isset($_POST['id_pendaftaran']) && isset($_POST['status']) && isset($_POST['pengumuman'])) {
     $id_pendaftaran = $_POST['id_pendaftaran'];

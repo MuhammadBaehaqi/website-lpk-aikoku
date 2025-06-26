@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../../config.php';
+include '../../../includes/config.php';
 // Pengecekan jika pengguna belum login
 if (!isset($_SESSION['username'])) {
     header("Location: ../../../login.php");
@@ -27,9 +27,12 @@ $hero = mysqli_fetch_assoc($result_hero);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
     <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
         .modal-body {
             max-height: 70vh;
             overflow-y: auto;

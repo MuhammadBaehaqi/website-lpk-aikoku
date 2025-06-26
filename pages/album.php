@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../includes/config.php';
 
 $category = isset($_GET['category']) ? str_replace('-', ' ', $_GET['category']) : '';
 $filter = '';
@@ -17,7 +17,7 @@ $result = mysqli_query($mysqli, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Album</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -151,7 +151,7 @@ $result = mysqli_query($mysqli, $query);
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?>
+    <?php include '../includes/navbar.php'; ?>
     <?php
     
     $heroQuery = mysqli_query($mysqli, "SELECT * FROM tb_hero_album ORDER BY id_hero DESC LIMIT 1");
@@ -164,7 +164,7 @@ $result = mysqli_query($mysqli, $query);
         $hero_description = '';  // Kosongkan deskripsi jika tidak ada
     } else {
         // Gunakan data dari database jika ada
-        $hero_background = "uploads/" . $heroData['gambar'];
+        $hero_background = "../uploads/" . $heroData['gambar'];
         $hero_title = $heroData['judul'];
         $hero_description = $heroData['deskripsi'];
     }
@@ -198,7 +198,7 @@ $result = mysqli_query($mysqli, $query);
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <div class="col-md-4">
                         <div class="card h-100 shadow fade-in">
-                            <img src="<?= $row['foto_album']; ?>" class="card-img-top"
+                            <img src="../<?= $row['foto_album']; ?>" class="card-img-top"
                                 alt="<?= htmlspecialchars($row['deskripsi']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($row['deskripsi']); ?></h5>
@@ -219,7 +219,7 @@ $result = mysqli_query($mysqli, $query);
             <?php endif; ?>
         </div>
     </div>
-    <?php include 'footer.php' ?>
+    <?php include '../includes/footer.php' ?>
 </body>
 
 </html>

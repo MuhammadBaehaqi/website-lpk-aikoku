@@ -5,7 +5,7 @@ if (!isset($_SESSION['username']) || $_SESSION['roles'] != 'admin') {
     exit();
 }
 
-include '../../../config.php';
+include '../../../includes/config.php';
 
 // Ambil data dari form
 $deskripsi = $_POST['deskripsi'] ?? '';

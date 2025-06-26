@@ -3,7 +3,7 @@ require '../../vendor/dompdf-3.1.0/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-include '../../config.php'; // ← sesuaikan path juga kalau koneksi di luar folder ini
+include '../../includes/config.php'; // ← sesuaikan path juga kalau koneksi di luar folder ini
 
 $options = new Options();
 $options->set('defaultFont', 'Arial');

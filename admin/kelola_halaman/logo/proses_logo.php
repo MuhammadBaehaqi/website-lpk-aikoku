@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../../config.php';
+include '../../../includes/config.php';
 
 // Cek jika admin
 if (!isset($_SESSION['username']) || $_SESSION['roles'] != 'admin') {

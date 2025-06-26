@@ -6,7 +6,7 @@ if (!isset($_SESSION['username']) || $_SESSION['roles'] !== 'admin') {
     header('Location: ../../login.php'); // Pastikan path-nya sesuai struktur folder kamu
     exit();
 }
-include '../../config.php'; // pastikan path ini sesuai
+include '../../includes/config.php'; // pastikan path ini sesuai
 
 // Ambil data admin dari database
 $id_pengguna = $_SESSION['id_pengguna'];
@@ -31,9 +31,16 @@ $pageTitle = 'Profile Saya';
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body>

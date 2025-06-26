@@ -14,7 +14,7 @@ if ($_SESSION['roles'] != 'admin') {
 }
 
 $pageTitle = "Kelola User";
-include '../../config.php';
+include '../../includes/config.php';
 
 // Ambil parameter search, show, dan page
 $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -44,9 +44,14 @@ $no = $offset + 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../logo.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
     <title><?= $pageTitle ?> - LPK Aikoku Terpadu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body>
