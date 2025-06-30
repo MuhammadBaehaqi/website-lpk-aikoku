@@ -266,6 +266,9 @@ function isDropdownActive($pages = [])
                             href="/pendaftaran/admin/kelola_halaman/program/program_admin.php"
                             onclick="changeTitle('Program')">
                             <i class="bi bi-journal-code"></i> Program</a></li>
+                    <li><a class="text-white d-block px-3 py-2 <?php echo isActive('job_admin.php'); ?>"
+                            href="/pendaftaran/admin/kelola_halaman/jobs/job_admin.php" onclick="changeTitle('Job')">
+                            <i class="bi bi-journal-code"></i> Job Admin</a></li>
                     <a class="text-white d-block px-3 py-2 <?php echo isActive('album_admin.php'); ?>"
                         href="/pendaftaran/admin/kelola_halaman/album/album_admin.php" onclick="changeTitle('Album')">
                         <i class="bi bi-images"></i> Album

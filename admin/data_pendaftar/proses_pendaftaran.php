@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $alamat_keluarga = $_POST['kirim_alamat_keluarga'];
     $telepon_keluarga = $_POST['kirim_no_telepon_keluarga'];
     $program = $_POST['kirim_program'];
+    $bidang = $_POST['kirim_bidang'];
     $pendidikan = $_POST['kirim_pendidikan_terakhir'];
     $pengalaman_kerja = $_POST['kirim_pengalaman_kerja'];
     $status_pernikahan = $_POST['kirim_status_pernikahan'];
@@ -24,6 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pengalaman_jepang = $_POST['kirim_pengalaman_jepang'];
     $penyakit_kronis = $_POST['kirim_penyakit_kronis'];
     $golongan_darah = $_POST['kirim_golongan_darah'];
+    $motivasi = $_POST['kirim_motivasi'];
+
+    // ✅ Upload foto diri
+    $foto_name = $_FILES['foto_diri']['name'];
+    $foto_tmp = $_FILES['foto_diri']['tmp_name'];
+    $foto_ext = pathinfo($foto_name, PATHINFO_EXTENSION);
+    $foto_new_name = 'foto_' . time() . '.' . $foto_ext;
+    move_uploaded_file($_FILES['foto_diri']['tmp_name'], '../../uploads/' . $foto_new_name);
+    $foto_path = $foto_new_name; // simpan di DB
 
     // ✅ Cek apakah email sudah digunakan untuk akun login
     $cek_email = mysqli_query($mysqli, "SELECT * FROM tb_pengguna WHERE email_pengguna = '$email'");
@@ -55,14 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 📝 Simpan data ke tb_pendaftaran, gunakan id_pengguna
     $query = "INSERT INTO tb_pendaftaran (
-        nama_lengkap, tempat_lahir, tanggal_lahir, usia, jenis_kelamin, agama, alamat_ktp, email, telepon, alamat,
-        alamat_keluarga, telepon_keluarga, program, pendidikan_terakhir, pengalaman_kerja, status_pernikahan,
-        tinggi_badan, berat_badan, pengalaman_jepang, penyakit_kronis, golongan_darah, nomor_pendaftaran, id_pengguna
+        nama_lengkap, foto_diri, tempat_lahir, tanggal_lahir, usia, jenis_kelamin, agama, alamat_ktp, email, telepon, alamat,
+        alamat_keluarga, telepon_keluarga, program, bidang, pendidikan_terakhir, pengalaman_kerja, status_pernikahan,
+        motivasi, tinggi_badan, berat_badan, pengalaman_jepang, penyakit_kronis, golongan_darah,
+        nomor_pendaftaran, id_pengguna
     ) VALUES (
-        '$nama', '$tempat_lahir', '$tanggal_lahir', '$usia', '$jenis_kelamin', '$agama', '$alamat_ktp',
-        '$email', '$telepon', '$alamat', '$alamat_keluarga', '$telepon_keluarga', '$program', '$pendidikan',
-        '$pengalaman_kerja', '$status_pernikahan', '$tinggi_badan', '$berat_badan', '$pengalaman_jepang',
-        '$penyakit_kronis', '$golongan_darah', '$nomor_pendaftaran', '$id_pengguna'
+        '$nama', '$foto_path', '$tempat_lahir', '$tanggal_lahir', '$usia', '$jenis_kelamin', '$agama', '$alamat_ktp',
+        '$email', '$telepon', '$alamat', '$alamat_keluarga', '$telepon_keluarga', '$program','$bidang', '$pendidikan',
+        '$pengalaman_kerja', '$status_pernikahan', '$motivasi', '$tinggi_badan', '$berat_badan',
+        '$pengalaman_jepang', '$penyakit_kronis', '$golongan_darah', '$nomor_pendaftaran', '$id_pengguna'
     )";
 
     if (mysqli_query($mysqli, $query)) {

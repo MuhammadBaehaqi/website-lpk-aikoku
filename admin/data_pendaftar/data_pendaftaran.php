@@ -70,7 +70,7 @@ include '../../includes/config.php';
                 <input type="text" name="search" class="form-control me-2"
                     placeholder="Cari nama, email, nomor, atau telepon..."
                     value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
-                    <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
+                <select name="limit" class="form-select w-auto me-2" onchange="this.form.submit()">
                     <?php
                     $limits = [5, 10, 15, 20];
                     foreach ($limits as $val) {
@@ -88,13 +88,16 @@ include '../../includes/config.php';
                 <a href="cetak_semua_pendaftaran.php" target="_blank" class="btn btn-danger btn-sm">
                     <i class="bi bi-printer"></i> Cetak Semua PDF
                 </a>
+                <a href="download_foto_zip.php" class="btn btn-dark btn-sm">
+                    <i class="bi bi-download"></i> Download Semua Foto
+                </a>
             </div>
 
             <div class="table-container">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>No Urutan</th>
+                            <th>No</th>
                             <th>Nama Lengkap</th>
                             <th>Nomor Pendaftaran</th>
                             <th>Tempat Lahir</th>
@@ -104,16 +107,19 @@ include '../../includes/config.php';
                             <th>Agama</th>
                             <th>Alamat KTP</th>
                             <th>Alamat Email</th>
-                            <th>No.Telepon/WhatsApp</th>
+                            <th>No.Telepon</th>
                             <th>Alamat</th>
                             <th>Alamat Keluarga</th>
-                            <th>No.Telepon/WhatsApp Keluarga</th>
+                            <th>No.Telepon Keluarga</th>
                             <th>Program</th>
+                            <th>Bidang</th>
                             <th>Pendidikan Terakhir</th>
                             <th>Pengalaman Kerja</th>
                             <th>Status Pernikahan</th>
-                            <th>Tinggi Badan (cm)</th>
-                            <th>Berat Badan (kg)</th>
+                            <th>Motivasi</th>
+                            <th>Foto</th>
+                            <th>Tinggi Badan</th>
+                            <th>Berat Badan</th>
                             <th>Pengalaman Jepang</th>
                             <th>Penyakit Kronis</th>
                             <th>Golongan Darah</th>
@@ -164,7 +170,7 @@ include '../../includes/config.php';
                         while ($d = mysqli_fetch_array($data)) {
                             ?>
                             <tr>
-                                <td><?= $no++ ?></td> <!-- Menampilkan nomor urut dinamis -->
+                                <td><?= $no++ ?></td>
                                 <td><?= $d['nama_lengkap'] ?></td>
                                 <td><?= $d['nomor_pendaftaran'] ?></td>
                                 <td><?= $d['tempat_lahir'] ?></td>
@@ -179,9 +185,18 @@ include '../../includes/config.php';
                                 <td><?= $d['alamat_keluarga'] ?></td>
                                 <td><?= $d['telepon_keluarga'] ?></td>
                                 <td><?= $d['program'] ?></td>
+                                <td><?= $d['bidang'] ?></td>
                                 <td><?= $d['pendidikan_terakhir'] ?></td>
                                 <td><?= $d['pengalaman_kerja'] ?></td>
                                 <td><?= $d['status_pernikahan'] ?></td>
+                                <td><?= nl2br(htmlspecialchars($d['motivasi'])) ?></td>
+                                <td>
+                                    <?php if (!empty($d['foto_diri'])): ?>
+                                        <img src="/pendaftaran/uploads/<?= $d['foto_diri'] ?>" width="60" alt="Foto Diri">
+                                    <?php else: ?>
+                                        <span class="text-muted">-</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= $d['tinggi_badan'] ?> cm</td>
                                 <td><?= $d['berat_badan'] ?> kg</td>
                                 <td><?= $d['pengalaman_jepang'] ?></td>
@@ -200,6 +215,7 @@ include '../../includes/config.php';
                                                 class="btn btn-sm btn-danger" title="PDF Data Ini">
                                                 <i class="bi bi-printer"></i>
                                             </a>
+
                                             <!-- Tombol untuk membuka modal -->
                                             <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#modalEdit<?= $d['id_pendaftaran'] ?>">
@@ -211,6 +227,12 @@ include '../../includes/config.php';
                                                 onclick="return confirm('Yakin ingin menghapus data ini?')">
                                                 <i class="bi bi-trash"></i>
                                             </a>
+                                            <a href="../../uploads/<?= $d['foto_diri'] ?>" class="btn btn-sm btn-secondary"
+                                                download="<?= $d['nama_lengkap'] ?>_foto.jpg"
+                                                title="Download Foto Pendaftar">
+                                                <i class="bi bi-download"></i>
+                                            </a>
+
                                         </div>
                                         <form action="update_status.php" method="POST"
                                             class="d-flex flex-wrap gap-2 align-items-center">
@@ -237,7 +259,8 @@ include '../../includes/config.php';
                                 aria-labelledby="modalLabel<?= $d['id_pendaftaran'] ?>" aria-hidden="true">
                                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                     <div class="modal-content">
-                                        <form action="edit_data_pendaftaran.php" method="POST">
+                                        <form action="edit_data_pendaftaran.php" method="POST"
+                                            enctype="multipart/form-data">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="modalLabel<?= $d['id_pendaftaran'] ?>">Edit Data
                                                     Pendaftaran</h5>
@@ -341,6 +364,19 @@ include '../../includes/config.php';
                                                             </option>
                                                         </select>
                                                     </div>
+                                                    <!-- Bidang -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Bidang Pekerjaan</label>
+                                                        <select name="bidang" class="form-select" required>
+                                                            <option value="Perhotelan" <?= ($d['bidang'] == 'Perhotelan') ? 'selected' : '' ?>>Perhotelan</option>
+                                                            <option value="Pertanian" <?= ($d['bidang'] == 'Pertanian') ? 'selected' : '' ?>>Pertanian</option>
+                                                            <option value="Pengelolahan Makanan" <?= ($d['bidang'] == 'Pengelolahan Makanan') ? 'selected' : '' ?>>Pengelolahan Makanan</option>
+                                                            <option value="Perawat Lansia (Kaigo)" <?= ($d['bidang'] == 'Perawat Lansia (Kaigo)') ? 'selected' : '' ?>>Perawat Lansia (Kaigo)</option>
+                                                            <option value="Konstruksi" <?= ($d['bidang'] == 'Konstruksi') ? 'selected' : '' ?>>Konstruksi</option>
+                                                            <option value="Kebersihan & Layanan Umum" <?= ($d['bidang'] == 'Kebersihan & Layanan Umum') ? 'selected' : '' ?>>Kebersihan & Layanan Umum</option>
+                                                            <option value="Restoran" <?= ($d['bidang'] == 'Restoran') ? 'selected' : '' ?>>Restoran</option>
+                                                        </select>
+                                                    </div>
 
                                                     <!-- Pendidikan Terakhir -->
                                                     <div class="col-md-6">
@@ -411,6 +447,31 @@ include '../../includes/config.php';
                                                         <label class="form-label">Golongan Darah</label>
                                                         <input type="text" name="golongan_darah" class="form-control"
                                                             value="<?= htmlspecialchars($d['golongan_darah']) ?>" required>
+                                                    </div>
+                                                    <!-- Motivasi -->
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Motivasi</label>
+                                                        <textarea name="kirim_motivasi" class="form-control"
+                                                            rows="3"><?= htmlspecialchars($d['motivasi']) ?></textarea>
+                                                    </div>
+
+                                                    <!-- Upload Foto Baru -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Foto Baru (opsional)</label>
+                                                        <input type="file" name="foto_diri" class="form-control">
+                                                        <small class="text-muted">Biarkan kosong jika tidak ingin
+                                                            mengganti.</small>
+                                                    </div>
+
+                                                    <!-- Preview Foto Lama -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Foto Saat Ini</label><br>
+                                                        <?php if (!empty($d['foto_diri'])): ?>
+                                                            <img src="../../uploads/<?= $d['foto_diri'] ?>" alt="Foto Lama"
+                                                                width="100" class="img-thumbnail">
+                                                        <?php else: ?>
+                                                            <span class="text-muted">Tidak ada foto.</span>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>

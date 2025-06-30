@@ -126,7 +126,7 @@ $footer = mysqli_fetch_assoc($result);
 
                 <!-- Tombol Login dan Daftar -->
                 <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="login.php" class="btn btn-outline-warning fw-bold">Login</a>
+                    <a href="../login.php" class="btn btn-outline-warning fw-bold">Login</a>
                     <a href="daftar.php" class="btn btn-outline-light fw-bold">Daftar</a>
                 </div>
             </div>

@@ -25,6 +25,18 @@ $telepon = $_POST['telepon'];
 $alamat = $_POST['alamat'];
 $alamat_keluarga = $_POST['alamat_keluarga'];
 $telepon_keluarga = $_POST['telepon_keluarga'];
+$foto_update = "";
+if (isset($_FILES['foto_diri']) && $_FILES['foto_diri']['error'] === 0) {
+    $foto_name = $_FILES['foto_diri']['name'];
+    $foto_tmp = $_FILES['foto_diri']['tmp_name'];
+    $foto_ext = pathinfo($foto_name, PATHINFO_EXTENSION);
+    $foto_new_name = 'foto_' . time() . '.' . $foto_ext;
+
+    if (move_uploaded_file($foto_tmp, '../uploads/' . $foto_new_name)) {
+        // tambahkan bagian ini ke SET foto_diri
+        $foto_update = ", foto_diri = '$foto_new_name'";
+    }
+}
 
 // Update di tb_pendaftaran berdasarkan email lama
 $query_pendaftaran = "UPDATE tb_pendaftaran SET 
@@ -38,6 +50,7 @@ $query_pendaftaran = "UPDATE tb_pendaftaran SET
     alamat = '$alamat',
     alamat_keluarga = '$alamat_keluarga',
     telepon_keluarga = '$telepon_keluarga'
+    $foto_update
     WHERE email = '$email_lama' LIMIT 1";
 
 // Jalankan update

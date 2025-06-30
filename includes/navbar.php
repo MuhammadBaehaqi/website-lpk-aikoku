@@ -81,6 +81,22 @@
                                 Engineering</a></li>
                     </ul>
                 </li>
+                <!-- MENU Bidang Pekerjaan -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="jobDropdown" role="button"
+                        data-bs-toggle="dropdown">
+                        Bidang Pekerjaan
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="job_perhotelan.php">Perhotelan</a></li>
+                        <li><a class="dropdown-item" href="job_pertanian.php">Pertanian</a></li>
+                        <li><a class="dropdown-item" href="job_pengolahan_makanan.php">Pengolahan Makanan</a></li>
+                        <li><a class="dropdown-item" href="job_perawat.php">Perawatan Lansia (kaigo)</a></li>
+                        <li><a class="dropdown-item" href="job_konstruksi.php">Konstruksi</a></li>
+                        <li><a class="dropdown-item" href="job_cleaning.php">Kebersihan & Layanan Umum</a></li>
+                        <li><a class="dropdown-item" href="job_restoran.php">Restoran</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" id="nav-album" href="album.php">Album</a>
                 </li>
@@ -125,11 +141,18 @@
 
         // Pastikan dropdown "Program" tidak aktif jika bukan di dalam program
         let programDropdown = document.querySelector('#programDropdown');
-        let programLinks = document.querySelectorAll('.dropdown-menu .dropdown-item');
-
+        let programLinks = document.querySelectorAll('#programDropdown + .dropdown-menu .dropdown-item');
         let isProgramActive = Array.from(programLinks).some(link => link.pathname === currentPath);
         if (!isProgramActive) {
             programDropdown.classList.remove('active');
+        }
+        // Pastikan dropdown "Bidang Pekerjaan" tidak aktif jika bukan di dalamnya
+        let jobDropdown = document.querySelector('#jobDropdown');
+        let jobLinks = document.querySelectorAll('#jobDropdown + .dropdown-menu .dropdown-item');
+
+        let isJobActive = Array.from(jobLinks).some(link => link.pathname === currentPath);
+        if (!isJobActive) {
+            jobDropdown.classList.remove('active');
         }
 
         // Saat klik logo/nama LPK, langsung aktifkan menu Beranda

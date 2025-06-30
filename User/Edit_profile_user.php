@@ -41,7 +41,12 @@ if (!$data) {
                 <div class="row">
                     <!-- KIRI: FOTO & NAMA -->
                     <div class="col-md-4 text-center border-end">
-                        <i class="fas fa-user-circle mb-3" style="font-size: 120px; color: #0db4d8;"></i>
+                        <?php if (!empty($data['foto_diri']) && file_exists("../uploads/" . $data['foto_diri'])): ?>
+                            <img src="../uploads/<?= $data['foto_diri'] ?>" alt="Foto Profil" class="img-fluid rounded mb-3"
+                                style="width: 150px; height: 200px; object-fit: cover;">
+                        <?php else: ?>
+                            <i class="fas fa-user-circle mb-3" style="font-size: 120px; color: #0db4d8;"></i>
+                        <?php endif; ?>
                         <h5 class="fw-bold"><?= $data['nama_lengkap'] ?></h5>
                         <p class="text-muted">No. Pendaftaran: <br><strong><?= $data['nomor_pendaftaran'] ?></strong>
                         </p>
@@ -50,7 +55,6 @@ if (!$data) {
                             Profil</button>
                         <button class="btn btn-outline-danger mt-2" data-bs-toggle="modal"
                             data-bs-target="#ubahPasswordModal">Ubah Password</button>
-
                     </div>
 
                     <!-- KANAN: DETAIL PROFIL -->
@@ -82,6 +86,7 @@ if (!$data) {
 
                             <div class="col-md-6 mb-3">
                                 <h6 class="text-primary">Pendidikan & Program</h6>
+                                <p><strong>Bidang Pekerjaan:</strong> <?= $data['bidang'] ?></p>
                                 <p><strong>Program:</strong> <?= $data['program'] ?></p>
                                 <p><strong>Pendidikan Terakhir:</strong> <?= $data['pendidikan_terakhir'] ?></p>
                             </div>
@@ -95,13 +100,12 @@ if (!$data) {
     <!-- Modal Edit Profil -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form action="update_profile.php" method="POST" class="modal-content">
+            <form action="update_profile.php" method="POST" class="modal-content" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Edit Profil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-
                     <!-- Readonly Fields -->
                     <div class="mb-3">
                         <label class="form-label">Nomor Pendaftaran <small class="text-muted">(*tidak dapat
@@ -122,12 +126,22 @@ if (!$data) {
                             style="background-color:#e9ecef;">
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Bidang Pekerjaan <small class="text-muted">(*tidak dapat
+                                diedit)</small></label>
+                        <input type="text" name="bidang" class="form-control" value="<?= $data['bidang'] ?>" readonly
+                            style="background-color:#e9ecef;">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Pendidikan Terakhir <small class="text-muted">(*tidak dapat
                                 diedit)</small></label>
                         <input type="text" name="pendidikan_terakhir" class="form-control"
                             value="<?= $data['pendidikan_terakhir'] ?>" readonly style="background-color:#e9ecef;">
                     </div>
-
+                    <div class="mb-3">
+                        <label class="form-label">Upload Foto Diri Baru (Opsional)</label>
+                        <input type="file" name="foto_diri" class="form-control" accept="image/*">
+                        <small class="text-muted">Kosongkan jika tidak ingin mengganti foto.</small>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" value="<?= $data['email'] ?>">
@@ -145,7 +159,7 @@ if (!$data) {
                     <div class="mb-3">
                         <label class="form-label">Jenis Kelamin</label>
                         <!-- form-select ikon panah -->
-                        <select name="jenis_kelamin" class="form-select"> 
+                        <select name="jenis_kelamin" class="form-select">
                             <option value="Laki-laki" <?= $data['jenis_kelamin'] == 'Laki-laki' ? 'selected' : '' ?>>
                                 Laki-laki</option>
                             <option value="Perempuan" <?= $data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '' ?>>

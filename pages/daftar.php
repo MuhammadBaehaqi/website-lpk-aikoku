@@ -24,106 +24,22 @@ include '../includes/config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
             font-weight: bold;
         }
 
-        .footer {
-            background-color: #000;
-            /* Warna hitam */
-            color: #fff;
-            /* Warna teks putih */
+        fieldset {
+            border: 2px solid #dee2e6;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
 
-        .footer a {
-            text-decoration: none;
-        }
-
-        .footer .fab,
-        .footer .fas {
-            font-size: 20px;
-        }
-
-        .footer h5 {
-            color: #00ff00;
-            /* Warna hijau neon */
-        }
-
-        .footer .text-success {
-            color: #00ff00 !important;
-            /* Hijau neon */
-        }
-
-        .footer .text-danger {
-            color: #ff0000 !important;
-            /* Merah */
-        }
-
-        .footer p,
-        .footer a {
-            color: #bbb;
-            /* Abu-abu terang */
-        }
-
-        .footer a:hover {
-            color: #00ff00;
-            /* Hijau neon saat hover */
-        }
-
-        /* Garis di atas Copyright */
-        .footer-line {
-            border: 1px solid #444;
-            /* Warna garis abu-abu gelap */
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        /* Efek hover kuning di footer */
-        .footer a:hover,
-        .footer .dropdown-toggle:hover {
-            color: #FFD700 !important;
-            /* Warna emas saat hover */
-        }
-
-        /* Pisahkan hover tombol dari hover link footer */
-        .footer a.btn:hover {
-            color: inherit !important;
-            /* Warna teks kembali ke default */
-        }
-
-        /* Tombol Daftar */
-        .footer .btn-success {
-            background-color: #FFD700 !important;
-            /* Kuning */
-            color: #fff !important;
-            /* Teks putih */
-
-            border: 1px solid #fff !important;
-            /* Border kuning */
-        }
-
-        .footer .btn-success:hover {
-            background-color: #fff !important;
-            /* Putih */
-            color: #FFD700 !important;
-            /* Teks kuning */
-            border: 1px solid #FFD700 !important;
-            /* Tambahkan border kuning saat hover */
-        }
-
-        /* Tombol Login */
-        .footer .btn-outline-light {
-            background-color: #fff !important;
-            /* Putih */
-            color: #FFD700 !important;
-            /* Teks kuning */
-            border: 1px solid #FFD700 !important;
-            /* Border kuning */
-        }
-
-        .footer .btn-outline-light:hover {
-            background-color: #FFD700 !important;
-            /* Kuning */
-            color: #fff !important;
-            /* Teks putih */
-            border: 1px solid #fff !important;
-            /* Border tetap kuning */
+        legend {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0 10px;
+            width: auto;
+            color: #343a40;
+            border-bottom: none;
         }
     </style>
 </head>
@@ -164,129 +80,184 @@ include '../includes/config.php'; // Ini HARUS ada sebelum pemakaian $mysqli
     <div class="container mt-4">
         <h2 class="text-center">Formulir Pendaftaran</h2>
         <form action="/pendaftaran/admin/data_pendaftar/proses_pendaftaran.php" method="POST"
-            class="p-4 shadow rounded bg-light mb-5" onsubmit="return konfirmasiData();">
-            <div class="mb-3">
-                <label for="nama_lengkap" class="form-label">Nama Lengkap:</label>
-                <input type="text" id="nama_lengkap" name="kirim_nama" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="tempat_lahir" class="form-label">Tempat Lahir:</label>
-                <input type="text" id="tempat_lahir" name="kirim_tempat_lahir" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="tanggal_lahir" class="form-label">Tanggal Lahir:</label>
-                <input type="date" id="tanggal_lahir" name="kirim_tanggal_lahir" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="usia" class="form-label">Usia:</label>
-                <input type="number" id="usia" name="kirim_usia" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="jenis_kelamin" class="form-label">Jenis Kelamin:</label>
-                <select id="jenis_kelamin" name="kirim_jenis_kelamin" class="form-select" required>
-                    <option value="">Pilih Jenis Kelamin</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="agama" class="form-label">Agama:</label>
-                <select id="agama" name="kirim_agama" class="form-select" required>
-                    <option value="">Pilih Agama</option>
-                    <option value="Islam">Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Katolik">Katolik</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Buddha">Buddha</option>
-                    <option value="Konghucu">Konghucu</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="alamat_ktp" class="form-label">Alamat KTP:</label>
-                <input type="text" id="alamat_ktp" name="kirim_alamat_ktp" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Alamat Email:</label>
-                <input type="email" id="email" name="alamat_email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="telepon" class="form-label">No.Telepon/WhatsApp:</label>
-                <input type="text" id="telepon" name="telepon" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="alamat" class="form-label">Alamat:</label>
-                <input type="text" id="alamat" name="kirim_alamat" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="alamat_keluarga" class="form-label">Alamat_Keluarga:</label>
-                <input type="text" id="alamat_keluarga" name="kirim_alamat_keluarga" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="telepon_keluarga" class="form-label">No.Telepon/WhatsApp Keluarga:</label>
-                <input type="text" id="telepon_keluarga" name="kirim_no_telepon_keluarga" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="program" class="form-label">Pilih Program:</label>
-                <select id="program" name="kirim_program" class="form-select" required>
-                    <option value="Magang">Program Magang</option>
-                    <option value="Engineering">Program Engineering</option>
-                    <option value="Tokutei Ginou">Program Tokutei Ginou</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir:</label>
-                <select id="pendidikan_terakhir" name="kirim_pendidikan_terakhir" class="form-select" required>
-                    <option value="">Pilih Pendidikan Terakhir</option>
-                    <option value="SD">SD</option>
-                    <option value="MI">MI</option>
-                    <option value="SMP">SMP</option>
-                    <option value="MTS">MTS</option>
-                    <option value="SMA">SMA</option>
-                    <option value="ALIYAH">ALIYAH</option>
-                    <option value="SMK">SMK</option>
-                    <option value="D3">D3</option>
-                    <option value="S1">S1</option>
-                    <option value="S2">S2</option>
-                    <option value="S3">S3</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="pengalaman_kerja" class="form-label">Pengalaman Kerja:</label>
-                <input type="text" id="pengalaman_kerja" name="kirim_pengalaman_kerja" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="status_pernikahan" class="form-label">Status Pernikahan:</label>
-                <select id="status_pernikahan" name="kirim_status_pernikahan" class="form-select" required>
-                    <option value="">Pilih Status Pernikahan</option>
-                    <option value="Belum Menikah">Belum Menikah</option>
-                    <option value="Menikah">Menikah</option>
-                    <option value="Janda/Duda">Janda/Duda</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="tinggi_badan" class="form-label">Tinggi Badan (cm):</label>
-                <input type="number" id="tinggi_badan" name="kirim_tinggi_badan" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="berat_badan" class="form-label">Berat Badan (kg):</label>
-                <input type="number" id="berat_badan" name="kirim_berat_badan" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="pengalaman_jepang" class="form-label">Pengalaman Jepang:</label>
-                <select id="pengalaman_jepang" name="kirim_pengalaman_jepang" class="form-select" required>
-                    <option value="">Pilih Status</option>
-                    <option value="Pemula">Pemula</option>
-                    <option value="Ex-Jepang">Ex-Jepang</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="penyakit_kronis" class="form-label">Penyakit Kronis (jika ada):</label>
-                <input type="text" id="penyakit_kronis" name="kirim_penyakit_kronis" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="golongan_darah" class="form-label">Golongan Darah:</label>
-                <input type="text" id="golongan_darah" name="kirim_golongan_darah" class="form-control" required>
-            </div>
+            enctype="multipart/form-data" class="p-4 shadow rounded bg-light mb-5" onsubmit="return konfirmasiData();">
+            <!-- A. Data Pribadi -->
+            <fieldset class="mb-4">
+                <legend>Data Pribadi</legend>
+
+                <div class="mb-3">
+                    <label for="nama_lengkap" class="form-label">Nama Lengkap:</label>
+                    <input type="text" id="nama_lengkap" name="kirim_nama" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="foto_diri" class="form-label">Upload Foto Diri (3x4):</label>
+                    <input type="file" id="foto_diri" name="foto_diri" class="form-control" accept="image/*" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tempat_lahir" class="form-label">Tempat Lahir:</label>
+                    <input type="text" id="tempat_lahir" name="kirim_tempat_lahir" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir:</label>
+                    <input type="date" id="tanggal_lahir" name="kirim_tanggal_lahir" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="usia" class="form-label">Usia:</label>
+                    <input type="number" id="usia" name="kirim_usia" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin:</label>
+                    <select id="jenis_kelamin" name="kirim_jenis_kelamin" class="form-select" required>
+                        <option value="">Pilih Jenis Kelamin</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="agama" class="form-label">Agama:</label>
+                    <select id="agama" name="kirim_agama" class="form-select" required>
+                        <option value="">Pilih Agama</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Kristen">Kristen</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Buddha">Buddha</option>
+                        <option value="Konghucu">Konghucu</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- B. Kontak & Alamat -->
+            <fieldset class="mb-4">
+                <legend>Kontak & Alamat</legend>
+
+                <div class="mb-3">
+                    <label for="alamat_ktp" class="form-label">Alamat KTP:</label>
+                    <input type="text" id="alamat_ktp" name="kirim_alamat_ktp" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Alamat Email:</label>
+                    <input type="email" id="email" name="alamat_email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telepon" class="form-label">No.Telepon/WhatsApp:</label>
+                    <input type="text" id="telepon" name="telepon" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="alamat" class="form-label">Alamat:</label>
+                    <input type="text" id="alamat" name="kirim_alamat" class="form-control" required>
+                </div>
+            </fieldset>
+
+            <!-- C. Kontak Keluarga -->
+            <fieldset class="mb-4">
+                <legend>Kontak Keluarga</legend>
+
+                <div class="mb-3">
+                    <label for="alamat_keluarga" class="form-label">Alamat_Keluarga:</label>
+                    <input type="text" id="alamat_keluarga" name="kirim_alamat_keluarga" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telepon_keluarga" class="form-label">No.Telepon/WhatsApp Keluarga:</label>
+                    <input type="text" id="telepon_keluarga" name="kirim_no_telepon_keluarga" class="form-control"
+                        required>
+                </div>
+            </fieldset>
+
+            <!-- D. Latar Belakang Pendidikan -->
+            <fieldset class="mb-4">
+                <legend>Pendidikan & Program</legend>
+
+                <div class="mb-3">
+                    <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir:</label>
+                    <select id="pendidikan_terakhir" name="kirim_pendidikan_terakhir" class="form-select" required>
+                        <option value="">Pilih Pendidikan Terakhir</option>
+                        <option value="SD">SD</option>
+                        <option value="MI">MI</option>
+                        <option value="SMP">SMP</option>
+                        <option value="MTS">MTS</option>
+                        <option value="SMA">SMA</option>
+                        <option value="ALIYAH">ALIYAH</option>
+                        <option value="SMK">SMK</option>
+                        <option value="D3">D3</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="program" class="form-label">Pilih Program:</label>
+                    <select id="program" name="kirim_program" class="form-select" required>
+                        <option value="">Pilih Program</option>
+                        <option value="Magang">Program Magang</option>
+                        <option value="Engineering">Program Engineering</option>
+                        <option value="Tokutei Ginou">Program Tokutei Ginou</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="BidangPekerjaan" class="form-label">Pilih Bidang Pekerjaan:</label>
+                    <select id="bidang_pekerjaan" name="kirim_bidang" class="form-select" required>
+                        <option value="">Pilih Bidang Pekerjaan</option>
+                        <option value="Perhotelan">Perhotelan</option>
+                        <option value="Pertanian">Pertanian</option>
+                        <option value="Pengelolahan Makanan">Pengelolahan Makanan</option>
+                        <option value="Perawat Lansia (Kaigo)">Perawat Lansia (Kaigo)</option>
+                        <option value="Konstruksi">Konstruksi</option>
+                        <option value="Kebersihan & Layanan Umum">Kebersihan & Layanan Umum</option>
+                        <option value="Restoran">Restoran</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="pengalaman_kerja" class="form-label">Pengalaman Kerja:</label>
+                    <input type="text" id="pengalaman_kerja" name="kirim_pengalaman_kerja" class="form-control"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="status_pernikahan" class="form-label">Status Pernikahan:</label>
+                    <select id="status_pernikahan" name="kirim_status_pernikahan" class="form-select" required>
+                        <option value="">Pilih Status Pernikahan</option>
+                        <option value="Belum Menikah">Belum Menikah</option>
+                        <option value="Menikah">Menikah</option>
+                        <option value="Janda/Duda">Janda/Duda</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="motivasi" class="form-label">Motivasi Anda Mengikuti Program Ini:</label>
+                    <textarea id="motivasi" name="kirim_motivasi" class="form-control" rows="3"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- E. Informasi Tambahan -->
+            <fieldset class="mb-4">
+                <legend>Informasi Tambahan</legend>
+
+                <div class="mb-3">
+                    <label for="tinggi_badan" class="form-label">Tinggi Badan (cm):</label>
+                    <input type="number" id="tinggi_badan" name="kirim_tinggi_badan" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="berat_badan" class="form-label">Berat Badan (kg):</label>
+                    <input type="number" id="berat_badan" name="kirim_berat_badan" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pengalaman_jepang" class="form-label">Pengalaman Jepang:</label>
+                    <select id="pengalaman_jepang" name="kirim_pengalaman_jepang" class="form-select" required>
+                        <option value="">Pilih Status</option>
+                        <option value="Pemula">Pemula</option>
+                        <option value="Ex-Jepang">Ex-Jepang</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="penyakit_kronis" class="form-label">Penyakit Kronis (jika ada):</label>
+                    <input type="text" id="penyakit_kronis" name="kirim_penyakit_kronis" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="golongan_darah" class="form-label">Golongan Darah:</label>
+                    <input type="text" id="golongan_darah" name="kirim_golongan_darah" class="form-control" required>
+                </div>
+            </fieldset>
+
+            <!-- Submit -->
             <button type="submit" class="btn btn-success w-100">Daftar</button>
         </form>
 

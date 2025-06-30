@@ -343,6 +343,83 @@ include '../includes/config.php';
             </div>
         </div>
     </section>
+    <!-- Bidang Pekerjaan Populer -->
+<section class="content-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center text-success fw-bold mb-4">Bidang Pekerjaan Populer</h2>
+        <div class="row g-4">
+            <!-- Perhotelan -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-hotel fa-3x text-success mb-3"></i>
+                    <h5>Perhotelan</h5>
+                    <p>Pekerjaan layanan kamar dan resepsionis di industri perhotelan Jepang.</p>
+                    <a href="job_perhotelan.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Pertanian -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-tractor fa-3x text-success mb-3"></i>
+                    <h5>Pertanian</h5>
+                    <p>Bekerja di lahan pertanian, perkebunan, dan pengolahan hasil tani.</p>
+                    <a href="job_pertanian.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Pengolahan Makanan -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-utensils fa-3x text-success mb-3"></i>
+                    <h5>Pengolahan Makanan</h5>
+                    <p>Menangani proses produksi makanan di pabrik atau restoran Jepang.</p>
+                    <a href="job_pengolahan_makanan.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Perawatan Lansia -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-user-nurse fa-3x text-success mb-3"></i>
+                    <h5>Perawatan Lansia (Kaigo)</h5>
+                    <p>Merawat lansia di fasilitas kesehatan atau rumah perawatan Jepang.</p>
+                    <a href="job_perawat.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Konstruksi -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-hard-hat fa-3x text-success mb-3"></i>
+                    <h5>Konstruksi</h5>
+                    <p>Pekerjaan di bidang pembangunan gedung, jembatan, dan proyek infrastruktur.</p>
+                    <a href="job_konstruksi.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Kebersihan & Layanan Umum -->
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-broom fa-3x text-success mb-3"></i>
+                    <h5>Kebersihan & Layanan Umum</h5>
+                    <p>Tugas kebersihan dan layanan umum seperti office boy atau petugas cleaning.</p>
+                    <a href="job_cleaning.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+
+            <!-- Restoran -->
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center shadow-sm p-4 h-100">
+                    <i class="fas fa-concierge-bell fa-3x text-success mb-3"></i>
+                    <h5>Restoran</h5>
+                    <p>Bekerja sebagai pelayan, koki, atau staf dapur di restoran Jepang.</p>
+                    <a href="job_restoran.php" class="btn btn-outline-success btn-sm mt-2">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Pengumuman -->
     <section class="container my-5">
         <h2 class="fw-bold text-success text-center">Pengumuman Kelulusan</h2>

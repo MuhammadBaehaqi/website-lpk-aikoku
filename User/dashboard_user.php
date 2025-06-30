@@ -35,6 +35,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
     <meta charset="UTF-8">
     <title>Dashboard Pendaftar - LPK Aikoku Terpadu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <style>
         .content {
@@ -63,6 +64,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                 <div class="card-body">
                     <!-- Informasi Profil -->
                     <h5>Data Diri</h5>
+                    <img src="../uploads/<?= $data['foto_diri'] ?>" class="img-fluid rounded" width="120">
                     <table class="table">
                         <tr>
                             <th>Nama Lengkap</th>
@@ -73,6 +75,14 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                             <td><?= $nomor_pendaftaran ?></td>
                         </tr>
                         <tr>
+                            <th>Bidang Pekerjaan</th>
+                            <td><?= $data['bidang'] ?></td>
+                        </tr>
+                        <tr>
+                            <th>Program</th>
+                            <td><?= $data['program'] ?></td>
+                        </tr>
+                        <tr>
                             <th>Email</th>
                             <td><?= $email ?></td>
                         </tr>
@@ -81,13 +91,11 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                             <td><?= $tanggal_daftar ?></td>
                         </tr>
                     </table>
-
                     <!-- Status Pendaftaran -->
                     <h5>Status Pendaftaran</h5>
                     <div class="alert alert-success" role="alert">
                         Selamat! Status Anda: <strong><?= $status ?></strong>
                     </div>
-
                     <!-- Pengumuman -->
                     <h5>Pengumuman</h5>
                     <?php if (!empty($pengumuman)): ?>
@@ -99,12 +107,14 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                     <?php else: ?>
                         <p><em>Belum ada pengumuman dari admin.</em></p>
                     <?php endif; ?>
-
-
+                    <!-- Motivasi -->
+                    <h5><i class="fas fa-lightbulb text-warning me-2"></i>Motivasi Anda Mengikuti Program Ini</h5>
+                    <div class="alert alert-secondary" role="alert">
+                        <?= nl2br(htmlspecialchars($data['motivasi'])) ?>
+                    </div>
                     <!-- Tombol Download Bukti -->
                     <a href="cetak_bukti.php" target="_blank" class="btn btn-outline-primary">Unduh Bukti Pendaftaran
                         (PDF)</a>
-
                     <!-- Tombol Logout -->
                     <a href="../logout.php" class="btn btn-outline-danger float-end">Logout</a>
                 </div>
