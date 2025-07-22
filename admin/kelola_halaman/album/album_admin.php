@@ -99,7 +99,8 @@ $hero = mysqli_fetch_assoc($result_hero);
 
                 <!-- Daftar Album -->
                 <h5>Daftar Album</h5>
-                <table class="table table-bordered">
+                <div class="table-responsive">
+    <table class="table table-bordered ">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
@@ -127,6 +128,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                         <?php } ?>
                     </tbody>
                 </table>
+                        </div>
             </div>
         </div>
 

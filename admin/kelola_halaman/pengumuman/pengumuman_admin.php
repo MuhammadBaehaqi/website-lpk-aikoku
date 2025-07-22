@@ -58,6 +58,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
         <div class="card mb-4">
             <div class="card-header">Data Hero Section</div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -87,6 +88,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                         <?php } ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 
@@ -127,6 +129,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
         <div class="card mb-4">
             <div class="card-header">Daftar Pendaftar (Lolos dan Tidak Lolos)</div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead class="table-success">
                         <tr>
@@ -172,6 +175,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+                </div>
                 <nav>
                     <ul class="pagination">
                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>

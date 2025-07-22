@@ -26,15 +26,6 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
             overflow-x: hidden;
         }
 
-        table {
-            table-layout: fixed;
-            width: 100%;
-        }
-
-        th,
-        td {
-            word-wrap: break-word;
-        }
     </style>
 </head>
 
@@ -45,7 +36,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
 
         <!-- Form Tambah Bidang Pekerjaan -->
         <div class="card mb-4">
-            <div class="card-header">Tambah Bidang Pekerjaan</div>
+            <div class="card-header">Kelola Hero Bidang Pekerjaan</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_job.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
@@ -85,7 +76,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                             <th>Nama</th>
                             <th>Deskripsi</th>
                             <th>Gambar Hero</th>
-                            <th>Upload</th>
+                            <th>Tanggal Upload</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -192,7 +183,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                 <h5 class="mb-0">Tambah Detail Bidang Pekerjaan</h5>
             </div>
             <div class="card-body">
-                <form action="detail_job/proses_tambah_detail.php" method="POST" enctype="multipart/form-data">
+                <form action="detail job/proses_tambah_detail.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label">Nama Bidang</label>
                         <select name="nama_job" class="form-select" required>

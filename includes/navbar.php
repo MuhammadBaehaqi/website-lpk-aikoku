@@ -91,7 +91,7 @@
                         <li><a class="dropdown-item" href="job_perhotelan.php">Perhotelan</a></li>
                         <li><a class="dropdown-item" href="job_pertanian.php">Pertanian</a></li>
                         <li><a class="dropdown-item" href="job_pengolahan_makanan.php">Pengolahan Makanan</a></li>
-                        <li><a class="dropdown-item" href="job_perawat.php">Perawatan Lansia (kaigo)</a></li>
+                        <li><a class="dropdown-item" href="job_perawat.php">Perawat Lansia (kaigo)</a></li>
                         <li><a class="dropdown-item" href="job_konstruksi.php">Konstruksi</a></li>
                         <li><a class="dropdown-item" href="job_cleaning.php">Kebersihan & Layanan Umum</a></li>
                         <li><a class="dropdown-item" href="job_restoran.php">Restoran</a></li>

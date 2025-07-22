@@ -7,6 +7,14 @@ $deskripsi = $_POST['deskripsi'];
 $link = $_POST['link_tombol'];
 $teks = $_POST['teks_tombol'];
 
+// Cek apakah link_tombol sudah digunakan oleh hero lain (kecuali yang sedang diedit)
+$cek = mysqli_query($mysqli, "SELECT * FROM tb_hero WHERE link_tombol='$link' AND id_hero != '$id'");
+if (mysqli_num_rows($cek) > 0) {
+    // Redirect dengan pesan error
+    header("Location: ../beranda_admin.php?status=duplikat_link");
+    exit();
+}
+
 // Cek apakah user upload gambar baru
 if ($_FILES['gambar']['name'] != "") {
     $gambar = $_FILES['gambar']['name'];
@@ -24,7 +32,6 @@ if ($_FILES['gambar']['name'] != "") {
 }
 
 mysqli_query($mysqli, $query);
-
 header("Location: ../beranda_admin.php?status=edit_sukses");
 exit();
 ?>

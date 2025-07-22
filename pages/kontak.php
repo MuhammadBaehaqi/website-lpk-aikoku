@@ -79,7 +79,8 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
     <div class="container my-5">
         <div class="row">
             <!-- Card Kirim Pesan -->
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4 mb-md-0">
+
                 <div class="card shadow-lg border-0">
                     <div class="card-body">
                         <h3 class="text-success">Kirim Pesan</h3>

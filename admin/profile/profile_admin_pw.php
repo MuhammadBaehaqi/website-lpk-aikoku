@@ -52,19 +52,27 @@ $pageTitle = 'Profile Saya';
         <form action="proses_update_profile_admin.php" method="POST">
             <input type="hidden" name="id_pengguna" value="<?= $data['id_pengguna'] ?>">
 
-            <div class="mb-3">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control"
-                    value="<?= htmlspecialchars($data['username']) ?>" required>
-            </div>
-
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control"
-                    value="<?= htmlspecialchars($data['email_pengguna']) ?>" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            <table class="table table-bordered">
+                <tr>
+                    <th width="200">Username</th>
+                    <td>
+                        <input type="text" name="username" class="form-control"
+                            value="<?= htmlspecialchars($data['username']) ?>" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <input type="email" name="email" class="form-control"
+                            value="<?= htmlspecialchars($data['email_pengguna']) ?>" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-end">
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </td>
+                </tr>
+            </table>
         </form>
 
         <hr>
@@ -80,19 +88,25 @@ $pageTitle = 'Profile Saya';
             <div class="alert alert-danger">Password lama salah.</div>
         <?php endif; ?>
         <form action="proses_ganti_password.php" method="POST">
-            <div class="mb-3">
-                <label>Password Lama</label>
-                <input type="password" name="password_lama" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label>Password Baru</label>
-                <input type="password" name="password_baru" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label>Konfirmasi Password Baru</label>
-                <input type="password" name="konfirmasi_password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-warning">Ganti Password</button>
+            <table class="table table-bordered">
+                <tr>
+                    <th width="200">Password Lama</th>
+                    <td><input type="password" name="password_lama" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th>Password Baru</th>
+                    <td><input type="password" name="password_baru" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th>Konfirmasi Password Baru</th>
+                    <td><input type="password" name="konfirmasi_password" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-end">
+                        <button type="submit" class="btn btn-warning">Ganti Password</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 

@@ -25,21 +25,46 @@ $pageTitle = 'Kelola Halaman / Beranda';
     <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 
     <style>
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 900px; /* bisa sesuaikan, ini memaksa agar tabel bisa discroll */
+        border-collapse: collapse;
+    }
+
+    .table td,
+    .table th {
+        white-space: nowrap; /* ini bikin teks tidak turun ke bawah */
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    @media (max-width: 768px) {
         .table td,
         .table th {
-            white-space: normal;
-            /* Membuat teks membungkus jika panjang */
-            word-wrap: break-word;
-            /* Memastikan kata panjang terpotong jika tidak muat */
+            font-size: 12px;
         }
 
-        .table {
-            table-layout: fixed;
-            /* Menjaga ukuran kolom tabel tetap rapi */
-            width: 100%;
-            /* Membuat tabel mengisi lebar kontainer */
+        .btn-sm {
+            font-size: 11px;
+            padding: 4px 6px;
         }
-    </style>
+
+        form input,
+        form select {
+            font-size: 14px;
+        }
+    }
+</style>
+
 </head>
 
 <body>
@@ -57,6 +82,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul" required>
                     <input type="text" name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required>
                     <select name="link_tombol" class="form-control mb-3" required>
+                    <option value="" disabled selected hidden>Pilih Link Tombol</option>
                         <option value="daftar.php">daftar.php</option>
                         <option value="album.php">album.php</option>
                         <option value="profile.php">profile.php</option>
@@ -145,7 +171,6 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                                         <input type="text" name="teks_tombol" class="form-control" value="<?= htmlspecialchars($row['teks_tombol']) ?>"
                                                             required>
                                                     </div>
-
                                                     <div class="mb-2">
                                                         <label>Ganti Gambar (opsional)</label>
                                                         <input type="file" name="gambar" class="form-control">
@@ -209,35 +234,103 @@ $pageTitle = 'Kelola Halaman / Beranda';
         </div>
 
         <!-- Data Saat Ini dibungkus Card -->
-        <div class="card mb-4">
-            <div class="card-header">Data Kelola Tentang Kami Singkat</div>
-            <div class="card-body">
-                <?php
+    <div class="card mb-4">
+        <div class="card-header">Data Kelola Tentang Kami Singkat</div>
+        <div class="card-body">
+        <?php
                 include '../../../includes/config.php';
                 $tentang = mysqli_query($mysqli, "SELECT * FROM tb_beranda_tentang_kami ORDER BY id_tentang DESC LIMIT 1");
                 if ($row = mysqli_fetch_assoc($tentang)) {
                     ?>
+                    <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
                                 <th>Deskripsi</th>
-                                <th>Gambar</th>
                                 <th>Tanggal Upload</th>
+                                <th>Gambar</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><?php echo $row['judul']; ?></td>
-                                <td><?php echo nl2br($row['deskripsi']); ?></td>
-                                <td><?php echo date("d-m-Y H:i", strtotime($row['tanggal_upload'])); ?></td>
-                                <td><img src="../../../uploads/<?php echo $row['gambar']; ?>" width="150" class="img-fluid">
+                                <td><?= $row['judul']; ?></td>
+                                <td><?= nl2br($row['deskripsi']); ?></td>
+                                <td><?= date("d-m-Y H:i", strtotime($row['tanggal_upload'])); ?></td>
+                                <td><img src="../../../uploads/<?= $row['gambar']; ?>" width="150" class="img-fluid"></td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editTentangKamiModal<?= $row['id_tentang']; ?>">Edit</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#hapusTentangKamiModal<?= $row['id_tentang']; ?>">Hapus</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+        </div>
+                    <!-- Modal Edit -->
+                    <div class="modal fade" id="editTentangKamiModal<?= $row['id_tentang']; ?>" tabindex="-1"
+                        aria-labelledby="editTentangKamiModalLabel<?= $row['id_tentang']; ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="tentang_kami/proses_edit_tentang_kami.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<?= $row['id_tentang']; ?>">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Tentang Kami</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-2">
+                                            <label>Judul</label>
+                                            <input type="text" name="judul" class="form-control" value="<?= $row['judul']; ?>"
+                                                required>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label>Deskripsi</label>
+                                            <textarea name="deskripsi" class="form-control"
+                                                required><?= $row['deskripsi']; ?></textarea>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label>Ganti Gambar (opsional)</label>
+                                            <input type="file" name="gambar" class="form-control">
+                                            <small>Gambar saat ini:</small><br>
+                                            <img src="../../../uploads/<?= $row['gambar']; ?>" width="100">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        
+                    <!-- Modal Hapus -->
+                    <div class="modal fade" id="hapusTentangKamiModal<?= $row['id_tentang']; ?>" tabindex="-1"
+                        aria-labelledby="hapusTentangKamiModalLabel<?= $row['id_tentang']; ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="tentang_kami/hapus_tentang_kami.php" method="GET">
+                                <input type="hidden" name="id" value="<?= $row['id_tentang']; ?>">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Hapus Tentang Kami</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin ingin menghapus data "<strong><?= htmlspecialchars($row['judul']); ?></strong>"?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 <?php } else { ?>
                     <p>Belum ada data.</p>
                 <?php } ?>

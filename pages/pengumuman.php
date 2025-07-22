@@ -71,6 +71,24 @@ include '../includes/config.php'; // koneksi ke database
             padding: 8px 12px;
             border-radius: 5px;
         }
+        .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
     </style>
 </head>
 
@@ -156,7 +174,7 @@ include '../includes/config.php'; // koneksi ke database
             }
             ?>
 
-
+        <div class="table-responsive">
             <table class="table table-bordered table-striped text-center">
                 <thead>
                     <tr>
@@ -191,6 +209,7 @@ include '../includes/config.php'; // koneksi ke database
                     ?>
                 </tbody>
             </table>
+            </div>
             <nav>
                 <ul class="pagination justify-content-center mt-4">
                     <?php for ($i = 1; $i <= $pages; $i++): ?>

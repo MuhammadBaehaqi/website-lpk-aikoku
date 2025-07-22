@@ -45,6 +45,7 @@ $pageTitle = 'Kelola Halaman / Pendaftaran';
                 </form>
                 <hr>
                 <h5>Tabel Hero Pendaftaran</h5>
+                <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -74,6 +75,7 @@ $pageTitle = 'Kelola Halaman / Pendaftaran';
                         <?php } ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>

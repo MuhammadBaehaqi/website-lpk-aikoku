@@ -232,6 +232,7 @@ function isDropdownActive($pages = [])
                 'profile_admin.php',
                 'program_admin.php',
                 'album_admin.php',
+                'job_admin.php',
                 'pengumuman_admin.php',
                 'kontak_admin.php',
                 'pendaftaran_admin.php',
@@ -247,6 +248,7 @@ function isDropdownActive($pages = [])
                 'profile_admin.php',
                 'program_admin.php',
                 'album_admin.php',
+                'job_admin.php',
                 'pengumuman_admin.php',
                 'kontak_admin.php',
                 'pendaftaran_admin.php',
@@ -268,7 +270,7 @@ function isDropdownActive($pages = [])
                             <i class="bi bi-journal-code"></i> Program</a></li>
                     <li><a class="text-white d-block px-3 py-2 <?php echo isActive('job_admin.php'); ?>"
                             href="/pendaftaran/admin/kelola_halaman/jobs/job_admin.php" onclick="changeTitle('Job')">
-                            <i class="bi bi-journal-code"></i> Job Admin</a></li>
+                            <i class="bi bi-briefcase"></i> Bidang Pekerjaan</a></li>
                     <a class="text-white d-block px-3 py-2 <?php echo isActive('album_admin.php'); ?>"
                         href="/pendaftaran/admin/kelola_halaman/album/album_admin.php" onclick="changeTitle('Album')">
                         <i class="bi bi-images"></i> Album

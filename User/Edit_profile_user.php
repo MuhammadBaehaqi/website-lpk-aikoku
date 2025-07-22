@@ -40,6 +40,7 @@ if (!$data) {
             <div class="card shadow-lg p-4">
                 <div class="row">
                     <!-- KIRI: FOTO & NAMA -->
+                     <!-- border-end garis vertikal sebelah kanan -->
                     <div class="col-md-4 text-center border-end">
                         <?php if (!empty($data['foto_diri']) && file_exists("../uploads/" . $data['foto_diri'])): ?>
                             <img src="../uploads/<?= $data['foto_diri'] ?>" alt="Foto Profil" class="img-fluid rounded mb-3"
@@ -62,7 +63,7 @@ if (!$data) {
                         <div class="row">
                             <!-- Data Pribadi -->
                             <div class="col-md-6 mb-3">
-                                <h6 class="text-primary">Informasi Pribadi</h6>
+                                <h6 class="text-primary mt-3">Informasi Pribadi</h6>
                                 <p><strong>Tempat Lahir:</strong> <?= $data['tempat_lahir'] ?></p>
                                 <p><strong>Tanggal Lahir:</strong> <?= $data['tanggal_lahir'] ?></p>
                                 <p><strong>Jenis Kelamin:</strong> <?= $data['jenis_kelamin'] ?></p>

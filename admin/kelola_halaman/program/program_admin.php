@@ -30,17 +30,6 @@ $pageTitle = 'Kelola Halaman / Program';
             overflow-x: hidden;
         }
 
-        table {
-            table-layout: fixed;
-            width: 100%;
-        }
-
-        th,
-        td {
-            word-wrap: break-word;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
     </style>
 </head>
 
@@ -55,14 +44,15 @@ $pageTitle = 'Kelola Halaman / Program';
             <div class="card-body">
                 <!-- Tambah Hero Section -->
                 <form action="hero/proses_tambah_hero_program.php" method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="program" class="form-label">Program</label>
-                        <select name="program" class="form-select" required>
-                            <option value="magang">Magang</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="tokutei">Tokutei Ginou</option>
-                        </select>
-                    </div>
+                <div class="mb-3">
+                    <label for="program" class="form-label">Program</label>
+                    <select name="program" class="form-select" required>
+                        <option value="" disabled selected>Pilih Program</option>
+                        <option value="magang">Magang</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="tokutei">Tokutei Ginou</option>
+                    </select>
+                </div>
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
                         <input type="text" name="judul" id="judul" class="form-control" required maxlength="100">
@@ -80,6 +70,7 @@ $pageTitle = 'Kelola Halaman / Program';
                 <hr>
 
                 <h5>Data Hero Program</h5>
+                <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
@@ -158,6 +149,7 @@ $pageTitle = 'Kelola Halaman / Program';
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
 
         <!-- Form Tambah Persyaratan -->
@@ -188,120 +180,129 @@ $pageTitle = 'Kelola Halaman / Program';
                 </form>
             </div>
         </div>
-        <!-- Tabel Data Persyaratan -->
-        <div class="card mb-4">
-            <div class="card-header">Data Persyaratan</div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th>No</th>
-                            <th>Program</th>
-                            <th>Jenis</th>
-                            <th>Isi</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $result = mysqli_query($mysqli, "SELECT * FROM tb_persyaratan_program ORDER BY id ASC");
-                        $no = 1;
+    <!-- Data Persyaratan Dipisah per Program dan Jenis -->
+    <div class="card mb-4">
+        <div class="table-responsive">
+        <div class="card-header">Data Persyaratan (Dipisah per Program dan Jenis)</div>
+        <div class="card-body">
+            <?php
+            $programs = ['magang', 'engineering', 'tokutei'];
+            $jenisList = ['umum', 'dokumen'];
+
+            foreach ($programs as $program) {
+                echo "<h4 class='mt-4 text-primary'>Program: " . ucfirst($program) . "</h4>";
+                foreach ($jenisList as $jenis) {
+                    echo "<h6 class='mt-3'>Jenis: " . ucfirst($jenis) . "</h6>";
+
+                    $query = "SELECT * FROM tb_persyaratan_program WHERE program = '$program' AND jenis = '$jenis' ORDER BY id ASC";
+                    $result = mysqli_query($mysqli, $query);
+
+                    $no = 1; // ✅ RESET nomor urut tiap jenis
+            
+                    if (mysqli_num_rows($result) > 0) {
+                        echo '<table class="table table-bordered mb-4">';
+                        echo '<thead class="table-light"><tr>
+                                <th>No</th>
+                                <th>Isi Persyaratan</th>
+                                <th>Aksi</th>
+                            </tr></thead><tbody>';
+
                         while ($row = mysqli_fetch_assoc($result)) {
                             $id = $row['id'];
                             ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= htmlspecialchars($row['program']) ?></td>
-                                <td><?= htmlspecialchars($row['jenis']) ?></td>
                                 <td><?= htmlspecialchars($row['isi']) ?></td>
                                 <td>
                                     <!-- Tombol Edit -->
                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?= $id ?>">
-                                        Edit
+                                        data-bs-target="#editModal<?= $id ?>">Edit
                                     </button>
-
+            
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#hapusModal<?= $id ?>">
-                                        Hapus
+                                        data-bs-target="#hapusModal<?= $id ?>">Hapus
                                     </button>
                                 </td>
                             </tr>
-
-                            <!-- Modal Edit -->
-                            <div class="modal fade" id="editModal<?= $id ?>" tabindex="-1"
-                                aria-labelledby="editModalLabel<?= $id ?>" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <form action="persyaratan/edit_persyaratan.php" method="POST">
-                                        <input type="hidden" name="id" value="<?= $id ?>">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel<?= $id ?>">Edit Persyaratan</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Tutup"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Program</label>
-                                                    <select name="program" class="form-select" required>
-                                                        <option value="magang" <?= $row['program'] == 'magang' ? 'selected' : '' ?>>
-                                                            Magang</option>
-                                                        <option value="engineering" <?= $row['program'] == 'engineering' ? 'selected' : '' ?>>Engineering</option>
-                                                        <option value="tokutei" <?= $row['program'] == 'tokutei' ? 'selected' : '' ?>>
-                                                            Tokutei Ginou</option>
-                                                    </select>
+                            
+                                <!-- Modal Edit -->
+                                <div class="modal fade" id="editModal<?= $id ?>" tabindex="-1" aria-labelledby="editModalLabel<?= $id ?>"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="persyaratan/edit_persyaratan.php" method="POST">
+                                            <input type="hidden" name="id" value="<?= $id ?>">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel<?= $id ?>">Edit Persyaratan</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Jenis</label>
-                                                    <select name="jenis" class="form-select" required>
-                                                        <option value="umum" <?= $row['jenis'] == 'umum' ? 'selected' : '' ?>>
-                                                            Umum
-                                                        </option>
-                                                        <option value="dokumen" <?= $row['jenis'] == 'dokumen' ? 'selected' : '' ?>>
-                                                            Dokumen</option>
-                                                    </select>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Program</label>
+                                                        <select name="program" class="form-select" required>
+                                                            <option value="magang" <?= $row['program'] == 'magang' ? 'selected' : '' ?>>Magang
+                                                            </option>
+                                                            <option value="engineering" <?= $row['program'] == 'engineering' ? 'selected' : '' ?>>
+                                                                Engineering</option>
+                                                            <option value="tokutei" <?= $row['program'] == 'tokutei' ? 'selected' : '' ?>>Tokutei
+                                                                Ginou</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Jenis</label>
+                                                        <select name="jenis" class="form-select" required>
+                                                            <option value="umum" <?= $row['jenis'] == 'umum' ? 'selected' : '' ?>>Umum</option>
+                                                            <option value="dokumen" <?= $row['jenis'] == 'dokumen' ? 'selected' : '' ?>>Dokumen
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Isi</label>
+                                                        <textarea name="isi" class="form-control"
+                                                            required><?= htmlspecialchars($row['isi']) ?></textarea>
+                                                    </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Isi</label>
-                                                    <textarea name="isi" class="form-control"
-                                                        required><?= htmlspecialchars($row['isi']) ?></textarea>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!-- Modal Hapus -->
-                            <div class="modal fade" id="hapusModal<?= $id ?>" tabindex="-1"
-                                aria-labelledby="hapusModalLabel<?= $id ?>" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <form action="persyaratan/hapus_persyaratan.php" method="GET">
-                                        <input type="hidden" name="id" value="<?= $id ?>">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="hapusModalLabel<?= $id ?>">Konfirmasi Hapus</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Tutup"></button>
+        
+                                <!-- Modal Hapus -->
+                                <div class="modal fade" id="hapusModal<?= $id ?>" tabindex="-1" aria-labelledby="hapusModalLabel<?= $id ?>"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="persyaratan/hapus_persyaratan.php" method="GET">
+                                            <input type="hidden" name="id" value="<?= $id ?>">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="hapusModalLabel<?= $id ?>">Konfirmasi Hapus</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah kamu yakin ingin menghapus persyaratan ini?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                Apakah kamu yakin ingin menghapus persyaratan ini?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                                <?php
+                            }
+                            echo '</tbody></table>';
+                        } else {
+                            echo "<p class='text-muted fst-italic'>Tidak ada data persyaratan.</p>";
+                        }
+                    }
+                }
+                ?>
             </div>
+        </div>
         </div>
     </div>
 </body>

@@ -5,10 +5,10 @@ include '../../../includes/config.php';
 $hero_result = mysqli_query($mysqli, "SELECT * FROM tb_hero_profile ORDER BY id_hero DESC");
 
 //sejarah
-$sejarah = mysqli_query($mysqli, "SELECT * FROM tb_profile_sejarah ORDER BY id DESC LIMIT 1");
+$sejarah = mysqli_query($mysqli, "SELECT * FROM tb_profile_sejarah ORDER BY id DESC");
 
 //sambutan
-$sambutan_result = mysqli_query($mysqli, "SELECT * FROM tb_profile_sambutan ORDER BY tanggal_upload DESC LIMIT 1");
+$sambutan_result = mysqli_query($mysqli, "SELECT * FROM tb_profile_sambutan ORDER BY tanggal_upload DESC");
 
 //visi dan misi
 $data = mysqli_query($mysqli, "SELECT * FROM tb_profile_visimisi ORDER BY tanggal_upload DESC LIMIT 1");
@@ -62,7 +62,8 @@ $pageTitle = 'Kelola Halaman / Profile';
         <div class="card mb-4">
             <div class="card-header">Data Hero Section</div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <div class="table-responsive">
+                <table class="table table-bordered" style="min-width: 800px;">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -70,6 +71,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                             <th>Deskripsi</th>
                             <th>Gambar</th>
                             <th>Tanggal Upload</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,10 +87,67 @@ $pageTitle = 'Kelola Halaman / Profile';
                                     <img src="../../../uploads/<?= $row['gambar']; ?>" width="150" alt="Hero Gambar">
                                 </td>
                                 <td><?= date('d-m-Y H:i:s', strtotime($row['upload_date'])); ?></td>
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_hero']; ?>">Edit</button>
+                                    <!-- Tombol Hapus -->
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#hapusModal<?= $row['id_hero']; ?>">Hapus</button>
+                                </td>
                             </tr>
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="editModal<?= $row['id_hero']; ?>" tabindex="-1"
+                                aria-labelledby="editModalLabel<?= $row['id_hero']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="hero/proses_edit_hero_profile.php" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?= $row['id_hero']; ?>">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Hero</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="text" name="judul" class="form-control mb-2" value="<?= $row['judul']; ?>" required>
+                                                <input type="text" name="deskripsi" class="form-control mb-2" value="<?= $row['deskripsi']; ?>"
+                                                    required>
+                                                <label>Ganti Gambar (Opsional)</label>
+                                                <input type="file" name="gambar" class="form-control">
+                                                <input type="hidden" name="gambar_lama" value="<?= $row['gambar']; ?>">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Modal Hapus -->
+                            <div class="modal fade" id="hapusModal<?= $row['id_hero']; ?>" tabindex="-1"
+                                aria-labelledby="hapusModalLabel<?= $row['id_hero']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="hero/hapus_hero_profile.php" method="GET">
+                                        <input type="hidden" name="id" value="<?= $row['id_hero']; ?>">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Konfirmasi Hapus</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah kamu yakin ingin menghapus <strong><?= $row['judul']; ?></strong>?
+                                                <br><img src="../../../uploads/<?= $row['gambar']; ?>" class="mt-2" width="100">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         <?php } ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 
@@ -118,40 +177,101 @@ $pageTitle = 'Kelola Halaman / Profile';
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Data Sejarah LPK</div>
+        <div class="card-header">Data Sejarah LPK</div>
             <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead class="table-success">
+            <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-success">
+                    <tr>
+                        <th>No</th>
+                        <th>Judul Atas</th>
+                        <th>Judul Bawah</th>
+                        <th>Judul Tengah</th>
+                        <th>Paragraf 1</th>
+                        <th>Paragraf 2</th>
+                        <th>Gambar</th>
+                        <th>Tanggal Upload</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1;
+                    while ($data = mysqli_fetch_assoc($sejarah)) { ?>
                         <tr>
-                            <th>No</th>
-                            <th>Judul Atas</th>
-                            <th>Judul Bawah</th>
-                            <th>Judul Tengah</th>
-                            <th>Paragraf 1</th>
-                            <th>Paragraf 2</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data['judul_atas']; ?></td>
+                            <td><?= $data['judul_bawah']; ?></td>
+                            <td><?= $data['judul_tengah']; ?></td>
+                            <td><?= $data['paragraf1']; ?></td>
+                            <td><?= $data['paragraf2']; ?></td>
+                            <td><img src="../../../uploads/<?= $data['gambar']; ?>" width="100"></td>
+                            <td><?= date('d-m-Y H:i', strtotime($data['tanggal_upload'])); ?></td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSejarahModal<?= $data['id']; ?>">Edit</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusSejarahModal<?= $data['id']; ?>">Hapus</button>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php $no = 1;
-                        while ($data = mysqli_fetch_assoc($sejarah)) {
-                            ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['judul_atas']; ?></td>
-                                <td><?= $data['judul_bawah']; ?></td>
-                                <td><?= $data['judul_tengah']; ?></td>
-                                <td><?= $data['paragraf1']; ?></td>
-                                <td><?= $data['paragraf2']; ?></td>
-                                <td><img src="../../../uploads/<?= $data['gambar']; ?>" width="100"></td>
-                                <td><?= date('d-m-Y H:i', strtotime($data['tanggal_upload'])); ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+
+                        <!-- Modal Edit Sejarah -->
+                        <div class="modal fade" id="editSejarahModal<?= $data['id']; ?>" tabindex="-1" aria-labelledby="editSejarahModalLabel<?= $data['id']; ?>" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <form action="sejarah/proses_edit_sejarah.php" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?= $data['id']; ?>">
+                                    <input type="hidden" name="gambar_lama" value="<?= $data['gambar']; ?>">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Sejarah</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" name="judul_atas" class="form-control mb-2" value="<?= $data['judul_atas']; ?>" required>
+                                            <input type="text" name="judul_bawah" class="form-control mb-2" value="<?= $data['judul_bawah']; ?>" required>
+                                            <input type="text" name="judul_tengah" class="form-control mb-2" value="<?= $data['judul_tengah']; ?>" required>
+                                            <textarea name="paragraf1" class="form-control mb-2" required><?= $data['paragraf1']; ?></textarea>
+                                            <textarea name="paragraf2" class="form-control mb-2" required><?= $data['paragraf2']; ?></textarea>
+                                            <label>Gambar (Kosongkan jika tidak diganti)</label>
+                                            <input type="file" name="gambar" class="form-control mb-2">
+                                            <img src="../../../uploads/<?= $data['gambar']; ?>" width="100" class="mt-2">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Modal Hapus Sejarah -->
+                        <div class="modal fade" id="hapusSejarahModal<?= $data['id']; ?>" tabindex="-1" aria-labelledby="hapusSejarahModalLabel<?= $data['id']; ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="sejarah/proses_hapus_sejarah.php" method="POST">
+                                    <input type="hidden" name="id" value="<?= $data['id']; ?>">
+                                    <input type="hidden" name="gambar" value="<?= $data['gambar']; ?>">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Konfirmasi Hapus</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menghapus data sejarah ini?
+                                            <img src="../../../uploads/<?= $data['gambar']; ?>" class="img-fluid mt-2" width="100">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </tbody>
+            </table>
             </div>
         </div>
+    </div>
 
         <!-- Sambutan Kepala Sekolah -->
         <div class="card mb-4">
@@ -174,6 +294,7 @@ $pageTitle = 'Kelola Halaman / Profile';
         <div class="card mb-4">
             <div class="card-header">Daftar Sambutan Kepala Sekolah</div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -185,28 +306,95 @@ $pageTitle = 'Kelola Halaman / Profile';
                             <th>Nama Kepala</th>
                             <th>Gambar</th>
                             <th>Tanggal Upload</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        // Tampilkan setiap sambutan
-                        $no = 1;
-                        while ($row = mysqli_fetch_assoc($sambutan_result)) {
-                            echo "<tr>";
-                            echo "<td>$no</td>";
-                            echo "<td>" . htmlspecialchars($row['paragraf_1']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['paragraf_2']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['paragraf_3']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['paragraf_4']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['nama_kepala']) . "</td>";
-                            echo "<td><img src='../../../uploads/" . htmlspecialchars($row['gambar']) . "' width='100'></td>";
-                            echo "<td>" . date('d-m-Y', strtotime($row['tanggal_upload'])) . "</td>";
-                            echo "</tr>";
-                            $no++;
-                        }
-                        ?>
+                        <?php $no = 1;
+                        while ($row = mysqli_fetch_assoc($sambutan_result)) { ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= htmlspecialchars($row['paragraf_1']); ?></td>
+                                <td><?= htmlspecialchars($row['paragraf_2']); ?></td>
+                                <td><?= htmlspecialchars($row['paragraf_3']); ?></td>
+                                <td><?= htmlspecialchars($row['paragraf_4']); ?></td>
+                                <td><?= htmlspecialchars($row['nama_kepala']); ?></td>
+                                <td><img src="../../../uploads/<?= $row['gambar']; ?>" width="100"></td>
+                                <td><?= date('d-m-Y', strtotime($row['tanggal_upload'])); ?></td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#editSambutanModal<?= $row['id']; ?>">Edit</button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#hapusSambutanModal<?= $row['id']; ?>">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                    
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="editSambutanModal<?= $row['id']; ?>" tabindex="-1"
+                                aria-labelledby="editSambutanModalLabel<?= $row['id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <form action="sambutan/proses_edit_sambutan.php" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                                        <input type="hidden" name="gambar_lama" value="<?= $row['gambar']; ?>">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Sambutan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <textarea name="paragraf_1" class="form-control mb-2"
+                                                    required><?= $row['paragraf_1']; ?></textarea>
+                                                <textarea name="paragraf_2" class="form-control mb-2"
+                                                    required><?= $row['paragraf_2']; ?></textarea>
+                                                <textarea name="paragraf_3" class="form-control mb-2"
+                                                    required><?= $row['paragraf_3']; ?></textarea>
+                                                <textarea name="paragraf_4" class="form-control mb-2"
+                                                    required><?= $row['paragraf_4']; ?></textarea>
+                                                <input type="text" name="nama_kepala" class="form-control mb-2"
+                                                    value="<?= $row['nama_kepala']; ?>" required>
+                                                <label class="form-label">Gambar (kosongkan jika tidak diganti)</label>
+                                                <input type="file" name="gambar" class="form-control mb-2">
+                                                <img src="../../../uploads/<?= $row['gambar']; ?>" class="mt-2" width="100">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    
+                            <!-- Modal Hapus -->
+                            <div class="modal fade" id="hapusSambutanModal<?= $row['id']; ?>" tabindex="-1"
+                                aria-labelledby="hapusSambutanModalLabel<?= $row['id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="sambutan/proses_hapus_sambutan.php" method="POST">
+                                        <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                                        <input type="hidden" name="gambar" value="<?= $row['gambar']; ?>">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Konfirmasi Hapus</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Yakin ingin menghapus sambutan dari
+                                                <strong><?= htmlspecialchars($row['nama_kepala']); ?></strong>?
+                                                <img src="../../../uploads/<?= $row['gambar']; ?>" class="img-fluid mt-2" width="100">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 
@@ -372,11 +560,12 @@ $pageTitle = 'Kelola Halaman / Profile';
         $query = "SELECT * FROM tb_profile_legalitas ORDER BY tanggal_upload ASC";
         $result = mysqli_query($mysqli, $query);
         ?>
-        
-        <h2 class="my-4">Data Legalitas</h2>
-        
-        <table class="table table-bordered table-hover">
-            <thead class="table-success">
+        <div class="card mb-4">
+        <div class="card-header">Data Legalitas</div>
+        <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-success">
                 <tr>
                     <th>No</th>
                     <th>Judul</th>
@@ -474,7 +663,8 @@ $pageTitle = 'Kelola Halaman / Profile';
             </tbody>
         </table>
     </div>
-
+</div>
+</div>
 </body>
 
 </html>
