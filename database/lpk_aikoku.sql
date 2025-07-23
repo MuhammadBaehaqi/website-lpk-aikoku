@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Jun 2025 pada 16.38
+-- Waktu pembuatan: 22 Jul 2025 pada 19.35
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -105,7 +105,8 @@ CREATE TABLE `tb_beranda_tentang_kami` (
 --
 
 INSERT INTO `tb_beranda_tentang_kami` (`id_tentang`, `judul`, `deskripsi`, `gambar`, `tanggal_upload`) VALUES
-(11, 'LPK AIKOKU TERPADU', 'jadi w', 'assassins-creed-shadows-naoe-yasuke-4k-wallpaper-uhdpaper.com-642@5@e.jpg', '2025-06-06 19:05:36');
+(13, 'LPK AIKOKU TERPADU', 'bnla blabla', 'assassins-creed-shadows-naoe-yasuke-4k-wallpaper-uhdpaper.com-642@5@e.jpg', '2025-07-05 06:48:38'),
+(14, 'wad', 'wa', 'bg.jpg', '2025-07-05 06:55:06');
 
 -- --------------------------------------------------------
 
@@ -161,7 +162,7 @@ CREATE TABLE `tb_footer` (
 --
 
 INSERT INTO `tb_footer` (`id`, `logo`, `deskripsi`, `facebook`, `instagram`, `whatsapp`, `youtube`, `email_sosmed`, `email`, `alamat`, `telepon`, `jam_kerja`, `jam_sabtu`, `catatan`, `maps_url`, `updated_at`) VALUES
-(1, 'logo.png', 'Pusat Pelatihan Bahasa Jepang Terbaik untuk Mewujudkan Impian Berkarir di Jepang', 'https://www.facebook.com/lpk.aikokuterpadu?locale=id_ID', 'https://www.instagram.com/lpkaikokuterpadu/', '+6285875962872', 'https://www.youtube.com/@%E3%83%8F%E3%82%AD%E3%83%93%E3%82%AD%E3%83%B3%E3%83%9B%E3%82%AD', 'lpkaikokuterpadu@gmail.com', 'lpkaikokuterpadu@gmail.com', 'adaw', 'wada', '323r', '23r2', '23r2df', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.8166997799794!2d108.9736890707426!3d-6.912507652349622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fa5af84c2ae8d%3A0x6d0eb4890eba578f!2sLPK%20AIKOKU%20TERPADU!5e0!3m2!1sid!2sid!4v1748591560939!5m2!1sid!2sid', '2025-05-30 08:48:56');
+(1, 'logo.png', 'Kan coba', 'https://www.facebook.com/lpk.aikokuterpadu?locale=id_ID', 'https://www.instagram.com/lpkaikokuterpadu/', '+6285875962872', 'https://www.youtube.com/@%E3%83%8F%E3%82%AD%E3%83%93%E3%82%AD%E3%83%B3%E3%83%9B%E3%82%AD', 'lpkaikokuterpadu@gmail.com', 'lpkaikokuterpadu@gmail.com', 'adaw', 'wada', '323r', '23r2', '23r2df', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.8166997799794!2d108.9736890707426!3d-6.912507652349622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fa5af84c2ae8d%3A0x6d0eb4890eba578f!2sLPK%20AIKOKU%20TERPADU!5e0!3m2!1sid!2sid!4v1748591560939!5m2!1sid!2sid', '2025-07-18 11:57:45');
 
 -- --------------------------------------------------------
 
@@ -184,9 +185,8 @@ CREATE TABLE `tb_hero` (
 --
 
 INSERT INTO `tb_hero` (`id_hero`, `judul`, `deskripsi`, `gambar`, `tanggal_upload`, `link_tombol`, `teks_tombol`) VALUES
-(10, 'LPK AIKOKU TERPADU22', 'Lpk', 'jpng.jpg', '2025-06-07 09:09:13', 'profile.php', 'coba'),
-(11, 'LPK AIKOKU TERPADU', '3', 'Fujiyama.jpg', '2025-06-07 09:15:42', 'album.php', 'Daftar Sekarang'),
-(12, 'cc', 'cc', 'contact.png', '2025-06-26 20:25:16', 'daftar.php', 'ccc');
+(14, 'Wujudkan Mimpimu Bekerja di Jepang!', 'Bergabunglah bersama LPK Aikoku Terpadu dan ikuti pelatihan berkualitas untuk masa depan yang lebih baik.', 'galery.jpg', '2025-07-05 06:32:09', 'daftar.php', 'Daftar sekarang dan mulailah perjalananmu!'),
+(15, 'wad', 'wa', 'cbn.jpg', '2025-07-05 06:44:07', '#program', 'Daftar Sekarang');
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,7 @@ CREATE TABLE `tb_hero_album` (
 --
 
 INSERT INTO `tb_hero_album` (`id_hero`, `judul`, `deskripsi`, `gambar`, `tanggal_upload`) VALUES
-(6, 'qw', 'qwd', 'foto_login.jpg', '2025-06-06 19:09:03');
+(7, 'Dokumentasi perjalanan para peserta dalam meraih mimpi ke Jepang.', 'Mulai dari belajar di kelas, pelatihan disiplin, hingga kegiatan budaya — semua terekam dalam album ini.\r\nKami percaya, setiap langkah kecil adalah bagian dari perjalanan besar.', 'program1.jpg', '2025-07-22 22:15:05');
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,7 @@ CREATE TABLE `tb_hero_kontak` (
 --
 
 INSERT INTO `tb_hero_kontak` (`id_hero`, `judul`, `deskripsi`, `gambar`, `tanggal_upload`) VALUES
-(6, 'wa', 'ww', 'foto_login.jpg', '2025-06-06 12:44:14');
+(7, '📱 Butuh Bantuan? Hubungi Kami!', 'Jika Anda memiliki pertanyaan seputar program, pendaftaran, atau layanan kami, jangan ragu untuk menghubungi tim LPK Aikoku Terpadu melalui form kontak, email, atau nomor yang tersedia di bawah ini. Kami siap membantu Anda!', 'galery.jpg', '2025-07-22 15:38:06');
 
 -- --------------------------------------------------------
 
@@ -270,7 +270,7 @@ CREATE TABLE `tb_hero_pengumuman` (
 --
 
 INSERT INTO `tb_hero_pengumuman` (`id`, `hero_title`, `hero_description`, `hero_image`, `created_at`) VALUES
-(6, 'coba', 'c', 'assassins-creed-shadows-naoe-yasuke-4k-wallpaper-uhdpaper.com-642@5@e.jpg', '2025-06-26 10:45:45');
+(7, 'Informasi Hasil Seleksi Peserta', 'Berikut adalah pengumuman hasil seleksi calon peserta program LPK Aikoku Terpadu. Silakan cari berdasarkan nama atau nomor pendaftaran untuk mengetahui status Anda.', 'profile.jpg', '2025-07-22 15:34:32');
 
 -- --------------------------------------------------------
 
@@ -291,7 +291,7 @@ CREATE TABLE `tb_hero_profile` (
 --
 
 INSERT INTO `tb_hero_profile` (`id_hero`, `judul`, `deskripsi`, `gambar`, `upload_date`) VALUES
-(7, '21', '21', 'foto_login.jpg', '2025-06-06 13:09:04');
+(10, 'LPK Aikoku Terpadu Wujudkan Mimpimu Kerja Di Jepang.', 'Lembaga Pelatihan Kerja \"AIKOKU TERPADU\" Adalah Sebuah Lembaga Pelatihan Yang Mendidik Dan Melatih Siswanya Guna Membentuk Peserta Sesuai Dengan Yang Diharapkan Oleh Perusahaan Di Jepang.', 'profile.jpg', '2025-07-17 16:18:39');
 
 -- --------------------------------------------------------
 
@@ -314,7 +314,7 @@ CREATE TABLE `tb_hero_program` (
 --
 
 INSERT INTO `tb_hero_program` (`id_hero_program`, `nama_program`, `judul`, `deskripsi`, `gambar`, `program`, `tanggal_upload`) VALUES
-(9, '', 'rsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaa', 'rsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaa', 'jpng.jpg', 'tokutei', '2025-05-13 23:10:33'),
+(9, '', 'rsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaa', 'rsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaarsgaa', '1364877.png', 'tokutei', '2025-05-13 23:10:33'),
 (10, '', '32', '32', '1749222148_bg.jpg', 'engineering', '2025-06-06 22:02:28'),
 (11, '', 'ew', 'fe4', '1749263212_Fujiyama.jpg', 'magang', '2025-06-07 09:26:52');
 
@@ -340,7 +340,7 @@ CREATE TABLE `tb_informasi_kontak` (
 --
 
 INSERT INTO `tb_informasi_kontak` (`id_kontak`, `alamat`, `email_kontak`, `telepon`, `jam_kerja`, `jam_sabtu`, `catatan`, `created_at`) VALUES
-(6, 'ww', 'ww@frged', 'ww', 'ww', 'ww', 'ww', '2025-06-06 12:47:35');
+(7, 'Petunjungan', 'lpk@gmail.com', '085875962872', 'Jam 8 sampe 16 ', 'Jam 8 sampe 12', 'Hari minggu', '2025-07-22 15:40:44');
 
 -- --------------------------------------------------------
 
@@ -361,7 +361,8 @@ CREATE TABLE `tb_job` (
 --
 
 INSERT INTO `tb_job` (`id_job`, `nama_job`, `deskripsi_job`, `hero_image`, `tanggal_upload`) VALUES
-(4, 'Pertanian', 'qqaaa2', '1751287169_foto_login.jpg', '2025-06-29 18:26:23');
+(4, 'Pertanian', 'qqaaa2', '1751287169_foto_login.jpg', '2025-06-29 18:26:23'),
+(7, 'Perhotelan', 'Program Perhotelan di LPK Aikoku Terpadu dirancang khusus untuk mempersiapkan peserta menjadi tenaga kerja profesional .', '1753203141_bg.jpg', '2025-07-22 23:52:21');
 
 -- --------------------------------------------------------
 
@@ -387,7 +388,8 @@ CREATE TABLE `tb_job_detail` (
 INSERT INTO `tb_job_detail` (`id_job_detail`, `nama_job`, `gambar`, `paragraf`, `pengumuman`, `cakupan_tugas`, `pendaftaran_terbuka`, `persyaratan_umum`) VALUES
 (3, 'Konstruksi', '1751288925_assassins-creed-shadows-naoe-yasuke-4k-wallpaper-uhdpaper.com-642@5@e.jpg', 'aaaaaaaaaaaaaaaw1112\r\ns22', 'aa', 'aa', 'aa', 'aa'),
 (5, 'Cleaning Service', '1751293937_foto_login.jpg', 'a2\r\n22', '2s', 'a\r\nasd', 'awaa\r\n2\r\naw', '                        aw\r\naw'),
-(7, 'Pertanian', '1751294034_bg.jpg', 'wdq', 'q3dw', '                     qd   q3wd', '             dq   3qd        ', '                    qd    ');
+(7, 'Pertanian', '1751294034_bg.jpg', 'wdq', 'q3dw', '                     qd   q3wd', '             dq   3qd        ', '                    qd    '),
+(8, 'Perhotelan', '1753203030_bg.jpg', 'LPK Aikoku Terpadu merupakan lembaga pelatihan kerja yang berkomitmen untuk membantu generasi muda Indonesia dalam mewujudkan impian bekerja di Jepang. Kami menyediakan pelatihan bahasa Jepang, budaya kerja, serta etika profesional yang sesuai dengan standar perusahaan di Jepang. Dengan pengajar berpengalaman dan kurikulum yang terstruktur, kami siap mencetak calon tenaga kerja berkualitas yang siap bersaing di dunia internasional.', 'Pemahaman budaya kerja dan kehidupan di Jepang', 'Lulusan SMA/SMK sederajat\r\nPria dan wanita usia 18 – 27 tahun', 'Pemahaman budaya kerja dan kehidupan di Jepang\r\nPemahaman budaya kerja dan kehidupan di Jepang', 'Fotokopi ijazah terakhir dan transkrip nilai\r\nFotokopi KTP & KK');
 
 -- --------------------------------------------------------
 
@@ -414,7 +416,8 @@ INSERT INTO `tb_kontak` (`id_kontak`, `name`, `email`, `phone`, `address`, `mess
 (6, 'aer', 'aew2@dq', 'awr', 'awr', 'awerfc', '2025-05-09 08:24:38'),
 (7, 'wre', 'ana@gmail.com', 'f3', '3r', 'ef', '2025-05-09 08:51:35'),
 (8, 'dx', 'diji@mailinator13.com', '1', '1', '1', '2025-06-26 13:12:37'),
-(9, 'dx', 'diji@mailinator13.com', '1', '1', '1', '2025-06-26 13:13:11');
+(9, 'dx', 'diji@mailinator13.com', '1', '1', '1', '2025-06-26 13:13:11'),
+(10, 'Muhammad baehaqi', 'muhammadbaehaki13@gmail.com', '085875962872', 'Petunjungan ', 'Sya ingin menanyakan tentang program , apakah bla bla bla bla bla bla bla bla bla bal ablaabdwadajsdaijijwijh akjksjjd jodowja', '2025-07-22 15:46:21');
 
 -- --------------------------------------------------------
 
@@ -687,10 +690,9 @@ CREATE TABLE `tb_persyaratan_program` (
 --
 
 INSERT INTO `tb_persyaratan_program` (`id`, `jenis`, `isi`, `program`) VALUES
-(2, 'umum', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'magang'),
-(3, 'dokumen', 'coba tes', 'magang'),
+(2, 'umum', 'Minimal lulusan SMA/sederajat (bisa disesuaikan jika menerima lulusan SMP atau lainnya).', 'magang'),
 (4, 'dokumen', 'ciba', 'magang'),
-(5, 'umum', 'aa', 'tokutei'),
+(5, 'dokumen', 'aa1', 'tokutei'),
 (6, 'umum', 'avan', 'tokutei'),
 (7, 'dokumen', 'afcew', 'tokutei'),
 (8, 'dokumen', 'awdfaw', 'tokutei'),
@@ -700,7 +702,11 @@ INSERT INTO `tb_persyaratan_program` (`id`, `jenis`, `isi`, `program`) VALUES
 (12, 'umum', 'wafwa', 'engineering'),
 (13, 'umum', 'wadaw', 'engineering'),
 (14, 'umum', 'dewqewqwc\r\nedqd\r\n\r\nqeqf', 'engineering'),
-(15, 'dokumen', '23\r\n23\r\n23', 'engineering');
+(15, 'dokumen', '23\r\n23\r\n23', 'engineering'),
+(16, 'umum', 'coba', 'engineering'),
+(17, 'umum', 'ciba', 'tokutei'),
+(18, 'dokumen', 'ya', 'magang'),
+(19, 'umum', 'masa', 'magang');
 
 -- --------------------------------------------------------
 
@@ -770,7 +776,7 @@ CREATE TABLE `tb_profile_sambutan` (
 --
 
 INSERT INTO `tb_profile_sambutan` (`id`, `paragraf_1`, `paragraf_2`, `paragraf_3`, `paragraf_4`, `nama_kepala`, `gambar`, `tanggal_upload`) VALUES
-(4, 'wqd', 'qwd', 'qwd', 'qwd', 'Imam Joharudin', '1749221196_nihongjin.jpg', '2025-06-06 14:46:36');
+(5, 'selamat datang', 'selamat datang1', 'selamat datang3', 'selamat datang4', 'Ali Chamdan', '1751696669_nihongjin.jpg', '2025-07-05 06:24:29');
 
 -- --------------------------------------------------------
 
@@ -794,7 +800,7 @@ CREATE TABLE `tb_profile_sejarah` (
 --
 
 INSERT INTO `tb_profile_sejarah` (`id`, `judul_atas`, `judul_bawah`, `judul_tengah`, `paragraf1`, `paragraf2`, `gambar`, `tanggal_upload`) VALUES
-(7, 'Sejarah', 'LPK AIKOKU TERPADU', 'LPK AIKOKU TERPADU', 'qwed', 'qwd', 'Fujiyama.jpg', '2025-06-06 21:37:53');
+(10, 'Sejarah', 'LPK AIKOKU TERPADU1', 'LPK AIKOKU TERPADU', '12w12', '123', 'bg.jpg', '2025-07-05 13:29:13');
 
 -- --------------------------------------------------------
 
@@ -1024,7 +1030,7 @@ ALTER TABLE `tb_beranda_keunggulan`
 -- AUTO_INCREMENT untuk tabel `tb_beranda_tentang_kami`
 --
 ALTER TABLE `tb_beranda_tentang_kami`
-  MODIFY `id_tentang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_tentang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_beranda_testimoni`
@@ -1042,19 +1048,19 @@ ALTER TABLE `tb_footer`
 -- AUTO_INCREMENT untuk tabel `tb_hero`
 --
 ALTER TABLE `tb_hero`
-  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_album`
 --
 ALTER TABLE `tb_hero_album`
-  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_kontak`
 --
 ALTER TABLE `tb_hero_kontak`
-  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_pendaftaran`
@@ -1066,13 +1072,13 @@ ALTER TABLE `tb_hero_pendaftaran`
 -- AUTO_INCREMENT untuk tabel `tb_hero_pengumuman`
 --
 ALTER TABLE `tb_hero_pengumuman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_profile`
 --
 ALTER TABLE `tb_hero_profile`
-  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_hero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_hero_program`
@@ -1084,25 +1090,25 @@ ALTER TABLE `tb_hero_program`
 -- AUTO_INCREMENT untuk tabel `tb_informasi_kontak`
 --
 ALTER TABLE `tb_informasi_kontak`
-  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_job`
 --
 ALTER TABLE `tb_job`
-  MODIFY `id_job` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_job` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_job_detail`
 --
 ALTER TABLE `tb_job_detail`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kontak`
 --
 ALTER TABLE `tb_kontak`
-  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kontak_maps`
@@ -1144,7 +1150,7 @@ ALTER TABLE `tb_pengumuman_tayang`
 -- AUTO_INCREMENT untuk tabel `tb_persyaratan_program`
 --
 ALTER TABLE `tb_persyaratan_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_profile_legalitas`
@@ -1162,13 +1168,13 @@ ALTER TABLE `tb_profile_pengurus`
 -- AUTO_INCREMENT untuk tabel `tb_profile_sambutan`
 --
 ALTER TABLE `tb_profile_sambutan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_profile_sejarah`
 --
 ALTER TABLE `tb_profile_sejarah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_profile_visimisi`
