@@ -29,7 +29,24 @@ $pageTitle = 'Kelola Halaman / Program';
         html {
             overflow-x: hidden;
         }
+        .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
 
+            .table-responsive::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .table-responsive::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 4px;
+            }
+
+            .table-responsive::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
     </style>
 </head>
 
@@ -65,7 +82,7 @@ $pageTitle = 'Kelola Halaman / Program';
                         <label for="gambar" class="form-label">Upload Gambar</label>
                         <input type="file" name="gambar" class="form-control" accept="image/*" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
                 <hr>
 
@@ -100,7 +117,7 @@ $pageTitle = 'Kelola Halaman / Program';
                                     <!-- Tombol Edit -->
                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#editHero<?= $data['id_hero_program'] ?>">
-                                        Edit
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -139,7 +156,7 @@ $pageTitle = 'Kelola Halaman / Program';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>
@@ -176,7 +193,7 @@ $pageTitle = 'Kelola Halaman / Program';
                         <label for="isi" class="form-label">Isi Persyaratan</label>
                         <textarea name="isi" class="form-control" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
@@ -216,12 +233,12 @@ $pageTitle = 'Kelola Halaman / Program';
                                 <td>
                                     <!-- Tombol Edit -->
                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?= $id ?>">Edit
+                                        data-bs-target="#editModal<?= $id ?>"><i class="fas fa-edit"></i>
                                     </button>
             
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#hapusModal<?= $id ?>">Hapus
+                                        data-bs-target="#hapusModal<?= $id ?>"><i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -264,7 +281,7 @@ $pageTitle = 'Kelola Halaman / Program';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                 </div>
                                             </div>
                                         </form>

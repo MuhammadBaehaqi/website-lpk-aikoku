@@ -71,24 +71,23 @@ include '../includes/config.php'; // koneksi ke database
             padding: 8px 12px;
             border-radius: 5px;
         }
-        .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
+                .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-.table-responsive::-webkit-scrollbar {
-    height: 8px;
-}
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
 
-.table-responsive::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
 
-.table-responsive::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
     </style>
 </head>
 

@@ -69,7 +69,7 @@ $pageTitle = 'Profile Saya';
                 </tr>
                 <tr>
                     <td colspan="2" class="text-end">
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                     </td>
                 </tr>
             </table>

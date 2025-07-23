@@ -23,6 +23,26 @@ $pageTitle = 'Kelola Halaman / Kontak';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
     <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,7 +61,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
                     <input type="text" name="hero_description" class="form-control mb-3" placeholder="Deskripsi"
                         required>
                     <input type="file" name="hero_image" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Hero</button>
+                    <button type="submit" class="btn btn-success">Tambah Hero</button>
                 </form>
                 <hr>
                 <h5>Daftar Hero</h5>
@@ -98,7 +118,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
                     <input type="text" name="jam_sabtu" class="form-control mb-3" placeholder="Jam Kerja Sabtu"
                         required>
                     <input type="text" name="catatan" class="form-control mb-3" placeholder="Catatan Tambahan">
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                 </form>
                 <hr>
                 <h5>Daftar Kontak</h5>
@@ -128,7 +148,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
             <div class="card-body">
                 <form action="maps/proses_tambah_maps.php" method="POST">
                     <input type="text" name="maps_url" class="form-control mb-3" placeholder="URL Google Maps" required>
-                    <button type="submit" class="btn btn-primary">Simpan URL Maps</button>
+                    <button type="submit" class="btn btn-success">Simpan URL Maps</button>
                 </form>
                 <hr>
                 <h5>Daftar Google Maps</h5>

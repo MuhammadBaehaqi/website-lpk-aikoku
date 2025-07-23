@@ -37,6 +37,24 @@ $hero = mysqli_fetch_assoc($result_hero);
             max-height: 70vh;
             overflow-y: auto;
         }
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
     </style>
 </head>
 
@@ -52,7 +70,7 @@ $hero = mysqli_fetch_assoc($result_hero);
             <form method="GET" action="" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control" placeholder="Cari album..."
                     value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                <button type="submit" class="btn btn-primary">Cari</button>
+                <button type="submit" class="btn btn-success">Cari</button>
             </form>
 
             <!-- Dropdown Show -->
@@ -92,7 +110,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                         <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
 
                 <hr>
@@ -100,7 +118,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                 <!-- Daftar Album -->
                 <h5>Daftar Album</h5>
                 <div class="table-responsive">
-    <table class="table table-bordered ">
+                <table class="table table-bordered ">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
@@ -128,7 +146,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                         <?php } ?>
                     </tbody>
                 </table>
-                        </div>
+                </div>
             </div>
         </div>
 
@@ -166,9 +184,13 @@ $hero = mysqli_fetch_assoc($result_hero);
                             <td>
                                 <!-- Tombol untuk membuka modal Edit -->
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editAlbumModal<?= $row['id_album']; ?>">Edit</button>
+                                    data-bs-target="#editAlbumModal<?= $row['id_album']; ?>">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#hapusAlbumModal<?= $row['id_album']; ?>">Hapus</button>
+                                    data-bs-target="#hapusAlbumModal<?= $row['id_album']; ?>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </td>
                         </tr>
 
@@ -218,7 +240,7 @@ $hero = mysqli_fetch_assoc($result_hero);
                                                         src="../../../<?= $row['foto_album']; ?>" width="150"
                                                         class="img-thumbnail"></p>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Update Album</button>
+                                            <button type="submit" class="btn btn-success">Update Album</button>
                                         </form>
                                     </div>
                                 </div>

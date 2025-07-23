@@ -25,7 +25,24 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
         html {
             overflow-x: hidden;
         }
+    .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
 
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
     </style>
 </head>
 
@@ -60,7 +77,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                         <label class="form-label">Upload Gambar Hero</label>
                         <input type="file" name="hero_image" class="form-control" accept="image/*" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
@@ -94,10 +111,12 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                                 <td><?= date('d-m-Y H:i', strtotime($row['tanggal_upload'])) ?></td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?= $row['id_job'] ?>">Edit</button>
+                                        data-bs-target="#editModal<?= $row['id_job'] ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#hapusModal<?= $row['id_job'] ?>">
-                                        Hapus
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -137,7 +156,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>
@@ -179,7 +198,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
         </div>
 
         <div class="card mb-4 shadow-sm">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-success text-white">
                 <h5 class="mb-0">Tambah Detail Bidang Pekerjaan</h5>
             </div>
             <div class="card-body">
@@ -241,7 +260,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                         </textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
@@ -274,9 +293,13 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                                 <td><?= htmlspecialchars(substr($row['paragraf'], 0, 80)) ?>...</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?= $row['id_job_detail'] ?>">Edit</button>
+                                        data-bs-target="#editModal<?= $row['id_job_detail'] ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#hapusDetailModal<?= $row['id_job_detail'] ?>">Hapus</button>
+                                        data-bs-target="#hapusDetailModal<?= $row['id_job_detail'] ?>">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
 
@@ -338,7 +361,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn btn-success">Simpan</button>
                                             </div>
                                         </div>
                                     </form>

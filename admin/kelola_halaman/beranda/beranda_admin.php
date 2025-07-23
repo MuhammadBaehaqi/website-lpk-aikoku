@@ -25,11 +25,25 @@ $pageTitle = 'Kelola Halaman / Beranda';
     <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
 
     <style>
-    .table-responsive {
-        width: 100%;
+        .table-responsive {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
     }
 
+    .table-responsive::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    
     .table {
         min-width: 900px; /* bisa sesuaikan, ini memaksa agar tabel bisa discroll */
         border-collapse: collapse;
@@ -91,7 +105,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     </select>
                     <input type="text" name="teks_tombol" class="form-control mb-3" placeholder="Teks Tombol (misal: Daftar Sekarang)" required>
                     <input type="file" name="gambar" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Hero</button>
+                    <button type="submit" class="btn btn-success">Tambah Hero</button>
                 </form>
                 <hr>
                 <h5>Daftar Hero</h5>
@@ -125,10 +139,12 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                     <td><img src="../../../uploads/<?= $row['gambar'] ?>" width="120"></td>
                                     <td><?= date("d-m-Y H:i", strtotime($row['tanggal_upload'])) ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#editHeroModal<?= $row['id_hero'] ?>">Edit</button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#hapusHeroModal<?= $row['id_hero'] ?>">Hapus</button>
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editHeroModal<?= $row['id_hero'] ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusHeroModal<?= $row['id_hero'] ?>">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 <!-- Modal Edit -->
@@ -178,7 +194,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -228,7 +244,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     <textarea name="deskripsi" class="form-control mb-3" placeholder="Deskripsi Singkat"
                         required></textarea>
                     <input type="file" name="gambar" class="form-control mb-3">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
@@ -263,9 +279,13 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 <td><img src="../../../uploads/<?= $row['gambar']; ?>" width="150" class="img-fluid"></td>
                                 <td>
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editTentangKamiModal<?= $row['id_tentang']; ?>">Edit</button>
+                                        data-bs-target="#editTentangKamiModal<?= $row['id_tentang']; ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#hapusTentangKamiModal<?= $row['id_tentang']; ?>">Hapus</button>
+                                        data-bs-target="#hapusTentangKamiModal<?= $row['id_tentang']; ?>">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -301,7 +321,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     </div>
                                 </div>
@@ -346,7 +366,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                         placeholder="Ikon di web Fontawesome Contoh: fas fa-graduation-cap" required>
                     <input type="text" name="judul" class="form-control mb-2" placeholder="Judul" required>
                     <textarea name="keunggulan" class="form-control mb-3" placeholder="Deskripsi" required></textarea>
-                    <button type="submit" class="btn btn-primary">Tambah Keunggulan</button>
+                    <button type="submit" class="btn btn-success">Tambah Keunggulan</button>
                 </form>
                 <hr>
                 <h5>Daftar Keunggulan</h5>
@@ -378,11 +398,14 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                     <td>
                                         <!-- Tombol Edit -->
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#editModal<?= $data['id_keunggulan']; ?>">Edit</button>
-
+                                            data-bs-target="#editModal<?= $data['id_keunggulan']; ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
                                         <!-- Tombol Hapus -->
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#hapusModal<?= $data['id_keunggulan']; ?>">Hapus</button>
+                                            data-bs-target="#hapusModal<?= $data['id_keunggulan']; ?>">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 <!-- Modal Edit -->
@@ -415,7 +438,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -463,7 +486,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     <input type="text" name="ikon" class="form-control mb-2" placeholder="Ikon Fontawesome" required>
                     <input type="text" name="judul" class="form-control mb-2" placeholder="Judul" required>
                     <textarea name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required></textarea>
-                    <button type="submit" class="btn btn-primary">Tambah Fasilitas</button>
+                    <button type="submit" class="btn btn-success">Tambah Fasilitas</button>
                 </form>
                 <hr>
                 <h5>Daftar Fasilitas</h5>
@@ -492,11 +515,15 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                     <td>
                                         <!-- Tombol Edit -->
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#editFasilitasModal<?= $f['id_fasilitas']; ?>">Edit</button>
+                                            data-bs-target="#editFasilitasModal<?= $f['id_fasilitas']; ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
 
                                         <!-- Tombol Hapus -->
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#hapusFasilitasModal<?= $f['id_fasilitas']; ?>">Hapus</button>
+                                            data-bs-target="#hapusFasilitasModal<?= $f['id_fasilitas']; ?>">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -530,7 +557,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Batal</button>
                                                 </div>
@@ -586,7 +613,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     <input type="text" name="bidang" class="form-control mb-3"
                         placeholder="Bidang Alumni (contoh: Kaigo, Perhotelan, dll)" required>
                     <input type="file" name="gambar" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Testimoni</button>
+                    <button type="submit" class="btn btn-success">Tambah Testimoni</button>
                 </form>
                 <hr>
                 <h5>Daftar Testimoni</h5>
@@ -616,8 +643,12 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                 echo '<td>' . substr($row['testimoni'], 0, 100) . '...</td>';
                                 echo '<td>' . date('d-m-Y', strtotime($row['tanggal'])) . '</td>';
                                 echo '<td>
-                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTestimoniModal' . $row['id_testimoni'] . '">Edit</button>
-                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusTestimoniModal' . $row['id_testimoni'] . '">Hapus</button>
+                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTestimoniModal' . $row['id_testimoni'] . '">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hapusTestimoniModal' . $row['id_testimoni'] . '">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>';
                                 echo '</tr>';
 
@@ -652,7 +683,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             </div>
                                         </div>

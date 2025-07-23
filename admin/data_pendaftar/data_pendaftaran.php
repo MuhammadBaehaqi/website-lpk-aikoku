@@ -34,12 +34,25 @@ include '../../includes/config.php';
 
         .table-container {
             overflow-x: auto;
-            /* Scroll horizontal di perangkat kecil */
             overflow-y: auto;
-            /* Scroll vertikal jika diperlukan */
-            max-width: 100%;
             max-height: 90vh;
-            /* Batas tinggi agar bisa scroll di semua perangkat */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 6px;
+            /* ini untuk scrollbar vertikal */
+            height: 6px;
+            /* ini untuk scrollbar horizontal */
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background-color: transparent;
         }
 
         /* Pastikan tabel tidak melebar di luar container */
@@ -79,7 +92,7 @@ include '../../includes/config.php';
                     }
                     ?>
                 </select>
-                <button type="submit" class="btn btn-primary">Tampilkan</button>
+                <button type="submit" class="btn btn-success">Tampilkan</button>
             </form>
             <div class="mb-3">
                 <a href="export_excel.php" class="btn btn-success btn-sm">
@@ -370,10 +383,13 @@ include '../../includes/config.php';
                                                         <select name="bidang" class="form-select" required>
                                                             <option value="Perhotelan" <?= ($d['bidang'] == 'Perhotelan') ? 'selected' : '' ?>>Perhotelan</option>
                                                             <option value="Pertanian" <?= ($d['bidang'] == 'Pertanian') ? 'selected' : '' ?>>Pertanian</option>
-                                                            <option value="Pengelolahan Makanan" <?= ($d['bidang'] == 'Pengelolahan Makanan') ? 'selected' : '' ?>>Pengelolahan Makanan</option>
-                                                            <option value="Perawat Lansia (Kaigo)" <?= ($d['bidang'] == 'Perawat Lansia (Kaigo)') ? 'selected' : '' ?>>Perawat Lansia (Kaigo)</option>
+                                                            <option value="Pengelolahan Makanan"
+                                                                <?= ($d['bidang'] == 'Pengelolahan Makanan') ? 'selected' : '' ?>>Pengelolahan Makanan</option>
+                                                            <option value="Perawat Lansia (Kaigo)"
+                                                                <?= ($d['bidang'] == 'Perawat Lansia (Kaigo)') ? 'selected' : '' ?>>Perawat Lansia (Kaigo)</option>
                                                             <option value="Konstruksi" <?= ($d['bidang'] == 'Konstruksi') ? 'selected' : '' ?>>Konstruksi</option>
-                                                            <option value="Kebersihan & Layanan Umum" <?= ($d['bidang'] == 'Kebersihan & Layanan Umum') ? 'selected' : '' ?>>Kebersihan & Layanan Umum</option>
+                                                            <option value="Kebersihan & Layanan Umum"
+                                                                <?= ($d['bidang'] == 'Kebersihan & Layanan Umum') ? 'selected' : '' ?>>Kebersihan & Layanan Umum</option>
                                                             <option value="Restoran" <?= ($d['bidang'] == 'Restoran') ? 'selected' : '' ?>>Restoran</option>
                                                         </select>
                                                     </div>

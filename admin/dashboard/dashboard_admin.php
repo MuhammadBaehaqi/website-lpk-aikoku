@@ -37,7 +37,7 @@ if ($_SESSION['roles'] != 'admin') {
         <div class="row mt-4">
             <!-- Kartu Informasi Pendaftaran -->
             <div class="col-md-4">
-                <div class="card text-bg-success mb-3">
+                <div class="card text-bg-success mb-3 shadow-lg">
                     <div class="card-header">Kelola Pendaftaran</div>
                     <div class="card-body">
                         <?php
@@ -55,7 +55,7 @@ if ($_SESSION['roles'] != 'admin') {
 
             <!-- Kartu Data Kontak -->
             <div class="col-md-4">
-                <div class="card text-bg-danger mb-3">
+                <div class="card text-bg-danger mb-3 shadow-lg">
                     <div class="card-header">Data Kontak</div>
                     <div class="card-body">
                         <?php
@@ -72,7 +72,7 @@ if ($_SESSION['roles'] != 'admin') {
 
             <!-- Kartu Total Pengguna -->
             <div class="col-md-4">
-                <div class="card text-bg-primary mb-3">
+                <div class="card text-bg-primary mb-3 shadow-lg">
                     <div class="card-header">Kelola User</div>
                     <div class="card-body">
                         <?php

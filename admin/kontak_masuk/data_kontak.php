@@ -17,8 +17,8 @@ $pageTitle = "Data Kontak";
 include '../../includes/config.php';
 
 // Ambil parameter
-$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 10;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $offset = ($page - 1) * $limit;
 
@@ -49,6 +49,31 @@ $no = $offset + 1;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?> - LPK Aikoku Terpadu</title>
     <link rel="icon" href="../../img/logo.png" type="image/x-icon">
+    <style>
+        body,
+        html {
+            overflow-x: hidden;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+</style>
 </head>
 
 <body>
@@ -62,9 +87,9 @@ $no = $offset + 1;
             <form method="GET" action="" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control" placeholder="Cari user..."
                     value="<?= htmlspecialchars($search) ?>">
-                <button type="submit" class="btn btn-primary">Cari</button>
+                <button type="submit" class="btn btn-success">Cari</button>
             </form>
-        
+
             <form method="GET" action="" class="d-flex align-items-center gap-2">
                 <label for="show" class="mb-0">Show:</label>
                 <select name="show" id="show" class="form-select" onchange="this.form.submit()">
@@ -82,16 +107,16 @@ $no = $offset + 1;
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="table-primary">
+                <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>No HP</th>
-                        <th>Alamat</th>
-                        <th>Pesan</th>
-                        <th>Tanggal Kirim</th>
-                        <th>Aksi</th>
+                        <th class="bg-success text-white">No</th>
+                        <th class="bg-success text-white">Nama</th>
+                        <th class="bg-success text-white">Email</th>
+                        <th class="bg-success text-white">No HP</th>
+                        <th class="bg-success text-white">Alamat</th>
+                        <th class="bg-success text-white">Pesan</th>
+                        <th class="bg-success text-white">Tanggal Kirim</th>
+                        <th class="bg-success text-white">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,7 +131,8 @@ $no = $offset + 1;
                                 <td><?= htmlspecialchars($row['message']) ?></td>
                                 <td><?= $row['date_sent'] ?></td>
                                 <td>
-                                    <a href='hapus_kontak.php?id_kontak=<?= $row['id_kontak'] ?>' class='btn btn-danger btn-sm' onclick='return confirm("Yakin ingin menghapus pesan ini?");'>
+                                    <a href='hapus_kontak.php?id_kontak=<?= $row['id_kontak'] ?>' class='btn btn-danger btn-sm'
+                                        onclick='return confirm("Yakin ingin menghapus pesan ini?");'>
                                         <i class='bi bi-trash'></i> Hapus
                                     </a>
                                 </td>
@@ -126,7 +152,8 @@ $no = $offset + 1;
             <ul class="pagination justify-content-center">
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>&limit=<?= $limit ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+                        <a class="page-link"
+                            href="?page=<?= $i ?>&limit=<?= $limit ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
                     </li>
                 <?php endfor; ?>
             </ul>

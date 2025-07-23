@@ -37,6 +37,26 @@ $pageTitle = 'Kelola Halaman / Profile';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
     <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
+    <style>
+         .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+
+    .table-responsive::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    </style>
 </head>
 
 <body>
@@ -54,7 +74,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul" required>
                     <input type="text" name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required>
                     <input type="file" name="gambar" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Hero</button>
+                    <button type="submit" class="btn btn-success">Tambah Hero</button>
                 </form>
             </div>
         </div>
@@ -89,10 +109,14 @@ $pageTitle = 'Kelola Halaman / Profile';
                                 <td><?= date('d-m-Y H:i:s', strtotime($row['upload_date'])); ?></td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_hero']; ?>">Edit</button>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_hero']; ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                     <!-- Tombol Hapus -->
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#hapusModal<?= $row['id_hero']; ?>">Hapus</button>
+                                        data-bs-target="#hapusModal<?= $row['id_hero']; ?>">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <!-- Modal Edit -->
@@ -115,7 +139,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                                                 <input type="hidden" name="gambar_lama" value="<?= $row['gambar']; ?>">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>
@@ -171,7 +195,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                     <label class="form-label">Gambar Sejarah</label>
                     <input type="file" name="gambar" class="form-control mb-3" required>
 
-                    <button type="submit" class="btn btn-primary">Simpan Sejarah</button>
+                    <button type="submit" class="btn btn-success">Simpan Sejarah</button>
                 </form>
             </div>
         </div>
@@ -208,8 +232,12 @@ $pageTitle = 'Kelola Halaman / Profile';
                             <td><?= date('d-m-Y H:i', strtotime($data['tanggal_upload'])); ?></td>
                             <td>
                                 <div class="d-flex gap-2">
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSejarahModal<?= $data['id']; ?>">Edit</button>
-                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusSejarahModal<?= $data['id']; ?>">Hapus</button>
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSejarahModal<?= $data['id']; ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusSejarahModal<?= $data['id']; ?>">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -236,7 +264,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                                             <img src="../../../uploads/<?= $data['gambar']; ?>" width="100" class="mt-2">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                            <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                         </div>
                                     </div>
                                 </form>
@@ -285,7 +313,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                     <input type="text" name="nama_kepala" class="form-control mb-3" placeholder="Nama Kepala Sekolah"
                         required>
                     <input type="file" name="gambar" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Sambutan</button>
+                    <button type="submit" class="btn btn-success">Tambah Sambutan</button>
                 </form>
             </div>
         </div>
@@ -324,9 +352,13 @@ $pageTitle = 'Kelola Halaman / Profile';
                                 <td>
                                     <div class="d-flex gap-2">
                                         <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editSambutanModal<?= $row['id']; ?>">Edit</button>
+                                            data-bs-target="#editSambutanModal<?= $row['id']; ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
                                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#hapusSambutanModal<?= $row['id']; ?>">Hapus</button>
+                                            data-bs-target="#hapusSambutanModal<?= $row['id']; ?>">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -359,7 +391,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                                                 <img src="../../../uploads/<?= $row['gambar']; ?>" class="mt-2" width="100">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>
@@ -405,7 +437,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                 <form action="visi_misi/proses_tambah_visimisi.php" method="POST">
                     <textarea name="visi" class="form-control mb-3" placeholder="Visi" required></textarea>
                     <textarea name="misi" class="form-control mb-3" placeholder="Misi" required></textarea>
-                    <button type="submit" class="btn btn-primary">Tambah Visi & Misi</button>
+                    <button type="submit" class="btn btn-success">Tambah Visi & Misi</button>
                 </form>
                 <hr>
                 <h5>Visi Saat Ini:</h5>
@@ -427,7 +459,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                     <input type="text" name="jabatan" class="form-control mb-3" placeholder="Jabatan" required>
                     <textarea name="deskripsi" class="form-control mb-3" placeholder="Deskripsi" required></textarea>
                     <input type="file" name="foto" class="form-control mb-3" required>
-                    <button type="submit" class="btn btn-primary">Tambah Pengurus</button>
+                    <button type="submit" class="btn btn-success">Tambah Pengurus</button>
                 </form>
             </div>
         </div>
@@ -456,8 +488,12 @@ $pageTitle = 'Kelola Halaman / Profile';
                                     <td><?= $row['jabatan']; ?></td>
                                     <td><?= $row['deskripsi']; ?></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_pengurus']; ?>">Edit</button>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $row['id_pengurus']; ?>">Hapus</button>
+                                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_pengurus']; ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $row['id_pengurus']; ?>">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -494,7 +530,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                                 </div>
                                             </form>
@@ -588,8 +624,12 @@ $pageTitle = 'Kelola Halaman / Profile';
                             <td><?= $row['nomor_surat']; ?></td>
                             <td><?= date('d-m-Y', strtotime($row['tanggal_upload'])); ?></td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_legalitas']; ?>">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $row['id_legalitas']; ?>">Hapus</button>
+                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['id_legalitas']; ?>">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal<?= $row['id_legalitas']; ?>">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                             </td>
                         </tr>
                         <!-- Modal Edit Legalitas -->
@@ -626,7 +666,7 @@ $pageTitle = 'Kelola Halaman / Profile';
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                            <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                         </div>
                                     </form>

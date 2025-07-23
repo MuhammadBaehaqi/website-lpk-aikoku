@@ -24,6 +24,26 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle; ?> - Admin</title>
     <link rel="icon" href="../../../img/logo.png" type="image/x-icon">
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,7 +70,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                         <input type="file" class="form-control" id="hero_image" name="hero_image" accept="image/*"
                             required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Perbarui Hero Section</button>
+                    <button type="submit" class="btn btn-success">Perbarui Hero Section</button>
                 </form>
             </div>
         </div>
@@ -123,7 +143,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
                 }
                 ?>
             </select>
-            <button type="submit" class="btn btn-primary">Tampilkan</button>
+            <button type="submit" class="btn btn-success">Tampilkan</button>
         </form>
 
         <div class="card mb-4">
