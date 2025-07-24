@@ -54,7 +54,7 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
 
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Atur Hero Section</div>
+            <div class="card-header bg-success text-white">Atur Hero Section</div>
             <div class="card-body">
                 <form method="POST" action="hero/proses_hero.php" enctype="multipart/form-data">
                     <div class="mb-3">
@@ -76,17 +76,17 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
         </div>
         <!-- Hero Section Tabel -->
         <div class="card mb-4">
-            <div class="card-header">Data Hero Section</div>
+            <div class="card-header bg-success text-white">Data Hero Section</div>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Created At</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Created At</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,17 +147,17 @@ $pageTitle = 'Kelola Halaman / Pengumuman';
         </form>
 
         <div class="card mb-4">
-            <div class="card-header">Daftar Pendaftar (Lolos dan Tidak Lolos)</div>
+            <div class="card-header bg-success text-white">Daftar Pendaftar (Lolos dan Tidak Lolos)</div>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-bordered table-striped">
-                    <thead class="table-success">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Nomor Pendaftaran</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Nama</th>
+                            <th class="bg-success text-white">Nomor Pendaftaran</th>
+                            <th class="bg-success text-white">Status</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

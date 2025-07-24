@@ -32,7 +32,7 @@ if (!$logo) {
     <?php include '../../../sidebar1.php'; ?>
     <div class="content">
         <div class="card shadow">
-            <div class="card-header bg-light text-dark">
+            <div class="card-header bg-success text-white">
                 <h4><?= $pageTitle ?></h4>
             </div>
             <div class="card-body">

@@ -93,9 +93,9 @@ if ($_SESSION['roles'] != 'admin') {
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Aktivitas</th>
-                        <th>Nama</th>
-                        <th>Tanggal</th>
+                        <th class="bg-success text-white">Aktivitas</th>
+                        <th class="bg-success text-white">Nama</th>
+                        <th class="bg-success text-white">Tanggal</th>
                     </tr>
                 </thead>
                 <tbody>

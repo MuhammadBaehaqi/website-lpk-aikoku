@@ -68,7 +68,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Section</div>
+            <div class="card-header bg-success text-white">Kelola Hero Section</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_hero_profile.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul" required>
@@ -80,18 +80,18 @@ $pageTitle = 'Kelola Halaman / Profile';
         </div>
         <!-- Tabel Menampilkan Data Hero -->
         <div class="card mb-4">
-            <div class="card-header">Data Hero Section</div>
+            <div class="card-header bg-success text-white">Data Hero Section</div>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-bordered" style="min-width: 800px;">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -177,7 +177,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Sejarah -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Sejarah LPK</div>
+            <div class="card-header bg-success text-white">Kelola Sejarah LPK</div>
             <div class="card-body">
                 <form action="sejarah/proses_tambah_sejarah.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="judul_atas" class="form-control mb-3"
@@ -201,21 +201,21 @@ $pageTitle = 'Kelola Halaman / Profile';
         </div>
 
         <div class="card mb-4">
-        <div class="card-header">Data Sejarah LPK</div>
+        <div class="card-header bg-success text-white">Data Sejarah LPK</div>
             <div class="card-body">
             <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="table-success">
+                <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Judul Atas</th>
-                        <th>Judul Bawah</th>
-                        <th>Judul Tengah</th>
-                        <th>Paragraf 1</th>
-                        <th>Paragraf 2</th>
-                        <th>Gambar</th>
-                        <th>Tanggal Upload</th>
-                        <th>Aksi</th>
+                        <th class="bg-success text-white">No</th>
+                        <th class="bg-success text-white">Judul Atas</th>
+                        <th class="bg-success text-white">Judul Bawah</th>
+                        <th class="bg-success text-white">Judul Tengah</th>
+                        <th class="bg-success text-white">Paragraf 1</th>
+                        <th class="bg-success text-white">Paragraf 2</th>
+                        <th class="bg-success text-white">Gambar</th>
+                        <th class="bg-success text-white">Tanggal Upload</th>
+                        <th class="bg-success text-white">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -303,7 +303,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Sambutan Kepala Sekolah -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Sambutan Kepala Sekolah</div>
+            <div class="card-header bg-success text-white">Kelola Sambutan Kepala Sekolah</div>
             <div class="card-body">
                 <form action="sambutan/proses_tambah_sambutan.php" method="POST" enctype="multipart/form-data">
                     <textarea name="paragraf_1" class="form-control mb-3" placeholder="Paragraf 1" required></textarea>
@@ -320,21 +320,21 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Tabel Daftar Sambutan -->
         <div class="card mb-4">
-            <div class="card-header">Daftar Sambutan Kepala Sekolah</div>
+            <div class="card-header bg-success text-white">Daftar Sambutan Kepala Sekolah</div>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul Atas</th>
-                            <th>Judul Bawah</th>
-                            <th>Judul Tengah</th>
-                            <th>Judul Tengah</th>
-                            <th>Nama Kepala</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul Atas</th>
+                            <th class="bg-success text-white">Judul Bawah</th>
+                            <th class="bg-success text-white">Judul Tengah</th>
+                            <th class="bg-success text-white">Judul Tengah</th>
+                            <th class="bg-success text-white">Nama Kepala</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -432,7 +432,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Visi & Misi -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Visi & Misi</div>
+            <div class="card-header bg-success text-white">Kelola Visi & Misi</div>
             <div class="card-body">
                 <form action="visi_misi/proses_tambah_visimisi.php" method="POST">
                     <textarea name="visi" class="form-control mb-3" placeholder="Visi" required></textarea>
@@ -451,7 +451,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Tim Pengurus -->
         <div class="card mb-4">
-            <div class="card-header">Tambah Tim Pengurus</div>
+            <div class="card-header bg-success text-white">Tambah Tim Pengurus</div>
             <div class="card-body">
                 <form action="pengurus/proses_tambah_pengurus.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="nama_pengurus" class="form-control mb-3" placeholder="Nama Pengurus"
@@ -467,17 +467,17 @@ $pageTitle = 'Kelola Halaman / Profile';
         $pengurus_result = mysqli_query($mysqli, "SELECT * FROM tb_profile_pengurus ORDER BY id_pengurus ASC");
         ?>
         <div class="card mb-4">
-            <div class="card-header">Kelola Tim Pengurus</div>
+            <div class="card-header bg-success text-white">Kelola Tim Pengurus</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
-                        <thead class="table-success">
+                        <thead>
                             <tr>
-                                <th>Foto</th>
-                                <th>Nama</th>
-                                <th>Jabatan</th>
-                                <th>Deskripsi</th>
-                                <th>Aksi</th>
+                                <th class="bg-success text-white">Foto</th>
+                                <th class="bg-success text-white">Nama</th>
+                                <th class="bg-success text-white">Jabatan</th>
+                                <th class="bg-success text-white">Deskripsi</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -569,7 +569,7 @@ $pageTitle = 'Kelola Halaman / Profile';
 
         <!-- Legalitas -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Legalitas</div>
+            <div class="card-header bg-success text-white">Kelola Legalitas</div>
             <div class="card-body">
             <form action="legalitas/proses_tambah_legalitas.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -597,19 +597,19 @@ $pageTitle = 'Kelola Halaman / Profile';
         $result = mysqli_query($mysqli, $query);
         ?>
         <div class="card mb-4">
-        <div class="card-header">Data Legalitas</div>
+        <div class="card-header bg-success text-white">Data Legalitas</div>
         <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
-                <thead class="table-success">
+                <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Logo</th>
-                    <th>Deskripsi</th>
-                    <th>Nomor Surat</th>
-                    <th>Tanggal Upload</th>
-                    <th>Aksi</th>
+                    <th class="bg-success text-white">No</th>
+                    <th class="bg-success text-white">Judul</th>
+                    <th class="bg-success text-white">Logo</th>
+                    <th class="bg-success text-white">Deskripsi</th>
+                    <th class="bg-success text-white">Nomor Surat</th>
+                    <th class="bg-success text-white">Tanggal Upload</th>
+                    <th class="bg-success text-white">Aksi</th>
                 </tr>
             </thead>
             <tbody>

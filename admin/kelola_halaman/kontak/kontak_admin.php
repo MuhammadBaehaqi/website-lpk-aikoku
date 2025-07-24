@@ -54,7 +54,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
 
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Section</div>
+            <div class="card-header bg-success text-white">Kelola Hero Section</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="hero_title" class="form-control mb-3" placeholder="Judul" required>
@@ -67,13 +67,13 @@ $pageTitle = 'Kelola Halaman / Kontak';
                 <h5>Daftar Hero</h5>
                 <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Update</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Update</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,7 +108,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
 
         <!-- Informasi Kontak -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Informasi Kontak</div>
+            <div class="card-header bg-success text-white">Kelola Informasi Kontak</div>
             <div class="card-body">
                 <form action="informasi/proses_tambah_kontak.php" method="POST">
                     <input type="text" name="alamat" class="form-control mb-3" placeholder="Alamat" required>
@@ -144,7 +144,7 @@ $pageTitle = 'Kelola Halaman / Kontak';
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Kelola Google Maps</div>
+            <div class="card-header bg-success text-white">Kelola Google Maps</div>
             <div class="card-body">
                 <form action="maps/proses_tambah_maps.php" method="POST">
                     <input type="text" name="maps_url" class="form-control mb-3" placeholder="URL Google Maps" required>

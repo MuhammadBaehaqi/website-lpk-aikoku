@@ -48,7 +48,7 @@ $pageTitle = "Kelola Halaman / Footer";
 
     <div class="content">
         <div class="card shadow">
-            <div class="card-header bg-light text-dark">
+            <div class="card-header bg-success text-white">
                 <h4 class="mb-0"><?= $pageTitle ?></h4>
             </div>
             <div class="card-body">

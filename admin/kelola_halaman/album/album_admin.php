@@ -89,7 +89,7 @@ $hero = mysqli_fetch_assoc($result_hero);
         </div>
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Album</div>
+            <div class="card-header bg-success text-white">Kelola Hero Album</div>
             <div class="card-body">
                 <!-- Form Input Hero -->
                 <form action="hero/proses_tambah_hero_album.php" method="POST" enctype="multipart/form-data">
@@ -119,13 +119,13 @@ $hero = mysqli_fetch_assoc($result_hero);
                 <h5>Daftar Album</h5>
                 <div class="table-responsive">
                 <table class="table table-bordered ">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -157,14 +157,14 @@ $hero = mysqli_fetch_assoc($result_hero);
         <!-- Tabel Data Album -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="table-success">
+                <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Deskripsi</th>
-                        <th>Tanggal Dibuat</th>
-                        <th>Detail</th>
-                        <th>Preview Foto</th>
-                        <th>Aksi</th>
+                        <th class="bg-success text-white">No</th>
+                        <th class="bg-success text-white">Deskripsi</th>
+                        <th class="bg-success text-white">Tanggal Dibuat</th>
+                        <th class="bg-success text-white">Detail</th>
+                        <th class="bg-success text-white">Preview Foto</th>
+                        <th class="bg-success text-white">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

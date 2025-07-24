@@ -54,7 +54,7 @@ $pageTitle = 'Kelola Halaman / Pendaftaran';
 
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Pendaftaran</div>
+            <div class="card-header bg-success text-white">Kelola Hero Pendaftaran</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_hero_pendaftaran.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="hero_title" class="form-control mb-3" placeholder="Judul" required>
@@ -67,13 +67,13 @@ $pageTitle = 'Kelola Halaman / Pendaftaran';
                 <h5>Tabel Hero Pendaftaran</h5>
                 <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Update</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Update</th>
                         </tr>
                     </thead>
                     <tbody>

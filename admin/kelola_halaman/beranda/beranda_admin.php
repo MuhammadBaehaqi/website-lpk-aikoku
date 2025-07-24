@@ -90,7 +90,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
 
         <!-- Hero Section -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Section</div>
+            <div class="card-header bg-success text-white">Kelola Hero Section</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_hero.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="judul" class="form-control mb-3" placeholder="Judul" required>
@@ -111,16 +111,16 @@ $pageTitle = 'Kelola Halaman / Beranda';
                 <h5>Daftar Hero</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Link Tombol</th>
-                            <th>Teks Tombol</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Link Tombol</th>
+                            <th class="bg-success text-white">Teks Tombol</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                         <tbody>
@@ -251,7 +251,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
 
         <!-- Data Saat Ini dibungkus Card -->
     <div class="card mb-4">
-        <div class="card-header">Data Kelola Tentang Kami Singkat</div>
+        <div class="card-header bg-success text-white">Data Kelola Tentang Kami Singkat</div>
         <div class="card-body">
         <?php
                 include '../../../includes/config.php';
@@ -262,12 +262,12 @@ $pageTitle = 'Kelola Halaman / Beranda';
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Judul</th>
-                                <th>Deskripsi</th>
-                                <th>Tanggal Upload</th>
-                                <th>Gambar</th>
-                                <th>Aksi</th>
+                                <th class="bg-success text-white">No</th>
+                                <th class="bg-success text-white">Judul</th>
+                                <th class="bg-success text-white">Deskripsi</th>
+                                <th class="bg-success text-white">Tanggal Upload</th>
+                                <th class="bg-success text-white">Gambar</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -359,7 +359,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
 
         <!-- Mengapa Memilih Kami -->
         <div class="card mb-4">
-            <div class="card-header">Kelola "Mengapa Memilih Kami"</div>
+            <div class="card-header bg-success text-white">Kelola "Mengapa Memilih Kami"</div>
             <div class="card-body">
                 <form action="keunggulan/proses_tambah_keunggulan.php" method="POST">
                     <input type="text" name="ikon" class="form-control mb-2"
@@ -372,13 +372,13 @@ $pageTitle = 'Kelola Halaman / Beranda';
                 <h5>Daftar Keunggulan</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead class="table-light">
+                        <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Ikon</th>
-                                <th>Judul</th>
-                                <th>Deskripsi</th>
-                                <th>Aksi</th>
+                                <th class="bg-success text-white">No</th>
+                                <th class="bg-success text-white">Ikon</th>
+                                <th class="bg-success text-white">Judul</th>
+                                <th class="bg-success text-white">Deskripsi</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -480,7 +480,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
 
         <!-- Fasilitas -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Fasilitas</div>
+            <div class="card-header bg-success text-white">Kelola Fasilitas</div>
             <div class="card-body">
                 <form action="fasilitas/proses_tambah_fasilitas.php" method="POST">
                     <input type="text" name="ikon" class="form-control mb-2" placeholder="Ikon Fontawesome" required>
@@ -492,13 +492,13 @@ $pageTitle = 'Kelola Halaman / Beranda';
                 <h5>Daftar Fasilitas</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead class="table-light">
+                        <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Ikon</th>
-                                <th>Judul</th>
-                                <th>Deskripsi</th>
-                                <th>Aksi</th>
+                                <th class="bg-success text-white">No</th>
+                                <th class="bg-success text-white">Ikon</th>
+                                <th class="bg-success text-white">Judul</th>
+                                <th class="bg-success text-white">Deskripsi</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -604,7 +604,7 @@ $pageTitle = 'Kelola Halaman / Beranda';
         $result = mysqli_query($mysqli, $query);
         ?>
         <div class="card mb-4">
-            <div class="card-header">Kelola Testimoni</div>
+            <div class="card-header bg-success text-white">Kelola Testimoni</div>
             <div class="card-body">
                 <form action="testimoni/proses_tambah_testimoni.php" method="POST" enctype="multipart/form-data">
                     <input type="text" name="nama" class="form-control mb-3" placeholder="Nama Alumni" required>
@@ -619,15 +619,15 @@ $pageTitle = 'Kelola Halaman / Beranda';
                 <h5>Daftar Testimoni</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
-                        <thead class="table-success text-center">
+                        <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Bidang</th>
-                                <th>Gambar</th>
-                                <th>Testimoni</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
+                                <th class="bg-success text-white">No</th>
+                                <th class="bg-success text-white">Nama</th>
+                                <th class="bg-success text-white">Bidang</th>
+                                <th class="bg-success text-white">Gambar</th>
+                                <th class="bg-success text-white">Testimoni</th>
+                                <th class="bg-success text-white">Tanggal</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -25,7 +25,8 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
         html {
             overflow-x: hidden;
         }
-    .table-responsive {
+
+        .table-responsive {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             width: 100%;
@@ -53,7 +54,7 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
 
         <!-- Form Tambah Bidang Pekerjaan -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Bidang Pekerjaan</div>
+            <div class="card-header bg-success text-white">Kelola Hero Bidang Pekerjaan</div>
             <div class="card-body">
                 <form action="hero/proses_tambah_job.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
@@ -84,17 +85,17 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
 
         <!-- Tabel Data -->
         <div class="card mb-4">
-            <div class="card-header">Data Bidang Pekerjaan</div>
+            <div class="card-header bg-success text-white">Data Bidang Pekerjaan</div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-light text-center">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar Hero</th>
-                            <th>Tanggal Upload</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Nama</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar Hero</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -232,9 +233,9 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                         <label class="form-label">Cakupan Tugas <small class="text-muted">(1 baris 1
                                 tugas)</small></label>
                         <textarea name="cakupan_tugas" class="form-control" rows="3" required placeholder="Contoh:
-                        Pengangkutan bahan bangunan
-                        Persiapan lokasi kerja
-                        Perakitan struktur">
+                            Pengangkutan bahan bangunan
+                            Persiapan lokasi kerja
+                            Perakitan struktur">
                         </textarea>
                     </div>
 
@@ -242,9 +243,9 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                         <label class="form-label">Pendaftaran Terbuka Untuk <small class="text-muted">(1 baris 1
                                 poin)</small></label>
                         <textarea name="pendaftaran_terbuka" class="form-control" rows="3" required placeholder="Contoh:
-                        Kamu yang punya stamina kuat
-                        Siap kerja di lapangan
-                        Berkomitmen dan semangat tinggi">
+                            Kamu yang punya stamina kuat
+                            Siap kerja di lapangan
+                            Berkomitmen dan semangat tinggi">
                         </textarea>
                     </div>
 
@@ -252,11 +253,11 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
                         <label class="form-label">Persyaratan Umum <small class="text-muted">(1 baris 1
                                 syarat)</small></label>
                         <textarea name="persyaratan_umum" class="form-control" rows="3" required placeholder="Contoh:
-                        Lulusan SMA/sederajat
-                        Usia 18–28 tahun
-                        Sehat jasmani dan rohani
-                        Bersedia kerja fisik
-                        Lulus pelatihan bahasa Jepang (N4/N3)">
+                            Lulusan SMA/sederajat
+                            Usia 18–28 tahun
+                            Sehat jasmani dan rohani
+                            Bersedia kerja fisik
+                            Lulus pelatihan bahasa Jepang (N4/N3)">
                         </textarea>
                     </div>
 
@@ -271,13 +272,13 @@ $pageTitle = 'Kelola Halaman / Bidang Pekerjaan';
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered mt-4">
-                    <thead class="table-light text-center">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Bidang</th>
-                            <th>Gambar</th>
-                            <th>Deskripsi</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Nama Bidang</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

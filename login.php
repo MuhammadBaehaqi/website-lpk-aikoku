@@ -5,53 +5,56 @@ include 'includes/config.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = $_POST['username'];
+    $input = trim($_POST['username']); // Bisa email atau username
     $password = md5($_POST['password']);
 
-    // === 1. Coba login sebagai admin (cocokkan username)
-    $stmt_admin = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE username = ? AND password = ? AND roles = 'admin'");
-    $stmt_admin->bind_param('ss', $input, $password);
-    $stmt_admin->execute();
-    $result_admin = $stmt_admin->get_result();
+    if (strpos($input, '@') !== false) {
+        // ==== LOGIN SEBAGAI USER (PAKE EMAIL) ====
+        $stmt_user = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE email = ? AND status = 'Lolos'");
+        $stmt_user->bind_param('s', $input);
+        $stmt_user->execute();
+        $result_user = $stmt_user->get_result();
 
-    if ($result_admin->num_rows > 0) {
-        $admin = $result_admin->fetch_assoc();
-        $_SESSION['id_pengguna'] = $admin['id_pengguna'];
-        $_SESSION['username'] = $admin['username'];
-        $_SESSION['roles'] = $admin['roles'];
-        header("Location: admin/dashboard/dashboard_admin.php");
-        exit();
-    }
+        if ($result_user->num_rows > 0) {
+            $user = $result_user->fetch_assoc();
 
-    // === 2. Jika bukan admin, coba login sebagai user berdasarkan email
-    $stmt_user = $mysqli->prepare("SELECT * FROM tb_pendaftaran WHERE (email = ? OR email LIKE ?) AND status = 'Lolos'");
-    $stmt_user->bind_param('ss', $input, $input);
-    $stmt_user->execute();
-    $result_user = $stmt_user->get_result();
+            $stmt_pengguna = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE email_pengguna = ? AND password = ? AND roles = 'user'");
+            $stmt_pengguna->bind_param('ss', $input, $password);
+            $stmt_pengguna->execute();
+            $result_pengguna = $stmt_pengguna->get_result();
 
-    if ($result_user->num_rows > 0) {
-        $user = $result_user->fetch_assoc();
-
-        // Cocokkan password dari tb_pengguna berdasarkan email
-        $stmt_pengguna = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE email_pengguna = ? AND password = ? AND roles = 'user'");
-        $stmt_pengguna->bind_param('ss', $input, $password);
-        $stmt_pengguna->execute();
-        $result_pengguna = $stmt_pengguna->get_result();
-
-        if ($result_pengguna->num_rows > 0) {
-            $akun = $result_pengguna->fetch_assoc();
-            $_SESSION['id_pengguna'] = $akun['id_pengguna'];
-            $_SESSION['id'] = $user['id_pendaftaran'];
-            $_SESSION['username'] = $akun['username'];
-            $_SESSION['roles'] = $akun['roles'];
-            $_SESSION['nama'] = $user['nama_lengkap'];
-            header("Location: User/dashboard_user.php");
-            exit();
+            if ($result_pengguna->num_rows > 0) {
+                $akun = $result_pengguna->fetch_assoc();
+                $_SESSION['id_pengguna'] = $akun['id_pengguna'];
+                $_SESSION['id'] = $user['id_pendaftaran'];
+                $_SESSION['username'] = $akun['username'];
+                $_SESSION['roles'] = $akun['roles'];
+                $_SESSION['nama'] = $user['nama_lengkap'];
+                header("Location: User/dashboard_user.php");
+                exit();
+            } else {
+                $error = "Password salah.";
+            }
         } else {
-            $error = "Email ditemukan, tapi password salah.";
+            $error = "Email tidak ditemukan atau belum lolos seleksi.";
         }
     } else {
-        $error = "Email tidak ditemukan atau belum lolos seleksi.";
+        // ==== LOGIN SEBAGAI ADMIN (PAKE USERNAME) ====
+        $stmt_admin = $mysqli->prepare("SELECT * FROM tb_pengguna WHERE username = ? AND password = ? AND roles = 'admin'");
+        $stmt_admin->bind_param('ss', $input, $password);
+        $stmt_admin->execute();
+        $result_admin = $stmt_admin->get_result();
+
+        if ($result_admin->num_rows > 0) {
+            $admin = $result_admin->fetch_assoc();
+            $_SESSION['id_pengguna'] = $admin['id_pengguna'];
+            $_SESSION['username'] = $admin['username'];
+            $_SESSION['roles'] = $admin['roles'];
+            header("Location: admin/dashboard/dashboard_admin.php");
+            exit();
+        } else {
+            $error = "Username admin tidak ditemukan atau password salah.";
+        }
     }
 }
 ?>

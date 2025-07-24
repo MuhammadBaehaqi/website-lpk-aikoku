@@ -57,7 +57,7 @@ $pageTitle = 'Kelola Halaman / Program';
 
         <!-- Hero Section Program -->
         <div class="card mb-4">
-            <div class="card-header">Kelola Hero Program</div>
+            <div class="card-header bg-success text-white">Kelola Hero Program</div>
             <div class="card-body">
                 <!-- Tambah Hero Section -->
                 <form action="hero/proses_tambah_hero_program.php" method="POST" enctype="multipart/form-data">
@@ -89,15 +89,15 @@ $pageTitle = 'Kelola Halaman / Program';
                 <h5>Data Hero Program</h5>
                 <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Program</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Tanggal Upload</th>
-                            <th>Aksi</th>
+                            <th class="bg-success text-white">No</th>
+                            <th class="bg-success text-white">Program</th>
+                            <th class="bg-success text-white">Judul</th>
+                            <th class="bg-success text-white">Deskripsi</th>
+                            <th class="bg-success text-white">Gambar</th>
+                            <th class="bg-success text-white">Tanggal Upload</th>
+                            <th class="bg-success text-white">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@ $pageTitle = 'Kelola Halaman / Program';
 
         <!-- Form Tambah Persyaratan -->
         <div class="card mb-4">
-            <div class="card-header">Tambah Persyaratan</div>
+            <div class="card-header bg-success text-white">Tambah Persyaratan</div>
             <div class="card-body">
                 <form action="persyaratan/proses_tambah_persyaratan.php" method="POST">
                     <div class="mb-3">
@@ -200,14 +200,15 @@ $pageTitle = 'Kelola Halaman / Program';
     <!-- Data Persyaratan Dipisah per Program dan Jenis -->
     <div class="card mb-4">
         <div class="table-responsive">
-        <div class="card-header">Data Persyaratan (Dipisah per Program dan Jenis)</div>
+        <div class="card-header bg-success text-white">Data Persyaratan (Dipisah per Program dan Jenis)</div>
         <div class="card-body">
             <?php
             $programs = ['magang', 'engineering', 'tokutei'];
             $jenisList = ['umum', 'dokumen'];
 
             foreach ($programs as $program) {
-                echo "<h4 class='mt-4 text-primary'>Program: " . ucfirst($program) . "</h4>";
+                echo "<h4 class='mt-4 text-dark'>Program: " . ucfirst($program) . "</h4>";
+                
                 foreach ($jenisList as $jenis) {
                     echo "<h6 class='mt-3'>Jenis: " . ucfirst($jenis) . "</h6>";
 
@@ -218,10 +219,10 @@ $pageTitle = 'Kelola Halaman / Program';
             
                     if (mysqli_num_rows($result) > 0) {
                         echo '<table class="table table-bordered mb-4">';
-                        echo '<thead class="table-light"><tr>
-                                <th>No</th>
-                                <th>Isi Persyaratan</th>
-                                <th>Aksi</th>
+                        echo '<thead><tr>
+                                <th class="bg-success text-white">No</th>
+                                <th class="bg-success text-white">Isi Persyaratan</th>
+                                <th class="bg-success text-white">Aksi</th>
                             </tr></thead><tbody>';
 
                         while ($row = mysqli_fetch_assoc($result)) {
