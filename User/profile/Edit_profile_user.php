@@ -1,10 +1,10 @@
 <?php
 session_start();
-include '../includes/config.php';
+include '../../includes/config.php';
 
 if (!isset($_SESSION['id_pengguna'])) {
     // Jika id_pengguna tidak ditemukan di session, arahkan ke login
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -29,11 +29,11 @@ if (!$data) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
 </head>
 
 <body>
-    <?php include '../sidebar_user.php'; ?>
+    <?php include '../../sidebar_user.php'; ?>
     <div class="content p-4">
         <div class="container">
             <h3 class="mb-4">Profil Saya</h3>
@@ -42,8 +42,8 @@ if (!$data) {
                     <!-- KIRI: FOTO & NAMA -->
                      <!-- border-end garis vertikal sebelah kanan -->
                     <div class="col-md-4 text-center border-end">
-                        <?php if (!empty($data['foto_diri']) && file_exists("../uploads/" . $data['foto_diri'])): ?>
-                            <img src="../uploads/<?= $data['foto_diri'] ?>" alt="Foto Profil" class="img-fluid rounded mb-3"
+                        <?php if (!empty($data['foto_diri']) && file_exists("../../uploads/" . $data['foto_diri'])): ?>
+                            <img src="../../uploads/<?= $data['foto_diri'] ?>" alt="Foto Profil" class="img-fluid rounded mb-3"
                                 style="width: 150px; height: 200px; object-fit: cover;">
                         <?php else: ?>
                             <i class="fas fa-user-circle mb-3" style="font-size: 120px; color: #0db4d8;"></i>

@@ -95,13 +95,13 @@ include '../../includes/config.php';
                 <button type="submit" class="btn btn-success">Tampilkan</button>
             </form>
             <div class="mb-3">
-                <a href="export_excel.php" class="btn btn-success btn-sm">
+                <a href="exports/export_excel.php" class="btn btn-success btn-sm">
                     <i class="bi bi-file-earmark-excel"></i> Export Semua Excel
                 </a>
-                <a href="cetak_semua_pendaftaran.php" target="_blank" class="btn btn-danger btn-sm">
+                <a href="exports/cetak_semua_pendaftaran.php" target="_blank" class="btn btn-danger btn-sm">
                     <i class="bi bi-printer"></i> Cetak Semua PDF
                 </a>
-                <a href="download_foto_zip.php" class="btn btn-dark btn-sm">
+                <a href="exports/download_foto_zip.php" class="btn btn-dark btn-sm">
                     <i class="bi bi-download"></i> Download Semua Foto
                 </a>
             </div>
@@ -220,11 +220,11 @@ include '../../includes/config.php';
                                 <td>
                                     <div class="p-2 border rounded mb-2 bg-light">
                                         <div class="d-flex flex-wrap gap-2 mb-2">
-                                            <a href="export_excel.php?id=<?= $d['id_pendaftaran'] ?>"
+                                            <a href="exports/export_excel.php?id=<?= $d['id_pendaftaran'] ?>"
                                                 class="btn btn-sm btn-success" title="Excel Data Ini">
                                                 <i class="bi bi-file-earmark-excel"></i>
                                             </a>
-                                            <a href="cetak_semua_pendaftaran.php?id=<?= $d['id_pendaftaran'] ?>"
+                                            <a href="exports/cetak_semua_pendaftaran.php?id=<?= $d['id_pendaftaran'] ?>"
                                                 class="btn btn-sm btn-danger" title="PDF Data Ini">
                                                 <i class="bi bi-printer"></i>
                                             </a>
@@ -235,7 +235,7 @@ include '../../includes/config.php';
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
 
-                                            <a href="hapus_data_pendaftaran.php?id_pendaftaran=<?= $d['id_pendaftaran'] ?>"
+                                            <a href="controllers/hapus_data_pendaftaran.php?id_pendaftaran=<?= $d['id_pendaftaran'] ?>"
                                                 class="btn btn-danger btn-sm" title="Hapus"
                                                 onclick="return confirm('Yakin ingin menghapus data ini?')">
                                                 <i class="bi bi-trash"></i>
@@ -247,7 +247,7 @@ include '../../includes/config.php';
                                             </a>
 
                                         </div>
-                                        <form action="update_status.php" method="POST"
+                                        <form action="controllers/update_status.php" method="POST"
                                             class="d-flex flex-wrap gap-2 align-items-center">
                                             <input type="hidden" name="id_pendaftaran" value="<?= $d['id_pendaftaran'] ?>">
                                             <select name="status" class="form-select form-select-sm w-auto">
@@ -272,7 +272,7 @@ include '../../includes/config.php';
                                 aria-labelledby="modalLabel<?= $d['id_pendaftaran'] ?>" aria-hidden="true">
                                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                     <div class="modal-content">
-                                        <form action="edit_data_pendaftaran.php" method="POST"
+                                        <form action="controllers/edit_data_pendaftaran.php" method="POST"
                                             enctype="multipart/form-data">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="modalLabel<?= $d['id_pendaftaran'] ?>">Edit Data

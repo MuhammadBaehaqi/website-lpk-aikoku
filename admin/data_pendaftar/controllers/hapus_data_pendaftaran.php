@@ -1,5 +1,5 @@
 <?php
-include '../../includes/config.php';
+include '../../../includes/config.php';
 
 if (isset($_GET['id_pendaftaran'])) {
     $id_pendaftaran = intval($_GET['id_pendaftaran']);
@@ -11,7 +11,7 @@ if (isset($_GET['id_pendaftaran'])) {
         // Menampilkan alert dan redirect ke halaman data_pendaftaran.php
         echo "<script>
                 alert('Data berhasil dihapus!');
-                window.location.href = 'data_pendaftaran.php';
+                window.location.href = '../data_pendaftaran.php';
               </script>";
     } else {
         echo "Gagal menghapus data: " . mysqli_error($mysqli);

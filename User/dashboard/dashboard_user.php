@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../includes/config.php';
+include '../../includes/config.php';
 
 if (!isset($_SESSION['nama'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -16,7 +16,7 @@ $result = mysqli_query($mysqli, $query);
 $data = mysqli_fetch_assoc($result);
 
 if (!$data) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -36,7 +36,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
     <title>Dashboard Pendaftar - LPK Aikoku Terpadu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
     <style>
         .content {
             padding: 10px;
@@ -108,7 +108,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
 </head>
 
 <body style="background-color: #f8f9fa;">
-    <?php include '../sidebar_user.php'; ?>
+    <?php include '../../sidebar_user.php'; ?>
     <div class="content">
         <div class="container-sm mt-2 mb-3">
             <div class="card shadow-sm rounded">
@@ -119,7 +119,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                 <div class="card-body">
                     <!-- Informasi Profil -->
                     <h5>Data Diri</h5>
-                    <img src="../uploads/<?= $data['foto_diri'] ?>"
+                    <img src="../../uploads/<?= $data['foto_diri'] ?>"
                         class="img-fluid rounded shadow border border-2 mb-3" width="120">
                     <table class="table">
                         <tr>
@@ -157,7 +157,7 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                     <?php if (!empty($pengumuman)): ?>
                         <div class="alert alert-info">
                             <?= substr(htmlspecialchars($pengumuman), 0, 80) ?>...
-                            <a href="lihat_pengumuman.php" class="btn btn-sm btn-outline-primary ms-2">Lihat
+                            <a href="../pengumuman/lihat_pengumuman.php" class="btn btn-sm btn-outline-primary ms-2">Lihat
                                 Selengkapnya</a>
                         </div>
                     <?php else: ?>
@@ -169,14 +169,13 @@ $pengumuman = $data['pengumuman']; // Tambahkan ini
                         <?= nl2br(htmlspecialchars($data['motivasi'])) ?>
                     </div>
                     <div class="btn-wrapper">
-                        <a href="cetak_bukti.php" target="_blank" class="btn btn-custom-primary w-100">
+                        <a href="../pendaftaran/cetak_bukti.php" target="_blank" class="btn btn-custom-primary w-100">
                             <i class="fas fa-download me-2"></i> Unduh Bukti Pendaftaran (PDF)
                         </a>
-                        <a href="../logout.php" class="btn btn-custom-danger w-100">
+                        <a href="../../logout.php" class="btn btn-custom-danger w-100">
                             <i class="fas fa-sign-out-alt me-2"></i> Logout
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>

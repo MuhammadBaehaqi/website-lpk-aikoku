@@ -1,5 +1,5 @@
 <?php
-include '../../includes/config.php';
+include '../../../includes/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_pendaftaran'])) {
     $id = $_POST['id_pendaftaran'];
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_pendaftaran'])) {
         $foto_tmp = $_FILES['foto_diri']['tmp_name'];
         $foto_ext = pathinfo($foto_name, PATHINFO_EXTENSION);
         $foto_new = 'foto_' . time() . '.' . $foto_ext;
-        move_uploaded_file($foto_tmp, '../../uploads/' . $foto_new);
+        move_uploaded_file($foto_tmp, '../../../uploads/' . $foto_new);
         $foto_path = $foto_new;
     } else {
         $foto_path = $foto_lama;
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_pendaftaran'])) {
             SET username = '$nama', email_pengguna = '$email' 
             WHERE email_pengguna = '$email_lama' AND roles = 'user'
         ");
-        echo "<script>alert('Data berhasil diperbarui'); window.location.href='data_pendaftaran.php';</script>";
+        echo "<script>alert('Data berhasil diperbarui'); window.location.href='../data_pendaftaran.php';</script>";
     } else {
         echo "Gagal update data: " . mysqli_error($mysqli);
     }

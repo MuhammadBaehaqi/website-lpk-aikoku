@@ -1,11 +1,11 @@
 <?php
 // Koneksi database
-include('../includes/config.php');
+include('../../includes/config.php');
 
 session_start();
 if (!isset($_SESSION['id_pengguna'])) {
     // Jika id_pengguna belum ada dalam session, redirect ke halaman login
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 

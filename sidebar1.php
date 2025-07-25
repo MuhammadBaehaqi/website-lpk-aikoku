@@ -333,10 +333,11 @@ function isDropdownActive($pages = [])
         <div class="dropdown">
             <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
                 aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
                 <?php echo $_SESSION['username']; ?> (<?php echo ucfirst($_SESSION['roles']); ?>)
             </button>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="/pendaftaran/logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="/pendaftaran/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
             </ul>
         </div>
     </div>

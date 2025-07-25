@@ -1,13 +1,13 @@
 <?php
-require '../vendor/dompdf-3.1.0/dompdf/autoload.inc.php'; // ← sesuai struktur folder kamu
+require '../../vendor/dompdf-3.1.0/dompdf/autoload.inc.php'; // ← sesuai struktur folder kamu
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 session_start();
-include '../includes/config.php'; // ← kalau file ini di folder "dashboard_user", gunakan ../ untuk naik satu folder
+include '../../includes/config.php'; // ← kalau file ini di folder "dashboard_user", gunakan ../ untuk naik satu folder
 
 if (!isset($_SESSION['nama'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 

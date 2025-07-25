@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../includes/config.php';
+include '../../includes/config.php';
 
 if (!isset($_SESSION['id_pengguna'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -32,7 +32,7 @@ if (isset($_FILES['foto_diri']) && $_FILES['foto_diri']['error'] === 0) {
     $foto_ext = pathinfo($foto_name, PATHINFO_EXTENSION);
     $foto_new_name = 'foto_' . time() . '.' . $foto_ext;
 
-    if (move_uploaded_file($foto_tmp, '../uploads/' . $foto_new_name)) {
+    if (move_uploaded_file($foto_tmp, '../../uploads/' . $foto_new_name)) {
         // tambahkan bagian ini ke SET foto_diri
         $foto_update = ", foto_diri = '$foto_new_name'";
     }
@@ -63,7 +63,7 @@ if (mysqli_query($mysqli, $query_pendaftaran)) {
     // Update session jika nama berubah
     $_SESSION['username'] = $nama_lengkap;
 
-    header("Location: edit_profile_user.php?update=success");
+    header("Location: Edit_profile_user.php?update=success");
 } else {
     echo "Gagal memperbarui data: " . mysqli_error($mysqli);
 }

@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../includes/config.php';
+include '../../includes/config.php';
 
 if (!isset($_SESSION['nama'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ $pageTitle = "Pengumuman";
 <head>
     <meta charset="UTF-8">
     <title><?= $pageTitle ?> - LPK Aikoku Terpadu</title>
-    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .content {
@@ -45,7 +45,7 @@ $pageTitle = "Pengumuman";
 </head>
 
 <body style="background-color: #f8f9fa;">
-    <?php include '../sidebar_user.php'; ?>
+    <?php include '../../sidebar_user.php'; ?>
     <div class="content">
         <div class="container mt-5">
             <div class="card shadow rounded">
@@ -64,7 +64,7 @@ $pageTitle = "Pengumuman";
                         <p><em>Belum ada pengumuman dari admin.</em></p>
                     <?php endif; ?>
 
-                    <a href="dashboard_user.php" class="btn btn-outline-secondary">Kembali ke Dashboard</a>
+                    <a href="../dashboard/dashboard_user.php" class="btn btn-outline-secondary">Kembali ke Dashboard</a>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $akun['username'];
                 $_SESSION['roles'] = $akun['roles'];
                 $_SESSION['nama'] = $user['nama_lengkap'];
-                header("Location: User/dashboard_user.php");
+                header("Location: User/dashboard/dashboard_user.php");
                 exit();
             } else {
                 $error = "Password salah.";

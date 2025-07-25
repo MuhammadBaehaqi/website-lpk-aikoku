@@ -30,6 +30,7 @@ function isActive($page)
             font-weight: bold;
             transform: translateX(5px);
         }
+
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -179,22 +180,22 @@ function isActive($page)
         </div>
         <span class="btn-close-sidebar" onclick="closeSidebar()">✖</span>
 
-        <a href="/pendaftaran/User/dashboard_user.php" onclick="changeTitle('Dashboard')"
+        <a href="/pendaftaran/User/dashboard/dashboard_user.php" onclick="changeTitle('Dashboard')"
             class="text-white d-block px-3 py-2 <?php echo isActive('dashboard_user.php'); ?>">
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
 
-        <a href="/pendaftaran/User/lihat_pengumuman.php" onclick="changeTitle('Pengumuman')"
+        <a href="/pendaftaran/User/pengumuman/lihat_pengumuman.php" onclick="changeTitle('Pengumuman')"
             class="text-white d-block px-3 py-2 <?php echo isActive('lihat_pengumuman.php'); ?>">
             <i class="bi bi-megaphone"></i> Pengumuman
         </a>
 
-        <a href="/pendaftaran/User/Lihat_pendaftaran.php" onclick="changeTitle('Status Pendaftaran')"
+        <a href="/pendaftaran/User/pendaftaran/Lihat_pendaftaran.php" onclick="changeTitle('Status Pendaftaran')"
             class="text-white d-block px-3 py-2 <?php echo isActive('Lihat_pendaftaran.php'); ?>">
             <i class="bi bi-file-earmark-check"></i> Status Pendaftaran
         </a>
 
-        <a href="/pendaftaran/User/Edit_profile_user.php" onclick="changeTitle('Edit Profil')"
+        <a href="/pendaftaran/User/profile/Edit_profile_user.php" onclick="changeTitle('Edit Profil')"
             class="text-white d-block px-3 py-2 <?php echo isActive('Edit_profile_user.php'); ?>">
             <i class="bi bi-person-gear"></i> Edit Profil
         </a>
@@ -207,12 +208,14 @@ function isActive($page)
         <span id="page-title"><?php echo isset($pageTitle) ? $pageTitle : 'Dashboard'; ?></span>
 
         <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <button class="btn btn-dark dropdown-toggle d-flex align-items-center gap-2" type="button" id="userDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
                 <?php echo $username; ?> (<?php echo ucfirst($role); ?>)
             </button>
+
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="/pendaftaran/logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="/pendaftaran/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
             </ul>
         </div>
     </div>

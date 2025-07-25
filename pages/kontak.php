@@ -23,23 +23,29 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
         .hero-section {
             background: url('../img/kontak.jpg') no-repeat center center/cover;
             height: 80vh;
+            position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 20px;
             color: white;
+        }
+
+        .hero-content {
+            max-width: 700px;
             padding: 20px;
         }
 
         .hero-section h1 {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .hero-section p {
-            font-size: 16px;
-            max-width: 600px;
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         .contact-info {
@@ -70,7 +76,7 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
     }
     ?>
     <div class="hero-section" style="background: url('<?= $hero_background ?>') no-repeat center center/cover;">
-        <div class="container">
+        <div class="hero-content text-center text-white">
             <h1><?= htmlspecialchars($hero_title) ?></h1>
             <p><?= htmlspecialchars($hero_description) ?></p>
         </div>
@@ -80,7 +86,6 @@ $maps_url = $mapsData ? $mapsData['maps_url'] : '';
         <div class="row">
             <!-- Card Kirim Pesan -->
             <div class="col-md-6 mb-4 mb-md-0">
-
                 <div class="card shadow-lg border-0">
                     <div class="card-body">
                         <h3 class="text-success">Kirim Pesan</h3>

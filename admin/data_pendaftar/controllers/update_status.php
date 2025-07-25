@@ -1,5 +1,5 @@
 <?php
-include '../../includes/config.php'; // Pastikan sesuai
+include '../../../includes/config.php'; // Pastikan sesuai
 
 if (isset($_POST['id_pendaftaran']) && isset($_POST['status']) && isset($_POST['pengumuman'])) {
     $id_pendaftaran = $_POST['id_pendaftaran'];
@@ -29,7 +29,7 @@ if (isset($_POST['id_pendaftaran']) && isset($_POST['status']) && isset($_POST['
             }
         }
 
-        header("Location: data_pendaftaran.php?pesan=update_sukses");
+        header("Location: ../data_pendaftaran.php?pesan=update_sukses");
     } else {
         echo "Gagal mengubah status: " . mysqli_error($mysqli);
     }
